@@ -78,23 +78,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Chamber.cpp" />
-    <ClCompile Include="Creature.cpp" />
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="Inventory.cpp" />
-    <ClCompile Include="Item.cpp" />
-    <ClCompile Include="Monster.cpp" />
-    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="model\Chamber.cpp" />
+    <ClCompile Include="model\Creature.cpp" />
+    <ClCompile Include="model\Game.cpp" />
+    <ClCompile Include="model\Inventory.cpp" />
+    <ClCompile Include="model\Item.cpp" />
+    <ClCompile Include="model\Monster.cpp" />
+    <ClCompile Include="model\Player.cpp" />
+    <ClCompile Include="model\Thing.cpp" />
+    <ClCompile Include="states\GameState.cpp" />
     <ClCompile Include="the_labyrinth.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Chamber.h" />
-    <ClInclude Include="Creature.h" />
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="Inventory.h" />
-    <ClInclude Include="Item.h" />
-    <ClInclude Include="Monster.h" />
-    <ClInclude Include="Player.h" />
+    <ClInclude Include="model\Chamber.h" />
+    <ClInclude Include="model\Creature.h" />
+    <ClInclude Include="model\Game.h" />
+    <ClInclude Include="model\Inventory.h" />
+    <ClInclude Include="model\Item.h" />
+    <ClInclude Include="model\Monster.h" />
+    <ClInclude Include="model\Player.h" />
+    <ClInclude Include="model\Thing.h" />
+    <ClInclude Include="states\GameState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
