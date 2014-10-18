@@ -3,6 +3,7 @@
 #include "Thing.h"
 
 class Inventory;
+class Chamber;
 
 class Creature : public Thing
 {
@@ -15,9 +16,11 @@ public:
 	int getDefense() { return _defense; }
 	int getAttack() { return _attack; }
 	int getPerception() { return _perception; }
-	Inventory *getInventory() { return _inventory; }
+	Inventory &getInventory() { return *_inventory; }
+	Chamber &getCurrentRoom() { return *_currentRoom; }
 protected:
 	Inventory *_inventory;
+	Chamber *_currentRoom;
 	int _level;
 	int _experience;
 	int _healthPoints;

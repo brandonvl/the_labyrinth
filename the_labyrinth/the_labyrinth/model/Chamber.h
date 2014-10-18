@@ -1,6 +1,6 @@
 #pragma once
 
-#include <vector>;
+#include <vector>
 
 class Player;
 class Monster;

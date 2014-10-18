@@ -53,6 +53,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -86,6 +87,7 @@
     <ClCompile Include="model\Monster.cpp" />
     <ClCompile Include="model\Player.cpp" />
     <ClCompile Include="model\Thing.cpp" />
+    <ClCompile Include="states\ExploreState.cpp" />
     <ClCompile Include="states\GameState.cpp" />
     <ClCompile Include="the_labyrinth.cpp" />
   </ItemGroup>
@@ -98,6 +100,7 @@
     <ClInclude Include="model\Monster.h" />
     <ClInclude Include="model\Player.h" />
     <ClInclude Include="model\Thing.h" />
+    <ClInclude Include="states\ExploreState.h" />
     <ClInclude Include="states\GameState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
