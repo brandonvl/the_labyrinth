@@ -16,7 +16,7 @@ public:
 		return _instance;
 	}
 protected:
-	ExploreState();
+	ExploreState() { }
 	//virtual ~ExploreState();
 };
 

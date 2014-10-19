@@ -81,6 +81,8 @@
   <ItemGroup>
     <ClCompile Include="model\Chamber.cpp" />
     <ClCompile Include="model\Creature.cpp" />
+    <ClCompile Include="model\Dungeon.cpp" />
+    <ClCompile Include="model\Floor.cpp" />
     <ClCompile Include="model\Game.cpp" />
     <ClCompile Include="model\Inventory.cpp" />
     <ClCompile Include="model\Item.cpp" />
@@ -94,6 +96,8 @@
   <ItemGroup>
     <ClInclude Include="model\Chamber.h" />
     <ClInclude Include="model\Creature.h" />
+    <ClInclude Include="model\Dungeon.h" />
+    <ClInclude Include="model\Floor.h" />
     <ClInclude Include="model\Game.h" />
     <ClInclude Include="model\Inventory.h" />
     <ClInclude Include="model\Item.h" />

@@ -60,6 +60,12 @@
     <ClCompile Include="states\ExploreState.cpp">
       <Filter>Source Files\states</Filter>
     </ClCompile>
+    <ClCompile Include="model\Floor.cpp">
+      <Filter>Source Files\model</Filter>
+    </ClCompile>
+    <ClCompile Include="model\Dungeon.cpp">
+      <Filter>Source Files\model</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="model\Chamber.h">
@@ -91,6 +97,12 @@
     </ClInclude>
     <ClInclude Include="states\ExploreState.h">
       <Filter>Header Files\states</Filter>
+    </ClInclude>
+    <ClInclude Include="model\Floor.h">
+      <Filter>Header Files\model</Filter>
+    </ClInclude>
+    <ClInclude Include="model\Dungeon.h">
+      <Filter>Header Files\model</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
