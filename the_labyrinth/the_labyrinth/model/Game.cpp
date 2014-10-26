@@ -1,7 +1,7 @@
 #include "Game.h"
 #include "states\GameState.h"
 #include "states\ExploreState.h"
-#include "Floor.h"
+#include "Dungeon.h"
 
 
 Game::Game()
@@ -14,13 +14,13 @@ Game::~Game()
 	if (_state != nullptr)
 		_state->cleanUp();
 
-	delete _testFloor;
+	delete _dungeon;
 }
 
 void Game::run()
 {
-	_testFloor = new Floor();
-	_testFloor->createFloor(5, 1, 3);
+	_dungeon = new Dungeon();
+	_dungeon->createDungeon();
 	changeState(ExploreState::instance());
 	_running = true;
 

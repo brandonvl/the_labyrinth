@@ -11,6 +11,9 @@ public:
 	Floor();
 	virtual ~Floor();
 	void createFloor(const int &size, const int &minLevel, const int &maxLevel);
+	std::vector<std::vector<Chamber*>> &getChambers() { return _chambers; }
+	Chamber &getStart() { return *_start; }
+	Chamber &getEnd() { return *_end; }
 private:
 	Chamber *_start;
 	Chamber *_end;

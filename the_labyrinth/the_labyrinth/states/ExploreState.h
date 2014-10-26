@@ -18,5 +18,7 @@ public:
 protected:
 	ExploreState() { }
 	//virtual ~ExploreState();
+private:
+	void showMap();
 };
 

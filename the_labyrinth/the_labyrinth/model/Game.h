@@ -2,7 +2,7 @@
 
 class Player;
 class GameState;
-class Floor;
+class Dungeon;
 
 class Game
 {
@@ -10,13 +10,14 @@ public:
 	Game();
 	virtual ~Game();
 	Player &getPlayer() { return *_player; }
+	Dungeon &getDungeon() { return *_dungeon; }
 	void run();
 	void stop();
 	void changeState(GameState &state);
 private:
 	GameState *_state;
 	Player *_player;
-	Floor *_testFloor;
+	Dungeon *_dungeon;
 	bool _running;
 
 };

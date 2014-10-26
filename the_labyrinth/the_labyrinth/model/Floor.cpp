@@ -76,7 +76,7 @@ void Floor::createMaze(const int &size)
 	int chosenY = dist(dre);
 
 	ChamberEncap currentCell;
-	currentCell.chamber = _chambers[chosenX][chosenY];
+	currentCell.chamber = _chambers[chosenY][chosenX];
 	currentCell.x = chosenX;
 	currentCell.y = chosenY;
 
@@ -109,11 +109,11 @@ void Floor::createMaze(const int &size)
 	chosenX = dist(dre);
 	chosenY = dist(dre);
 
-	_start = _chambers[chosenX][chosenY];
+	_start = _chambers[chosenY][chosenX];
 
 	chosenX = dist(dre);
 	chosenY = dist(dre);
-	_end = _chambers[chosenX][chosenY];
+ 	_end = _chambers[chosenY][chosenX];
 }
 
 void Floor::findSuitableChamber(const int &size, const int &x, const int &y, std::vector<ChamberEncap> &suitableChambers) 
@@ -123,7 +123,7 @@ void Floor::findSuitableChamber(const int &size, const int &x, const int &y, std
 		checkChamberValid(x - 1, y, suitableChambers);
 	}
 
-	if (x < size - 1) {
+	if (x < (size - 1)) {
 		// check right
 		checkChamberValid(x + 1, y, suitableChambers);
 	}
@@ -133,7 +133,7 @@ void Floor::findSuitableChamber(const int &size, const int &x, const int &y, std
 		checkChamberValid(x, y - 1, suitableChambers);
 	}
 
-	if (y < size - 1) {
+	if (y < (size - 1)) {
 		// check down
 		checkChamberValid(x, y + 1, suitableChambers);
 	}
@@ -141,9 +141,9 @@ void Floor::findSuitableChamber(const int &size, const int &x, const int &y, std
 
 void Floor::checkChamberValid(const int &x, const int &y, std::vector<ChamberEncap> &suitableChambers)
 {
-	if (_chambers[x][y]->getNeighbourCount() == 0) {
+	if (_chambers[y][x]->getNeighbourCount() == 0) {
 		ChamberEncap cham;
-		cham.chamber = _chambers[x][y];
+		cham.chamber = _chambers[y][x];
 		cham.x = x;
 		cham.y = y;
 		suitableChambers.push_back(cham);
@@ -161,8 +161,8 @@ void Floor::connectChambers(ChamberEncap &chamberOne, ChamberEncap &chamberTwo)
 	}
 	else
 	{
-		Direction directionChamber1 = chamberOne.x > chamberTwo.x ? Direction::EAST : Direction::WEST;
-		Direction directionChamber2 = chamberOne.x > chamberTwo.x ? Direction::WEST : Direction::EAST;
+		Direction directionChamber1 = chamberOne.x > chamberTwo.x ? Direction::WEST : Direction::EAST;
+		Direction directionChamber2 = chamberOne.x > chamberTwo.x ? Direction::EAST : Direction::WEST;
 		chamberOne.chamber->addNeighbour(directionChamber1, *chamberTwo.chamber);
 		chamberTwo.chamber->addNeighbour(directionChamber2, *chamberOne.chamber);
 	}
