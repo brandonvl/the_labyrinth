@@ -51,45 +51,18 @@ void ExploreState::showMap()
 	if (currentFloor != nullptr) {
 		std::vector<std::vector<Chamber*>> chambers = currentFloor->getChambers();
 
+		std::cout << "Dungeon map:" << std::endl;
 		for (auto row : chambers)
 		{
 			for (Chamber *cham : row)
 			{
-				std::string chamber;
-
-				//if (cham->isVisited())
-				
-				if (cham == &dungeon->getDungeonStart()) {
-					chamber = "S";
-				}
-				else if (cham == &dungeon->getDungeonEnd()) {
-					chamber = "E";
-				}
-				else if (cham->hasNeighbour(Direction::UPSTAIRS)) {
-					chamber = "U";
-				}
-				else if (cham->hasNeighbour(Direction::DOWNSTAIRS)) {
-					chamber = "D";
-				}
-				else {
-					chamber = "N";
-				}
-
-				if (cham->hasNeighbour(Direction::EAST)) {
-					chamber += "-";
-				}
-				else
-				{
-					chamber += " ";
-				}
-
-				std::cout << chamber.c_str();
+				showChamber(cham);
 			}
 			std::cout << std::endl;
 
 			for (Chamber *cham : row)
 			{
-				if (cham->hasNeighbour(Direction::SOUTH)) {
+				if (cham->hasNeighbour(Direction::SOUTH) && (cham->isVisited() || cham->getNeighbour(Direction::SOUTH)->isVisited())) {
 					std::cout << "| ";
 				}
 				else
@@ -99,6 +72,9 @@ void ExploreState::showMap()
 			}
 			std::cout << std::endl;
 		}
+
+		showMapInfo();
+
 		/*
 		std::cout << "==================================" << std::endl;
 		for (auto row : chambers)
@@ -118,4 +94,53 @@ void ExploreState::showMap()
 		}*/
 	}
 
+}
+
+void ExploreState::showChamber(Chamber *cham)
+{
+	std::string chamber;
+
+	if (!cham->isVisited()) {
+		chamber = ".";
+	}
+	else
+	{
+		if (cham == &_game->getDungeon().getDungeonStart()) {
+			chamber = "S";
+		}
+		else if (cham == &_game->getDungeon().getDungeonEnd()) {
+			chamber = "E";
+		}
+		else if (cham->hasNeighbour(Direction::UPSTAIRS)) {
+			chamber = "U";
+		}
+		else if (cham->hasNeighbour(Direction::DOWNSTAIRS)) {
+			chamber = "D";
+		}
+		else {
+			chamber = "N";
+		}
+	}
+
+	if (cham->hasNeighbour(Direction::EAST) && (cham->isVisited() || cham->getNeighbour(Direction::EAST)->isVisited())) {
+		chamber += "-";
+	}
+	else
+	{
+		chamber += " ";
+	}
+
+	std::cout << chamber.c_str();
+}
+
+void ExploreState::showMapInfo()
+{
+	std::cout << "==============" << std::endl;
+	std::cout << "|- = Passages" << std::endl;
+	std::cout << "N  = Normal room" << std::endl;
+	std::cout << "S  = Start location dungeon" << std::endl;
+	std::cout << "E  = End location dungeon (boss)" << std::endl;
+	std::cout << "U  = Move floor up" << std::endl;
+	std::cout << "D  = Move floor down" << std::endl;
+	std::cout << ".  = Not visited" << std::endl;
 }

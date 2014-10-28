@@ -1,4 +1,5 @@
 #include "Chamber.h"
+#include "Player.h"
 
 
 Chamber::Chamber() : _explored(false), _player(nullptr), _visited(false)
@@ -25,4 +26,16 @@ void Chamber::addNeighbour(const Direction &direction, Chamber &chamber)
 const bool Chamber::hasNeighbour(const Direction &direction)
 {
 	return _neighbours.find(direction) != _neighbours.end();
+}
+
+void Chamber::enter(Player &player)
+{
+	if (player.getCurrentRoom() != nullptr) {
+		player.getCurrentRoom()->setPlayer(nullptr);
+	}
+
+	player.setChamber(this);
+
+	if (!isVisited())
+		_visited = true;
 }

@@ -1,5 +1,8 @@
 #pragma once
 #include "GameState.h"
+
+class Chamber;
+
 class ExploreState :
 	public GameState
 {
@@ -20,5 +23,7 @@ protected:
 	//virtual ~ExploreState();
 private:
 	void showMap();
+	void showMapInfo();
+	void showChamber(Chamber *cham);
 };
 

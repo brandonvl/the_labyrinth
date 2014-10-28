@@ -24,6 +24,9 @@ public:
 	void addNeighbour(const Direction &direction, Chamber &chamber);
 	const bool hasNeighbour(const Direction &direction);
 	std::unordered_map<Direction, Chamber*> *getNeighbours() { return &_neighbours; }
+	Chamber *getNeighbour(const Direction &direction) { return hasNeighbour(direction) ?  _neighbours[direction] : nullptr; }
+	void enter(Player &player);
+	void setPlayer(Player *player) { _player = player; }
 private:
 	bool _explored;
 	bool _visited;

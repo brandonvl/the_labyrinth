@@ -17,7 +17,8 @@ public:
 	int getAttack() { return _attack; }
 	int getPerception() { return _perception; }
 	Inventory &getInventory() { return *_inventory; }
-	Chamber &getCurrentRoom() { return *_currentRoom; }
+	Chamber *getCurrentRoom() { return _currentRoom; }
+	void setChamber(Chamber *chamber) { _currentRoom = chamber; }
 protected:
 	Inventory *_inventory;
 	Chamber *_currentRoom;
