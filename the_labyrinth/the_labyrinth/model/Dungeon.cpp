@@ -1,6 +1,7 @@
 #include "Dungeon.h"
 #include "Floor.h"
 #include "Chamber.h"
+#include "model\enums.h"
 
 
 Dungeon::Dungeon()

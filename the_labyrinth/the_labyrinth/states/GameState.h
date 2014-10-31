@@ -18,5 +18,6 @@ public:
 protected:
 	GameState() {}
 	Game *_game;
+	std::string _chosenOption;
 };
 

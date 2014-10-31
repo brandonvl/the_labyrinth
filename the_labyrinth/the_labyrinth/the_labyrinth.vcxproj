@@ -97,6 +97,7 @@
     <ClInclude Include="model\Chamber.h" />
     <ClInclude Include="model\Creature.h" />
     <ClInclude Include="model\Dungeon.h" />
+    <ClInclude Include="model\enums.h" />
     <ClInclude Include="model\Floor.h" />
     <ClInclude Include="model\Game.h" />
     <ClInclude Include="model\Inventory.h" />

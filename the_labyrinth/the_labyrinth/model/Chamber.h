@@ -2,14 +2,10 @@
 
 #include <vector>
 #include <unordered_map>
+#include "enums.h"
 
 class Player;
 class Monster;
-
-enum class Direction
-{
-	NORTH = 1, SOUTH = 2, WEST = 3, EAST = 4, UPSTAIRS = 5, DOWNSTAIRS = 6
-};
 
 class Chamber
 {

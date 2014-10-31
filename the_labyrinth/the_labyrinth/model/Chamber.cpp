@@ -35,6 +35,7 @@ void Chamber::enter(Player &player)
 	}
 
 	player.setChamber(this);
+	setPlayer(&player);
 
 	if (!isVisited())
 		_visited = true;
