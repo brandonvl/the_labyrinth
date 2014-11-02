@@ -31,5 +31,7 @@ private:
 	void doOptionShowMap();
 	void doOptionExplore();
 	void doOptionFight();
+
+	const bool TEST_MODE = false;
 };
 

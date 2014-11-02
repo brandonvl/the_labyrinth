@@ -25,6 +25,12 @@
     <Filter Include="Source Files\states">
       <UniqueIdentifier>{c899d60b-fc58-47ee-b3a5-9c52969de0cd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\util">
+      <UniqueIdentifier>{bab978ae-e6a5-4967-9c9e-88de786a7f56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\util">
+      <UniqueIdentifier>{35a38934-585e-4d8b-9276-91b4e4df3acb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="the_labyrinth.cpp">
@@ -72,6 +78,12 @@
     <ClCompile Include="states\IntroState.cpp">
       <Filter>Source Files\states</Filter>
     </ClCompile>
+    <ClCompile Include="RandomGenerator.cpp">
+      <Filter>Source Files\util</Filter>
+    </ClCompile>
+    <ClCompile Include="util\ChamberDescriptionBuilder.cpp">
+      <Filter>Source Files\util</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="model\Chamber.h">
@@ -118,6 +130,12 @@
     </ClInclude>
     <ClInclude Include="states\IntroState.h">
       <Filter>Header Files\states</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomGenerator.h">
+      <Filter>Header Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="util\ChamberDescriptionBuilder.h">
+      <Filter>Header Files\util</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

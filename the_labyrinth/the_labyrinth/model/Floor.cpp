@@ -1,5 +1,6 @@
 #include "Floor.h"
 #include "Chamber.h"
+#include "RandomGenerator.h"
 
 #include <stack>
 #include <random>
@@ -53,27 +54,27 @@ void Floor::createFloor(const int &size, const int &minLevel, const int &maxLeve
 
 Chamber &Floor::generateChamber(const int &minLevel, const int &maxLevel)
 {
-	Chamber *chamber = new Chamber();
-
-	// make random chamber
+	Chamber *chamber = new Chamber(
+		static_cast<ChamberSize>(RandomGenerator::random(0, 2)),
+		static_cast<ChamberState>(RandomGenerator::random(0, 1)),
+		static_cast<ChamberLightning>(RandomGenerator::random(0, 2)),
+		static_cast<ChamberInventory>(RandomGenerator::random(0, 2)),
+		static_cast<ChamberInventoryPosition>(RandomGenerator::random(0, 1))
+	);
 
 	return *chamber;
 }
 
 void Floor::createMaze(const int &size)
-{
-	std::random_device dev;
-	std::default_random_engine dre(dev());
-	
+{	
 	// DFS - Backtrack algo
 	std::stack<ChamberEncap> _visitedCells;
 
 	int totalCells = size * size;
 	int visitedCells = 1;
 
-	std::uniform_int_distribution<int> dist(0, size-1);
-	int chosenX = dist(dre);
-	int chosenY = dist(dre);
+	int chosenX = RandomGenerator::random(0, size - 1);
+	int chosenY = RandomGenerator::random(0, size - 1);
 
 	ChamberEncap currentCell;
 	currentCell.chamber = _chambers[chosenY][chosenX];
@@ -89,8 +90,8 @@ void Floor::createMaze(const int &size)
 
 		if (suitableChambers.size() > 0)
 		{
-			std::uniform_int_distribution<int> suit(0, suitableChambers.size() - 1);
-			ChamberEncap suitableChamber = suitableChambers[suit(dev)];
+			int index = RandomGenerator::random(0, suitableChambers.size() - 1);
+			ChamberEncap suitableChamber = suitableChambers[index];
 			connectChambers(currentCell, suitableChamber);
 			_visitedCells.push(currentCell);
 			currentCell = suitableChamber;
@@ -106,13 +107,13 @@ void Floor::createMaze(const int &size)
 	}
 
 	// select starting point
-	chosenX = dist(dre);
-	chosenY = dist(dre);
+	chosenX = RandomGenerator::random(0, size - 1);
+	chosenY = RandomGenerator::random(0, size - 1);
 
 	_start = _chambers[chosenY][chosenX];
 
-	chosenX = dist(dre);
-	chosenY = dist(dre);
+	chosenX = RandomGenerator::random(0, size - 1);
+	chosenY = RandomGenerator::random(0, size - 1);
  	_end = _chambers[chosenY][chosenX];
 }
 

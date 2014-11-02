@@ -91,11 +91,13 @@
     <ClCompile Include="model\Monster.cpp" />
     <ClCompile Include="model\Player.cpp" />
     <ClCompile Include="model\Thing.cpp" />
+    <ClCompile Include="RandomGenerator.cpp" />
     <ClCompile Include="states\ExploreState.cpp" />
     <ClCompile Include="states\FightState.cpp" />
     <ClCompile Include="states\GameState.cpp" />
     <ClCompile Include="states\IntroState.cpp" />
     <ClCompile Include="the_labyrinth.cpp" />
+    <ClCompile Include="util\ChamberDescriptionBuilder.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="model\Chamber.h" />
@@ -109,10 +111,12 @@
     <ClInclude Include="model\Monster.h" />
     <ClInclude Include="model\Player.h" />
     <ClInclude Include="model\Thing.h" />
+    <ClInclude Include="RandomGenerator.h" />
     <ClInclude Include="states\ExploreState.h" />
     <ClInclude Include="states\FightState.h" />
     <ClInclude Include="states\GameState.h" />
     <ClInclude Include="states\IntroState.h" />
+    <ClInclude Include="util\ChamberDescriptionBuilder.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

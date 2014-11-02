@@ -4,6 +4,7 @@
 #include "model\Floor.h"
 #include "model\Chamber.h"
 #include "model\Player.h"
+#include "util\ChamberDescriptionBuilder.h"
 
 void ExploreState::init(Game &game)
 {
@@ -24,7 +25,7 @@ void ExploreState::update()
 
 void ExploreState::displayInfo()
 {
-	std::cout << "<<<<< CHAMBER INFO HERE >>>>>" << std::endl;
+	std::cout << ChamberDescriptionBuilder::getDescription(*_game->getPlayer().getCurrentRoom());
 	std::cout << std::endl;
 }
 
@@ -132,7 +133,7 @@ void ExploreState::doOptionShowMap()
 
 			for (Chamber *cham : row)
 			{
-				if (cham->hasNeighbour(Direction::SOUTH) && (cham->isVisited() || cham->getNeighbour(Direction::SOUTH)->isVisited())) {
+				if (cham->hasNeighbour(Direction::SOUTH) && (TEST_MODE || cham->isVisited() || cham->getNeighbour(Direction::SOUTH)->isVisited())) {
 					std::cout << "| ";
 				}
 				else
@@ -169,7 +170,7 @@ void ExploreState::showChamber(Chamber *cham)
 {
 	std::string chamber;
 
-	if (!cham->isVisited()) {
+	if (!TEST_MODE && !cham->isVisited()) {
 		chamber = ".";
 	}
 	else
@@ -191,7 +192,7 @@ void ExploreState::showChamber(Chamber *cham)
 		}
 	}
 
-	if (cham->hasNeighbour(Direction::EAST) && (cham->isVisited() || cham->getNeighbour(Direction::EAST)->isVisited())) {
+	if (cham->hasNeighbour(Direction::EAST) && (TEST_MODE || cham->isVisited() || cham->getNeighbour(Direction::EAST)->isVisited())) {
 		chamber += "-";
 	}
 	else

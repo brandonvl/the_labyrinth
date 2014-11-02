@@ -2,7 +2,8 @@
 #include "Player.h"
 
 
-Chamber::Chamber() : _explored(false), _player(nullptr), _visited(false)
+Chamber::Chamber(const ChamberSize size, const ChamberState state, const ChamberLightning lightning, const ChamberInventory inventory, const ChamberInventoryPosition inventoryPosition) :
+_explored(false), _player(nullptr), _visited(false), _size(size), _state(state), _lightning(lightning), _inventory(inventory), _inventoryPosition(inventoryPosition)
 {
 }
 
