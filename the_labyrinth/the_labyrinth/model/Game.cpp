@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "states\GameState.h"
 #include "states\ExploreState.h"
+#include "states\IntroState.h"
 #include "Dungeon.h"
 #include "Player.h"
 #include "Chamber.h"
@@ -24,8 +25,8 @@ Game::~Game()
 void Game::run()
 {
 	_dungeon = new Dungeon();
-	_dungeon->createDungeon();
 	_player = new Player();
+	_dungeon->createDungeon();
 	_dungeon->getDungeonStart().enter(*_player);
 	changeState(ExploreState::instance());
 	_running = true;

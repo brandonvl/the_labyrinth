@@ -53,53 +53,67 @@ void ExploreState::displayOptions()
 		optionString += "|fight";
 	}
 
-	optionString += "|move|map";
+	optionString += "|move|map|status|quit";
 	optionString += "]";
 
 	std::cout << optionString << std::endl << std::endl;
 	std::cout << "You choose: ";
 	std::getline(std::cin, _chosenOption);
-
-	if (_chosenOption == "move")
-	{
-		std::vector<std::string> neighbours = getNeighBourStrings(*chamber);
-		std::string neighOption = "[";
-		for (auto it : neighbours) {
-			neighOption += "|" + it;
-		}
-
-		neighOption += "]";
-
-		std::cout << neighOption << std::endl;
-		std::cout << "Move where: ";
-		std::getline(std::cin, _chosenOption);
-		Direction direction = Direction::INVALID;
-		for (auto it : directionNames) {
-			if (it.second == _chosenOption)
-				direction = it.first;
-		}
-
-		if (chamber->hasNeighbour(direction)) {
-			chamber->getNeighbour(direction)->enter(player);
-		}
-	}
-	else if (_chosenOption == "map")
-	{
-		showMap();
-	}
-
-	_chosenOption = "";
 	std::cout << std::endl;
 }
 
 void ExploreState::doOption()
 {
+	if (_chosenOption == "move")
+	{
+		Player &player = _game->getPlayer();
+		Chamber *chamber = player.getCurrentRoom();
+		doOptionMove(player, *chamber);
+	}
+	else if (_chosenOption == "map")
+	{
+		doOptionShowMap();
+	}
+	else if (_chosenOption == "quit") {
+		doOptionQuit();
+	}
 	std::cout << std::endl;
-	std::cout << _chosenOption;
-	std::cout << std::endl;
+	_chosenOption = "";
 }
 
-void ExploreState::showMap()
+void ExploreState::doOptionQuit()
+{
+	_game->stop();
+}
+
+void ExploreState::doOptionMove(Player &player, Chamber &chamber)
+{
+	std::vector<std::string> neighbours = getNeighBourStrings(chamber);
+	std::string neighOption = "[";
+	for (auto it : neighbours) {
+		neighOption += "|" + it;
+	}
+
+	neighOption += "]";
+
+	std::cout << neighOption << std::endl;
+	std::cout << "Move where: ";
+	std::getline(std::cin, _chosenOption);
+	Direction direction = Direction::INVALID;
+	for (auto it : directionNames) {
+		if (it.second == _chosenOption) {
+			direction = it.first;
+			break;
+		}
+	}
+
+	if (chamber.hasNeighbour(direction)) {
+		chamber.getNeighbour(direction)->enter(player);
+	}
+	else std::cout << "That option is invalid.";
+}
+
+void ExploreState::doOptionShowMap()
 {
 	Dungeon *dungeon = &_game->getDungeon();
 	Floor *currentFloor = _game->getDungeon().getCurrentFloor();
@@ -135,21 +149,20 @@ void ExploreState::showMap()
 		std::cout << "==================================" << std::endl;
 		for (auto row : chambers)
 		{
-			for (Chamber *cham : row)
-			{
-				std::unordered_map<Direction, Chamber*> *neighbours = cham->getNeighbours();
+		for (Chamber *cham : row)
+		{
+		std::unordered_map<Direction, Chamber*> *neighbours = cham->getNeighbours();
 
-				for (auto item : *neighbours)
-				{
-					std::cout << "Direction: " << static_cast<int>(item.first) << ", Chamber: " << item.second << std::endl;
-				}
-				std::cout << "==== end chamber ==" << std::endl;
-			}
+		for (auto item : *neighbours)
+		{
+		std::cout << "Direction: " << static_cast<int>(item.first) << ", Chamber: " << item.second << std::endl;
+		}
+		std::cout << "==== end chamber ==" << std::endl;
+		}
 
-			std::cout << "==== end row ==" << std::endl;
+		std::cout << "==== end row ==" << std::endl;
 		}*/
 	}
-
 }
 
 void ExploreState::showChamber(Chamber *cham)

@@ -2,6 +2,7 @@
 #include "GameState.h"
 
 class Chamber;
+class Player;
 
 class ExploreState :
 	public GameState
@@ -25,5 +26,10 @@ private:
 	void showMap();
 	void showMapInfo();
 	void showChamber(Chamber *cham);
+	void doOptionQuit();
+	void doOptionMove(Player &player, Chamber &chamber);
+	void doOptionShowMap();
+	void doOptionExplore();
+	void doOptionFight();
 };
 
