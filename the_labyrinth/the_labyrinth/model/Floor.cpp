@@ -107,13 +107,17 @@ void Floor::createMaze(const int &size)
 	}
 
 	// select starting point
-	chosenX = RandomGenerator::random(0, size - 1);
-	chosenY = RandomGenerator::random(0, size - 1);
+	int startchosenX = RandomGenerator::random(0, size - 1);
+	int startchosenY = RandomGenerator::random(0, size - 1);
 
-	_start = _chambers[chosenY][chosenX];
+	_start = _chambers[startchosenY][startchosenX];
 
-	chosenX = RandomGenerator::random(0, size - 1);
-	chosenY = RandomGenerator::random(0, size - 1);
+	do
+	{
+		chosenX = RandomGenerator::random(0, size - 1);
+		chosenY = RandomGenerator::random(0, size - 1);
+	} while (chosenX == startchosenX && chosenY == startchosenY);
+
  	_end = _chambers[chosenY][chosenX];
 }
 

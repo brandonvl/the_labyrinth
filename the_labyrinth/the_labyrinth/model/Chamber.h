@@ -7,6 +7,7 @@
 class Player;
 class Monster;
 class Inventory;
+class Monster;
 
 class Chamber
 {
@@ -19,6 +20,7 @@ public:
 	const bool isExplored() { return _explored; }
 	const bool isVisited() { return _visited; }
 	void addNeighbour(const Direction &direction, Chamber &chamber);
+	void addMonster(Monster &monster);
 	const bool hasNeighbour(const Direction &direction);
 	std::unordered_map<Direction, Chamber*> *getNeighbours() { return &_neighbours; }
 	Chamber *getNeighbour(const Direction &direction) { return hasNeighbour(direction) ?  _neighbours[direction] : nullptr; }

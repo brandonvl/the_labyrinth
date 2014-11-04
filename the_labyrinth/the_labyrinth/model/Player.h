@@ -6,5 +6,7 @@ class Player :
 public:
 	Player();
 	virtual ~Player();
+private:
+	int _experience;
 };
 

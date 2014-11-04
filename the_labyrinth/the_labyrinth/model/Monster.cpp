@@ -3,6 +3,7 @@
 
 Monster::Monster()
 {
+	_baseExperience = 0;
 }
 
 

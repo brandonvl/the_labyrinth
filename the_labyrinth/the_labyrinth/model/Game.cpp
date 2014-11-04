@@ -24,11 +24,11 @@ Game::~Game()
 
 void Game::run()
 {
-	_dungeon = new Dungeon();
-	_player = new Player();
-	_dungeon->createDungeon();
-	_dungeon->getDungeonStart().enter(*_player);
-	changeState(ExploreState::instance());
+	//_dungeon = new Dungeon();
+	//_player = new Player();
+	//_dungeon->createDungeon();
+	//_dungeon->getDungeonStart().enter(*_player);
+	changeState(IntroState::instance());
 	_running = true;
 
 	while (_running)
@@ -50,4 +50,12 @@ void Game::changeState(GameState &state)
 	_state = &state;
 
 	_state->init(*this);
+}
+
+void Game::createDungeon(Player &player)
+{
+	_dungeon = new Dungeon();
+	_player = &player;
+	_dungeon->createDungeon();
+	_dungeon->getDungeonStart().enter(*_player);
 }

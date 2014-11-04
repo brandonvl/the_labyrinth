@@ -14,7 +14,7 @@ public:
 	void run();
 	void stop();
 	void changeState(GameState &state);
-	void createDungeon();
+	void createDungeon(Player &player);
 private:
 	GameState *_state;
 	Player *_player;

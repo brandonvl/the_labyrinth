@@ -1,5 +1,6 @@
 #include "Chamber.h"
 #include "Player.h"
+#include "Monster.h"
 
 
 Chamber::Chamber(const ChamberSize size, const ChamberState state, const ChamberLightning lightning, const ChamberInventory inventory, const ChamberInventoryPosition inventoryPosition) :
@@ -15,6 +16,11 @@ Chamber::~Chamber()
 		it.second = nullptr;
 	}
 
+	for (auto it : _monsters) 
+	{
+		delete it;
+	}
+
 	_monsters.clear();
 	_neighbours.clear();
 }
@@ -22,6 +28,12 @@ Chamber::~Chamber()
 void Chamber::addNeighbour(const Direction &direction, Chamber &chamber)
 {
 	_neighbours.insert(std::make_pair(direction, &chamber));
+}
+
+void Chamber::addMonster(Monster &monster)
+{
+	monster.setChamber(this);
+	_monsters.push_back(&monster);
 }
 
 const bool Chamber::hasNeighbour(const Direction &direction)

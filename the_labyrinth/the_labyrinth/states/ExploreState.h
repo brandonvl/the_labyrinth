@@ -30,6 +30,7 @@ private:
 	void doOptionMove(Player &player, Chamber &chamber);
 	void doOptionShowMap();
 	void doOptionExplore();
+	void doOptionShowStatus(Player &player);
 	void doOptionFight();
 
 	const bool TEST_MODE = false;

@@ -5,6 +5,8 @@
 #include "model\Chamber.h"
 #include "model\Player.h"
 #include "util\ChamberDescriptionBuilder.h"
+#include "FightState.h"
+#include "model\Monster.h"
 
 void ExploreState::init(Game &game)
 {
@@ -23,12 +25,6 @@ void ExploreState::update()
 	doOption();
 }
 
-void ExploreState::displayInfo()
-{
-	std::cout << ChamberDescriptionBuilder::getDescription(*_game->getPlayer().getCurrentRoom());
-	std::cout << std::endl;
-}
-
 std::vector<std::string> getNeighBourStrings(Chamber &chamber)
 {
 	std::vector<std::string> neighbours;
@@ -42,6 +38,62 @@ std::vector<std::string> getNeighBourStrings(Chamber &chamber)
 
 	return neighbours;
 }
+
+std::string getNeighBourString(Chamber &chamber)
+{
+	std::vector<std::string> neighbours = getNeighBourStrings(chamber);
+	std::string neighOption = "[";
+	for (auto it : neighbours) {
+		neighOption += "|" + it;
+	}
+
+	neighOption += "]";
+
+	return neighOption;
+}
+
+std::string getMonsterString(Chamber &chamber)
+{
+	if (chamber.getMonsters()->size() > 0)
+	{
+		std::string monsterString;
+		std::unordered_map<std::string, int> _tempMonsterMap;
+
+		std::vector<Monster*> *monsters = chamber.getMonsters();
+
+		for (Monster *monster : *monsters)
+		{
+			if (_tempMonsterMap.find(monster->getName()) != _tempMonsterMap.end()) {
+				_tempMonsterMap[monster->getName()]++;
+			}
+			else
+			{
+				_tempMonsterMap.insert(std::make_pair(monster->getName(), 1));
+			}
+		}
+
+		for (auto keyValue : _tempMonsterMap) {
+			monsterString.append(std::to_string(keyValue.second) + " " + keyValue.first + " ");
+		}
+
+		return monsterString;
+	}
+	else
+	{
+		return "none";
+	}
+}
+
+void ExploreState::displayInfo()
+{
+	Chamber &chamber = *_game->getPlayer().getCurrentRoom();
+	std::cout << "Description: " << ChamberDescriptionBuilder::getDescription(chamber) << std::endl << std::endl;
+	std::cout << "Exits: " << getNeighBourString(chamber) << std::endl << std::endl;
+	std::cout << "Monsters: " << getMonsterString(chamber);
+	std::cout << std::endl << std::endl;
+}
+
+
 
 void ExploreState::displayOptions()
 {
@@ -57,7 +109,7 @@ void ExploreState::displayOptions()
 	optionString += "|move|map|status|quit";
 	optionString += "]";
 
-	std::cout << optionString << std::endl << std::endl;
+	std::cout << "Options: " << optionString << std::endl << std::endl;
 	std::cout << "You choose: ";
 	std::getline(std::cin, _chosenOption);
 	std::cout << std::endl;
@@ -75,9 +127,21 @@ void ExploreState::doOption()
 	{
 		doOptionShowMap();
 	}
+	else if (_chosenOption == "status")
+	{
+		doOptionShowStatus(_game->getPlayer());
+	}
 	else if (_chosenOption == "quit") {
 		doOptionQuit();
 	}
+	else
+	{
+		std::cout << "Invalid choice." << std::endl;
+	}
+
+	/*if (_game->getPlayer().getCurrentRoom()->getMonsters()->size() > 0)
+		changeState(FightState::instance());*/
+
 	std::cout << std::endl;
 	_chosenOption = "";
 }
@@ -87,16 +151,23 @@ void ExploreState::doOptionQuit()
 	_game->stop();
 }
 
+void ExploreState::doOptionShowStatus(Player &player)
+{
+	std::cout << "==== Status of " << player.getName() << " ====" << std::endl;
+	std::cout << "Level: " << player.getLevel() << std::endl;
+	std::cout << "HP / MaxHP: " << player.getHealth() << " / " << player.getMaxHealth() << std::endl;
+	std::cout << "Defense: " << player.getDefense() << std::endl;
+	std::cout << "Attack: " << player.getAttack() << std::endl;
+	std::cout << "Perception: " << player.getPerception() << std::endl;
+	std::cout << "Press any key to continue...";
+	std::cin.get();
+	std::cout << std::endl;
+	
+}
+
 void ExploreState::doOptionMove(Player &player, Chamber &chamber)
 {
-	std::vector<std::string> neighbours = getNeighBourStrings(chamber);
-	std::string neighOption = "[";
-	for (auto it : neighbours) {
-		neighOption += "|" + it;
-	}
-
-	neighOption += "]";
-
+	std::string neighOption = getNeighBourString(chamber);
 	std::cout << neighOption << std::endl;
 	std::cout << "Move where: ";
 	std::getline(std::cin, _chosenOption);
@@ -146,6 +217,7 @@ void ExploreState::doOptionShowMap()
 
 		showMapInfo();
 
+		std::cout << "Press any key to continue..." << std::endl;
 		/*
 		std::cout << "==================================" << std::endl;
 		for (auto row : chambers)

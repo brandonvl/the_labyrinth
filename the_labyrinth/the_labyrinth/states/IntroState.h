@@ -20,6 +20,6 @@ protected:
 	IntroState() { }
 private:
 	void doOptionQuit();
-	void doOptionPlay();
+	void doOptionNew();
 };
 
