@@ -8,6 +8,7 @@ class Player;
 class Monster;
 class Inventory;
 class Monster;
+class Item;
 
 class Chamber
 {
@@ -21,6 +22,7 @@ public:
 	const bool isVisited() { return _visited; }
 	void addNeighbour(const Direction &direction, Chamber &chamber);
 	void addMonster(Monster &monster);
+	void addItem(Item &item);
 	const bool hasNeighbour(const Direction &direction);
 	std::unordered_map<Direction, Chamber*> *getNeighbours() { return &_neighbours; }
 	Chamber *getNeighbour(const Direction &direction) { return hasNeighbour(direction) ?  _neighbours[direction] : nullptr; }
@@ -39,6 +41,7 @@ private:
 
 	Player *_player;
 	std::vector<Monster*> _monsters;
+	std::vector<Item*> _items;
 	std::vector<Inventory*> _inventories;
 	std::unordered_map<Direction, Chamber*> _neighbours;
 };

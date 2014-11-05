@@ -4,6 +4,7 @@
 #include <vector>
 
 class Monster;
+class Item;
 
 class FileManager
 {
@@ -12,6 +13,7 @@ public:
 	static void unload();
 	static const std::string &getRandomSize(), &getRandomState(), &getRandomLightning(), &getRandomInventory(), &getRandomInventoryPosition();
 	static Monster *getRandomMonster(const int minLevel, const int maxLevel), *getRandomBoss(const int minLevel, const int maxLevel);
+	static Item *getRandomItem();
 
 private:
 	static FileManager &instance();
@@ -22,6 +24,7 @@ private:
 	} _chamberOptions;
 
 	std::vector<Monster*> _monsters, _bosses;
+	std::vector<Item*> _items;
 	JSON::JSONDocument *_document;
 
 	FileManager() {}

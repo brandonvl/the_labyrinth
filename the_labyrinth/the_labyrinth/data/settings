@@ -50,13 +50,13 @@
 	],
 	
 	items: [
-		{ naam: "Health potion", type: "health", amount: 5 },
-		{ naam: "Max-health potion", type: "maxHealth", amount: 5 },
-		{ naam: "Level potion", type: "level", amount: 5 },
-		{ naam: "Experience potion", type: "experience", amount: 5 },
-		{ naam: "Defence potion", type: "defence", amount: 5 },
-		{ naam: "Attack potion", type: "attack", amount: 5 },
-		{ naam: "Perception potion", type: "perception", amount: 5 }
+		{ name: "Health potion", type: "health", amount: 5 },
+		{ name: "Max-health potion", type: "maxHealth", amount: 5 },
+		{ name: "Level potion", type: "level", amount: 5 },
+		{ name: "Experience potion", type: "experience", amount: 5 },
+		{ name: "Defence potion", type: "defence", amount: 5 },
+		{ name: "Attack potion", type: "attack", amount: 5 },
+		{ name: "Perception potion", type: "perception", amount: 5 }
 	],
 	
 	traps: [
