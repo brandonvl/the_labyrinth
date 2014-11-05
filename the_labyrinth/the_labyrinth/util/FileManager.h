@@ -12,7 +12,7 @@ class FileManager
 public:
 	static void load();
 	static void unload();
-	static const std::string &getRandomSize(), &getRandomState(), &getRandomLightning(), &getRandomInventory(), &getRandomInventoryPosition();
+	static const std::string &getRandomSize(), &getRandomState(), &getRandomLightning(), &getRandomFurniture(), &getRandomFurniturePosition();
 	static Monster *getRandomMonster(const int minLevel, const int maxLevel), *getRandomBoss(const int minLevel, const int maxLevel);
 	static Item *getRandomItem();
 	static Trap *getRandomTrap();
@@ -22,7 +22,7 @@ private:
 	void init();
 
 	struct ChamberOptions {
-		std::vector<std::string> sizes, states, lightning, inventory, inventoryPositions;
+		std::vector<std::string> sizes, states, lightning, furniture, furniturePositions;
 	} _chamberOptions;
 
 	std::vector<Monster*> _monsters, _bosses;

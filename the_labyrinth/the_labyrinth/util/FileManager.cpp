@@ -29,14 +29,14 @@ void FileManager::init() {
 			_chamberOptions.lightning.push_back(lightningOptions.getString(i));
 		}
 
-		auto &inventoryOptions = chamberOptions.getObject("inventory").getArray("items");
-		for (int i = 0; i < inventoryOptions.size(); i++) {
-			_chamberOptions.inventory.push_back(inventoryOptions.getString(i));
+		auto &furnitureOptions = chamberOptions.getObject("furniture").getArray("items");
+		for (int i = 0; i < furnitureOptions.size(); i++) {
+			_chamberOptions.furniture.push_back(furnitureOptions.getString(i));
 		}
 
-		auto &inventoryPositionOptions = chamberOptions.getObject("inventory").getArray("positions");
-		for (int i = 0; i < inventoryPositionOptions.size(); i++) {
-			_chamberOptions.inventoryPositions.push_back(inventoryPositionOptions.getString(i));
+		auto &furniturePositionOptions = chamberOptions.getObject("furniture").getArray("positions");
+		for (int i = 0; i < furniturePositionOptions.size(); i++) {
+			_chamberOptions.furniturePositions.push_back(furniturePositionOptions.getString(i));
 		}
 
 		auto &monsterOptions = root.getArray("monsters");
@@ -111,12 +111,12 @@ const std::string &FileManager::getRandomLightning() {
 	return RandomGenerator::randomFromVector<std::string>(instance()._chamberOptions.lightning);
 }
 
-const std::string &FileManager::getRandomInventory() {
-	return RandomGenerator::randomFromVector<std::string>(instance()._chamberOptions.inventory);
+const std::string &FileManager::getRandomFurniture() {
+	return RandomGenerator::randomFromVector<std::string>(instance()._chamberOptions.furniture);
 }
 
-const std::string &FileManager::getRandomInventoryPosition() {
-	return RandomGenerator::randomFromVector<std::string>(instance()._chamberOptions.inventoryPositions);
+const std::string &FileManager::getRandomFurniturePosition() {
+	return RandomGenerator::randomFromVector<std::string>(instance()._chamberOptions.furniturePositions);
 }
 
 Monster *FileManager::getRandomMonster(const int minLevel, const int maxLevel) {

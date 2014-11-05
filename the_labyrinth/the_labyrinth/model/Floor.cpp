@@ -58,7 +58,7 @@ Chamber &Floor::generateChamber(const int &minLevel, const int &maxLevel)
 	// create new chamber with random size, state, lightning, inventory and inventory position
 	Chamber *chamber = new Chamber(FileManager::getRandomSize(),
 		FileManager::getRandomState(), FileManager::getRandomLightning(),
-		FileManager::getRandomInventory(), FileManager::getRandomInventoryPosition());
+		FileManager::getRandomFurniture(), FileManager::getRandomFurniturePosition());
 
 	// add random number of random monsters
 	int numberOfMonsters = RandomGenerator::random(0, 3);

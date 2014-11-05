@@ -6,7 +6,6 @@
 
 class Player;
 class Monster;
-class Inventory;
 class Monster;
 class Item;
 class Trap;
@@ -14,7 +13,7 @@ class Trap;
 class Chamber
 {
 public:
-	Chamber(const std::string size, const std::string state, const std::string lightning, const std::string inventory, const std::string inventoryPosition);
+	Chamber(const std::string size, const std::string state, const std::string lightning, const std::string furniture, const std::string furniturePosition);
 	virtual ~Chamber();
 	Player *getPlayer() { return _player; }
 	std::vector<Monster*> *getMonsters() { return &_monsters; }
@@ -34,18 +33,17 @@ public:
 	const std::string &getSize() { return _size; }
 	const std::string &getState() { return _state; }
 	const std::string &getLightning() { return _lightning; }
-	const std::string &getInventory() { return _inventory; }
-	const std::string &getInventoryPosition() { return _inventoryPosition; }
+	const std::string &getFurniture() { return _furniture; }
+	const std::string &getFurniturePosition() { return _furniturePosition; }
 	
 private:
 	bool _explored;
 	bool _visited;
-	const std::string _size, _state, _lightning, _inventory, _inventoryPosition;
+	const std::string _size, _state, _lightning, _furniture, _furniturePosition;
 
 	Player *_player;
 	std::vector<Monster*> _monsters;
 	std::vector<Item*> _items;
-	std::vector<Inventory*> _inventories;
 	std::unordered_map<Direction, Chamber*> _neighbours;
 	Trap *_trap;
 };

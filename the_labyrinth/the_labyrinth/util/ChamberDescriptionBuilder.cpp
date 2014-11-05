@@ -25,8 +25,8 @@ std::string ChamberDescriptionBuilder::getDescription(Chamber &chamber) {
 		stream << ". The room is completely empty and is ";
 	else {*/
 		stream << ", with a ";
-		stream << chamber.getInventory() << " in the ";
-		stream << chamber.getInventoryPosition() << ". The room is ";
+		stream << chamber.getFurniture() << " in the ";
+		stream << chamber.getFurniturePosition() << ". The room is ";
 	//}
 
 	stream << "illuminated by a ";

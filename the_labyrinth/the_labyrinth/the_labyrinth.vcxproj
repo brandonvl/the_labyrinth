@@ -93,6 +93,7 @@
     <ClCompile Include="model\Player.cpp" />
     <ClCompile Include="model\Thing.cpp" />
     <ClCompile Include="model\Trap.cpp" />
+    <ClCompile Include="states\InventoryState.cpp" />
     <ClCompile Include="util\RandomGenerator.cpp" />
     <ClCompile Include="states\ExploreState.cpp" />
     <ClCompile Include="states\FightState.cpp" />
@@ -115,6 +116,7 @@
     <ClInclude Include="model\Player.h" />
     <ClInclude Include="model\Thing.h" />
     <ClInclude Include="model\Trap.h" />
+    <ClInclude Include="states\InventoryState.h" />
     <ClInclude Include="util\RandomGenerator.h" />
     <ClInclude Include="states\ExploreState.h" />
     <ClInclude Include="states\FightState.h" />

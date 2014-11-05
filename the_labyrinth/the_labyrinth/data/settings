@@ -3,7 +3,7 @@
 		sizes: [ "small", "medium", "large", "very large", "gigantic", "very small" ],
 		states: [ "clean", "dirty", "misty", "foggy" ],
 		lightning: [ "candle", "torch", "fireplace", "henk" ],
-		inventory: {
+		furniture: {
 			items: [ "table", "bed" ],
 			positions: [ "corner", "center" ]
 		}

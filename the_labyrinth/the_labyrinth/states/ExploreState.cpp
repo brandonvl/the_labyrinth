@@ -1,4 +1,5 @@
 #include "ExploreState.h"
+#include "InventoryState.h"
 #include "model\Game.h"
 #include "model\Dungeon.h"
 #include "model\Floor.h"
@@ -106,7 +107,7 @@ void ExploreState::displayOptions()
 		optionString += "|fight";
 	}
 
-	optionString += "|move|map|status|quit";
+	optionString += "|move|map|inventory|status|quit";
 	optionString += "]";
 
 	std::cout << "Options: " << optionString << std::endl << std::endl;
@@ -135,6 +136,10 @@ void ExploreState::doOption()
 	else if (_chosenOption == "status")
 	{
 		doOptionShowStatus(_game->getPlayer());
+	}
+	else if (_chosenOption == "inventory")
+	{
+		doOptionShowInventory();
 	}
 	else if (_chosenOption == "quit") {
 		doOptionQuit();
@@ -248,6 +253,10 @@ void ExploreState::doOptionShowMap()
 		std::cout << "==== end row ==" << std::endl;
 		}*/
 	}
+}
+
+void ExploreState::doOptionShowInventory() {
+	changeState(InventoryState::instance());
 }
 
 void ExploreState::showChamber(Chamber *cham)
