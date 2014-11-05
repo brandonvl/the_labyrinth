@@ -9,6 +9,7 @@ class Monster;
 class Inventory;
 class Monster;
 class Item;
+class Trap;
 
 class Chamber
 {
@@ -23,6 +24,7 @@ public:
 	void addNeighbour(const Direction &direction, Chamber &chamber);
 	void addMonster(Monster &monster);
 	void addItem(Item &item);
+	void setTrap(Trap &trap) { _trap = &trap; }
 	const bool hasNeighbour(const Direction &direction);
 	std::unordered_map<Direction, Chamber*> *getNeighbours() { return &_neighbours; }
 	Chamber *getNeighbour(const Direction &direction) { return hasNeighbour(direction) ?  _neighbours[direction] : nullptr; }
@@ -44,5 +46,6 @@ private:
 	std::vector<Item*> _items;
 	std::vector<Inventory*> _inventories;
 	std::unordered_map<Direction, Chamber*> _neighbours;
+	Trap *_trap;
 };
 

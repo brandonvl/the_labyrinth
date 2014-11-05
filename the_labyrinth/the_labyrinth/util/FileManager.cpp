@@ -2,6 +2,7 @@
 #include "RandomGenerator.h"
 #include "model\Monster.h"
 #include "model\Item.h"
+#include "model\Trap.h"
 
 void FileManager::load() {
 	instance().init();
@@ -75,6 +76,15 @@ void FileManager::init() {
 			item->setAmount(obj.getInt("amount"));
 			_items.push_back(item);
 		}
+
+		auto &trapOptions = root.getArray("traps");
+		for (int i = 0; i < trapOptions.size(); i++) {
+			JSON::JSONObject &obj = trapOptions.getObject(i);
+			Trap *trap = new Trap();
+			trap->setName(obj.getString("name"));
+			trap->setDamage(obj.getInt("damage"));
+			_traps.push_back(trap);
+		}
 	}
 }
 
@@ -129,6 +139,12 @@ Monster *FileManager::getRandomBoss(const int minLevel, const int maxLevel) {
 Item *FileManager::getRandomItem() {
 	Item *item = RandomGenerator::randomFromVector<Item*>(instance()._items);
 	if (item != nullptr) return new Item(*item);
+	return nullptr;
+}
+
+Trap *FileManager::getRandomTrap() {
+	Trap *trap = RandomGenerator::randomFromVector<Trap*>(instance()._traps);
+	if (trap != nullptr) return new Trap(*trap);
 	return nullptr;
 }
 

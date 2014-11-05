@@ -78,14 +78,17 @@
     <ClCompile Include="states\IntroState.cpp">
       <Filter>Source Files\states</Filter>
     </ClCompile>
-    <ClCompile Include="RandomGenerator.cpp">
-      <Filter>Source Files\util</Filter>
-    </ClCompile>
     <ClCompile Include="util\ChamberDescriptionBuilder.cpp">
       <Filter>Source Files\util</Filter>
     </ClCompile>
     <ClCompile Include="util\FileManager.cpp">
       <Filter>Source Files\util</Filter>
+    </ClCompile>
+    <ClCompile Include="util\RandomGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="model\Trap.cpp">
+      <Filter>Source Files\model</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -134,14 +137,17 @@
     <ClInclude Include="states\IntroState.h">
       <Filter>Header Files\states</Filter>
     </ClInclude>
-    <ClInclude Include="RandomGenerator.h">
-      <Filter>Header Files\util</Filter>
-    </ClInclude>
     <ClInclude Include="util\ChamberDescriptionBuilder.h">
       <Filter>Header Files\util</Filter>
     </ClInclude>
     <ClInclude Include="util\FileManager.h">
       <Filter>Header Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="util\RandomGenerator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="model\Trap.h">
+      <Filter>Header Files\model</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

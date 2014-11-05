@@ -76,6 +76,13 @@ Chamber &Floor::generateChamber(const int &minLevel, const int &maxLevel)
 			chamber->addItem(*item);
 	}
 
+	// 25% chance there's a trap in the chamber
+	if (RandomGenerator::random(0, 4) == 1) {
+		Trap *trap = FileManager::getRandomTrap();
+		if (trap != nullptr)
+			chamber->setTrap(*trap);
+	}
+
 	return *chamber;
 }
 
