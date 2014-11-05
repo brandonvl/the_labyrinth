@@ -21,10 +21,15 @@ public:
 	void setChamber(Chamber *chamber) { _currentRoom = chamber; }
 	void setLevel(const int &level) { _level = level; }
 	void setHealth(const int &health) { _healthPoints = health; }
+	void addHealth(const int &health) { _healthPoints += health; }
 	void setMaxHealth(const int &maxHealth, const bool &fillUpHealth = false);
+	void addMaxHealth(const int &maxHealth) { _maxHealthPoints += maxHealth; }
 	void setDefense(const int &defense) { _defense = defense; }
+	void addDefence(const int &defense) { _defense += defense; }
 	void setAttack(const int &attack) { _attack = attack; }
+	void addAttack(const int &attack) { _attack += attack; }
 	void setPerception(const int &perception) { _perception = perception; }
+	void addPerception(const int &perception) { _perception += perception; }
 protected:
 	Inventory *_inventory;
 	Chamber *_currentRoom;
