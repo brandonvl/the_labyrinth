@@ -22,7 +22,7 @@ public:
 	void setChamber(Chamber *chamber) { _currentRoom = chamber; }
 	void setLevel(const int &level) { _level = level; }
 	void setHealth(const int &health) { _healthPoints = health; }
-	void addHealth(const int &health) { _healthPoints += health; }
+	void addHealth(const int &health);
 	void setMaxHealth(const int &maxHealth, const bool &fillUpHealth = false);
 	void addMaxHealth(const int &maxHealth) { _maxHealthPoints += maxHealth; }
 	void setDefense(const int &defense) { _defense = defense; }

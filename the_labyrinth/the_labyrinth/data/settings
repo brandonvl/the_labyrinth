@@ -14,7 +14,7 @@
 			name: "Rat",
 			level: 1,
 			health: 1,
-			attack: 1,
+			attack: 10,
 			attackValue: 5,
 			defense: 1,
 			perception: 1,

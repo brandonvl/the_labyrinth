@@ -31,5 +31,6 @@ private:
 	void doOptionQuit();
 	void doDisplayMonsterInfo();
 	void doDisplayPlayerStatus();
-	void doCombat(Creature &attacker, Creature &defender);
+	void doMonsterActions();
+	int doCombat(Creature &attacker, Creature &defender);
 };

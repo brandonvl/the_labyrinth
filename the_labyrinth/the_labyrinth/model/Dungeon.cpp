@@ -30,7 +30,7 @@ void Dungeon::createDungeon()
 	int maxLevel = 10;
 	int minLevel = 1;
 	int lastLevelMaxLevel = minLevel;
-	int increment = floor(maxLevel / _floors.capacity());
+	int increment = static_cast<int>(floor(maxLevel / _floors.capacity()));
 
 	for (unsigned int i = 0; i < _floors.capacity(); i++)
 	{
