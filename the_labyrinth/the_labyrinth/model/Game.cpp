@@ -5,11 +5,11 @@
 #include "Dungeon.h"
 #include "Player.h"
 #include "Chamber.h"
-
+#include "util\FileManager.h"
 
 Game::Game()
 {
-	
+	FileManager::load();
 }
 
 
@@ -20,6 +20,8 @@ Game::~Game()
 
 	delete _player;
 	delete _dungeon;
+
+	FileManager::unload();
 }
 
 void Game::run()

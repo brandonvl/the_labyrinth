@@ -3,7 +3,7 @@
 #include "Monster.h"
 
 
-Chamber::Chamber(const ChamberSize size, const ChamberState state, const ChamberLightning lightning, const ChamberInventory inventory, const ChamberInventoryPosition inventoryPosition) :
+Chamber::Chamber(const std::string size, const std::string state, const std::string lightning, const std::string inventory, const std::string inventoryPosition) :
 _explored(false), _player(nullptr), _visited(false), _size(size), _state(state), _lightning(lightning), _inventory(inventory), _inventoryPosition(inventoryPosition)
 {
 }

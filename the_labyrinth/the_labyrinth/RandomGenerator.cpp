@@ -22,6 +22,11 @@ int RandomGenerator::random(int min, int max) {
 	return instance().getOrCreateDist(min, max)(instance()._dre);
 }
 
+const std::string &RandomGenerator::randomFromVector(const std::vector<std::string> &vect) {
+	int rand = random(0, vect.size() - 1);
+	return vect[rand];
+}
+
 std::uniform_int_distribution<int> &RandomGenerator::getOrCreateDist(const int min, const int max) {
 	std::string key = std::to_string(min) + "_" + std::to_string(max);
 	if (!_distMap.count(key)) 

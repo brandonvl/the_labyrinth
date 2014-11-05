@@ -2,11 +2,13 @@
 #include <random>
 #include <map>
 #include <string>
+#include <vector> 
 
 class RandomGenerator
 {
 public:
 	static int random(const int min, const int max);
+	static const std::string &randomFromVector(const std::vector<std::string> &vect);
 
 private:
 	RandomGenerator();

@@ -12,7 +12,7 @@ class Monster;
 class Chamber
 {
 public:
-	Chamber(const ChamberSize size, const ChamberState state, const ChamberLightning lightning, const ChamberInventory inventory, const ChamberInventoryPosition inventoryPosition);
+	Chamber(const std::string size, const std::string state, const std::string lightning, const std::string inventory, const std::string inventoryPosition);
 	virtual ~Chamber();
 	Player *getPlayer() { return _player; }
 	std::vector<Monster*> *getMonsters() { return &_monsters; }
@@ -26,20 +26,16 @@ public:
 	Chamber *getNeighbour(const Direction &direction) { return hasNeighbour(direction) ?  _neighbours[direction] : nullptr; }
 	void enter(Player &player);
 	void setPlayer(Player *player) { _player = player; }
-	const ChamberSize &getSize() { return _size; }
-	const ChamberState &getState() { return _state; }
-	const ChamberLightning &getLightning() { return _lightning; }
-	const ChamberInventory &getInventory() { return _inventory; }
-	const ChamberInventoryPosition &getInventoryPosition() { return _inventoryPosition; }
+	const std::string &getSize() { return _size; }
+	const std::string &getState() { return _state; }
+	const std::string &getLightning() { return _lightning; }
+	const std::string &getInventory() { return _inventory; }
+	const std::string &getInventoryPosition() { return _inventoryPosition; }
 	
 private:
 	bool _explored;
 	bool _visited;
-	const ChamberSize _size;
-	const ChamberState _state;
-	const ChamberLightning _lightning;
-	const ChamberInventory _inventory;
-	const ChamberInventoryPosition _inventoryPosition;
+	const std::string _size, _state, _lightning, _inventory, _inventoryPosition;
 
 	Player *_player;
 	std::vector<Monster*> _monsters;

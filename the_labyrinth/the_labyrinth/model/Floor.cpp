@@ -1,6 +1,7 @@
 #include "Floor.h"
 #include "Chamber.h"
 #include "RandomGenerator.h"
+#include "util\FileManager.h"
 
 #include <stack>
 #include <random>
@@ -54,13 +55,9 @@ void Floor::createFloor(const int &size, const int &minLevel, const int &maxLeve
 
 Chamber &Floor::generateChamber(const int &minLevel, const int &maxLevel)
 {
-	Chamber *chamber = new Chamber(
-		static_cast<ChamberSize>(RandomGenerator::random(0, 2)),
-		static_cast<ChamberState>(RandomGenerator::random(0, 1)),
-		static_cast<ChamberLightning>(RandomGenerator::random(0, 2)),
-		static_cast<ChamberInventory>(RandomGenerator::random(0, 2)),
-		static_cast<ChamberInventoryPosition>(RandomGenerator::random(0, 1))
-	);
+	Chamber *chamber = new Chamber(FileManager::getRandomSize(),
+		FileManager::getRandomState(), FileManager::getRandomLightning(),
+		FileManager::getRandomInventory(), FileManager::getRandomInventoryPosition());
 
 	return *chamber;
 }
