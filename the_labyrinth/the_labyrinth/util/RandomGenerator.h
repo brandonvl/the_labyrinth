@@ -11,8 +11,11 @@ public:
 
 	template <class T>
 	static const T &randomFromVector(const std::vector<T> &vect) {
-		int rand = random(0, vect.size() - 1);
-		return vect[rand];
+		if (vect.size() > 0) {
+			int rand = random(0, vect.size() - 1);
+			return vect[rand];
+		}
+		return nullptr;
 	}
 
 private:

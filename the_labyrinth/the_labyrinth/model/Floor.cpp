@@ -61,7 +61,9 @@ Chamber &Floor::generateChamber(const int &minLevel, const int &maxLevel)
 
 	int numberOfMonsters = RandomGenerator::random(0, 3);
 	for (int i = 0; i < numberOfMonsters; i++) {
-		chamber->addMonster(FileManager::getRandomMonster(minLevel, maxLevel));
+		Monster *monster = FileManager::getRandomMonster(minLevel, maxLevel);
+		if (monster != nullptr) 
+			chamber->addMonster(*monster);
 	}
 
 	return *chamber;

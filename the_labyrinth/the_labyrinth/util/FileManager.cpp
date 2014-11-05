@@ -40,7 +40,6 @@ void FileManager::init() {
 		auto &monsterOptions = root.getArray("monsters");
 		for (int i = 0; i < monsterOptions.size(); i++) {
 			JSON::JSONObject &obj = monsterOptions.getObject(i);
-
 			Monster *monster = new Monster();
 			monster->setName(obj.getString("name"));
 			monster->setLevel(obj.getInt("level"));
@@ -50,6 +49,20 @@ void FileManager::init() {
 			monster->setPerception(obj.getInt("perception"));
 			monster->setBaseExperience(obj.getInt("baseExperience"));
 			_monsters.push_back(monster);
+		}
+
+		auto &bossOptions = root.getArray("bosses");
+		for (int i = 0; i < monsterOptions.size(); i++) {
+			JSON::JSONObject &obj = monsterOptions.getObject(i);
+			Monster *monster = new Monster();
+			monster->setName(obj.getString("name"));
+			monster->setLevel(11);
+			monster->setMaxHealth(obj.getInt("health"), true);
+			monster->setAttack(obj.getInt("attack"));
+			monster->setDefense(obj.getInt("defense"));
+			monster->setPerception(obj.getInt("perception"));
+			monster->setBaseExperience(obj.getInt("baseExperience"));
+			_bosses.push_back(monster);
 		}
 	}
 }
@@ -82,13 +95,21 @@ const std::string &FileManager::getRandomInventoryPosition() {
 	return RandomGenerator::randomFromVector<std::string>(instance()._chamberOptions.inventoryPositions);
 }
 
-Monster &FileManager::getRandomMonster(const int minLevel, const int maxLevel) {
+Monster *FileManager::getRandomMonster(const int minLevel, const int maxLevel) {
 	std::vector<Monster*> monsters;
 	for (auto monster : instance()._monsters) {
 		if (monster->getLevel() >= minLevel && monster->getLevel() <= maxLevel)
 			monsters.push_back(monster);
 	}
-	return *new Monster(*RandomGenerator::randomFromVector<Monster*>(monsters));
+	Monster *monster = RandomGenerator::randomFromVector<Monster*>(monsters);
+	if (monster != nullptr) return new Monster(*monster);
+	return nullptr;
+}
+
+Monster *FileManager::getRandomBoss(const int minLevel, const int maxLevel) {
+	Monster *monster = RandomGenerator::randomFromVector<Monster*>(instance()._bosses);
+	if (monster != nullptr) return new Monster(*monster);
+	return nullptr;
 }
 
 FileManager &FileManager::instance() {

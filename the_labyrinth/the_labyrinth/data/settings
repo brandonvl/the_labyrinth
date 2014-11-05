@@ -33,7 +33,7 @@
 	bosses: [
 		{
 			name: "Harry de Beuker",
-			maxHP: 5,
+			health: 5,
 			attack: 5,
 			defense: 5,
 			perception: 5,
@@ -41,7 +41,7 @@
 		},
 		{
 			name: "Brandon van Lent",
-			maxHP: 5,
+			health: 5,
 			attack: 5,
 			defense: 5,
 			perception: 5,
