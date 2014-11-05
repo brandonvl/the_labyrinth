@@ -10,7 +10,7 @@ public:
 	static int random(const int min, const int max);
 
 	template <typename T>
-	static const T &randomFromVector(const std::vector<T> &vect) {
+	static const T *randomFromVector(const std::vector<T> &vect) {
 		if (vect.size() > 0) {
 			int rand = random(0, vect.size() - 1);
 			return vect[rand];

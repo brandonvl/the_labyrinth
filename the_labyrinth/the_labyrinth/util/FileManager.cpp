@@ -61,6 +61,7 @@ void FileManager::init() {
 			monster->setLevel(11);
 			monster->setMaxHealth(obj.getInt("health"), true);
 			monster->setAttack(obj.getInt("attack"));
+			monster->setAttackValue(obj.getInt("attackValue"));
 			monster->setDefense(obj.getInt("defense"));
 			monster->setPerception(obj.getInt("perception"));
 			monster->setBaseExperience(obj.getInt("baseExperience"));

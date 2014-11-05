@@ -1,5 +1,5 @@
 #include "Player.h"
-
+#include "Inventory.h"
 
 Player::Player()
 {
@@ -9,9 +9,11 @@ Player::Player()
 	setDefense(5);
 	setAttack(5);
 	setPerception(5);
+	_inventory = new Inventory(*this);
 }
 
 
 Player::~Player()
 {
+	delete _inventory;
 }

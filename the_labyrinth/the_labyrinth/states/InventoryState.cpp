@@ -1,6 +1,8 @@
 #include "InventoryState.h"
 #include "model\Game.h"
 #include "model\Player.h"
+#include "model\Inventory.h"
+#include "model\Item.h"
 
 void InventoryState::init(Game &game)
 {
@@ -19,7 +21,20 @@ void InventoryState::update()
 	system("cls");
 
 	std::cout << "Inventory";
-	std::cout << std::endl << std::endl;
+
+	Inventory *inventory = _player->getInventory();
+
+	if (inventory != nullptr) {
+
+		for (auto item : inventory->getItems()) {
+			std::cout << item.second << "x " << item.first->getName() << std::endl;
+		}
+	}
+	else {
+		std::cout << "There are no items in your inventory.";
+	}
+
+	std::cout << std::endl;
 	
 	std::cin.get();
 }

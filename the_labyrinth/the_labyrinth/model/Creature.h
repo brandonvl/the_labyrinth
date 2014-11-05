@@ -16,7 +16,8 @@ public:
 	int getDefense() { return _defense; }
 	int getAttack() { return _attack; }
 	int getPerception() { return _perception; }
-	Inventory &getInventory() { return *_inventory; }
+	int getAttackValue() { return _attackValue; }
+	Inventory *getInventory() { return _inventory; }
 	Chamber *getCurrentRoom() { return _currentRoom; }
 	void setChamber(Chamber *chamber) { _currentRoom = chamber; }
 	void setLevel(const int &level) { _level = level; }
@@ -28,6 +29,7 @@ public:
 	void addDefence(const int &defense) { _defense += defense; }
 	void setAttack(const int &attack) { _attack = attack; }
 	void addAttack(const int &attack) { _attack += attack; }
+	void setAttackValue(const int &attack) { _attack = attack; }
 	void setPerception(const int &perception) { _perception = perception; }
 	void addPerception(const int &perception) { _perception += perception; }
 protected:
@@ -39,6 +41,7 @@ protected:
 	int _defense;
 	int _attack;
 	int _perception;
+	int _attackValue;
 
 };
 

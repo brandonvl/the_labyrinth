@@ -3,14 +3,20 @@
 #include <unordered_map>
 
 class Item;
+class Player;
 
 class Inventory
 {
 public:
-	Inventory();
+	Inventory(Player &owner);
 	virtual ~Inventory();
-	int getItemCount(const Item &item);
+	int getItemCount() { return _items.size(); }
+	void addItem(Item &item);
+	void useItem(Item &item);
+	void setOwner(Player &owner) { _owner = &owner; }
+	const std::unordered_map<Item*, int> &getItems() { return _items; }
 private:
 	std::unordered_map<Item*,int> _items;
+	Player *_owner;
 };
 
