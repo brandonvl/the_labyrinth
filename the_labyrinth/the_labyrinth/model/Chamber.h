@@ -17,6 +17,7 @@ public:
 	Player *getPlayer() { return _player; }
 	std::vector<Monster*> *getMonsters() { return &_monsters; }
 	const int getNeighbourCount() { return _neighbours.size(); }
+	void clearMonsters();
 	const bool isExplored() { return _explored; }
 	const bool isVisited() { return _visited; }
 	void addNeighbour(const Direction &direction, Chamber &chamber);

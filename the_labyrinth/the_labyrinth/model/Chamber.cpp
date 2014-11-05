@@ -8,7 +8,6 @@ _explored(false), _player(nullptr), _visited(false), _size(size), _state(state),
 {
 }
 
-
 Chamber::~Chamber()
 {
 	for (auto it : _neighbours)
@@ -16,12 +15,18 @@ Chamber::~Chamber()
 		it.second = nullptr;
 	}
 
+	clearMonsters();
+	
+	_neighbours.clear();
+}
+
+void Chamber::clearMonsters()
+{
 	for (auto it : _monsters) {
 		delete it;
 	}
 
 	_monsters.clear();
-	_neighbours.clear();
 }
 
 void Chamber::addNeighbour(const Direction &direction, Chamber &chamber)

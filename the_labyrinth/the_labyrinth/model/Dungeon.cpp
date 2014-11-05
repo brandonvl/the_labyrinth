@@ -2,9 +2,8 @@
 #include "Floor.h"
 #include "Chamber.h"
 #include "model\enums.h"
-
-// For testing only!
-#include "Monster.h"
+#include "model\Monster.h"
+#include "util\FileManager.h"
 
 #include <iostream>
 
@@ -56,4 +55,9 @@ void Dungeon::createDungeon()
 	//_currentFloor = *(_floors.end() - 1);
 	_start = &(*_floors.begin())->getStart();
 	_end = &(*(_floors.end()-1))->getEnd();
+
+	_end->clearMonsters();
+	Monster *monster = FileManager::getRandomBoss(11, 11);
+
+	_end->addMonster(*monster);
 }

@@ -2,6 +2,7 @@
 #include "GameState.h"
 #include <vector>
 
+class Creature;
 class Player;
 class Monster;
 
@@ -20,11 +21,15 @@ public:
 
 		return _instance;
 	}
+	void setUserInitiated() { _userInitiated = true; }
 protected:
 	FightState() { }
 private:
+	bool _userInitiated = false;
 	Player *_player;
 	std::vector<Monster*> *_monsters;
 	void doOptionQuit();
-	void doOptionNew();
+	void doDisplayMonsterInfo();
+	void doDisplayPlayerStatus();
+	void doCombat(Creature &attacker, Creature &defender);
 };

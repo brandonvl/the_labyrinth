@@ -117,7 +117,12 @@ void ExploreState::displayOptions()
 
 void ExploreState::doOption()
 {
-	if (_chosenOption == "move")
+	if (_chosenOption == "fight") {
+		doOptionFight();
+		_chosenOption = "";
+		return;
+	}
+	else if (_chosenOption == "move")
 	{
 		Player &player = _game->getPlayer();
 		Chamber *chamber = player.getCurrentRoom();
@@ -183,6 +188,12 @@ void ExploreState::doOptionMove(Player &player, Chamber &chamber)
 		chamber.getNeighbour(direction)->enter(player);
 	}
 	else std::cout << "That option is invalid.";
+}
+
+void ExploreState::doOptionFight()
+{
+	FightState::instance().setUserInitiated();
+	changeState(FightState::instance());
 }
 
 void ExploreState::doOptionShowMap()
