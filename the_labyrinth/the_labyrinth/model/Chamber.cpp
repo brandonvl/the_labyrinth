@@ -1,7 +1,7 @@
 #include "Chamber.h"
 #include "Player.h"
 #include "Monster.h"
-
+#include "Item.h"
 
 Chamber::Chamber(const std::string size, const std::string state, const std::string lightning, const std::string inventory, const std::string inventoryPosition) :
 _explored(false), _player(nullptr), _visited(false), _size(size), _state(state), _lightning(lightning), _inventory(inventory), _inventoryPosition(inventoryPosition)
@@ -38,6 +38,11 @@ void Chamber::addMonster(Monster &monster)
 {
 	monster.setChamber(this);
 	_monsters.push_back(&monster);
+}
+
+void Chamber::addItem(Item &item)
+{
+	_items.push_back(&item);
 }
 
 const bool Chamber::hasNeighbour(const Direction &direction)

@@ -1,6 +1,8 @@
 #include "FileManager.h"
 #include "RandomGenerator.h"
 #include "model\Monster.h"
+#include "model\Item.h"
+#include "model\Trap.h"
 
 void FileManager::load() {
 	instance().init();
@@ -64,12 +66,34 @@ void FileManager::init() {
 			monster->setBaseExperience(obj.getInt("baseExperience"));
 			_bosses.push_back(monster);
 		}
+
+		auto &itemOptions = root.getArray("items");
+		for (int i = 0; i < itemOptions.size(); i++) {
+			JSON::JSONObject &obj = itemOptions.getObject(i);
+			Item *item = new Item();
+			item->setName(obj.getString("name"));
+			item->setType(keyItemTypeMap.at(obj.getString("type")));
+			item->setAmount(obj.getInt("amount"));
+			_items.push_back(item);
+		}
+
+		auto &trapOptions = root.getArray("traps");
+		for (int i = 0; i < trapOptions.size(); i++) {
+			JSON::JSONObject &obj = trapOptions.getObject(i);
+			Trap *trap = new Trap();
+			trap->setName(obj.getString("name"));
+			trap->setDamage(obj.getInt("damage"));
+			_traps.push_back(trap);
+		}
 	}
 }
 
 void FileManager::unload() {
 	for (auto monster : instance()._monsters)
 		delete monster;
+
+	for (auto item : instance()._items)
+		delete item;
 
 	instance()._monsters.clear();
 	delete instance()._document;
@@ -109,6 +133,18 @@ Monster *FileManager::getRandomMonster(const int minLevel, const int maxLevel) {
 Monster *FileManager::getRandomBoss(const int minLevel, const int maxLevel) {
 	Monster *monster = RandomGenerator::randomFromVector<Monster*>(instance()._bosses);
 	if (monster != nullptr) return new Monster(*monster);
+	return nullptr;
+}
+
+Item *FileManager::getRandomItem() {
+	Item *item = RandomGenerator::randomFromVector<Item*>(instance()._items);
+	if (item != nullptr) return new Item(*item);
+	return nullptr;
+}
+
+Trap *FileManager::getRandomTrap() {
+	Trap *trap = RandomGenerator::randomFromVector<Trap*>(instance()._traps);
+	if (trap != nullptr) return new Trap(*trap);
 	return nullptr;
 }
 

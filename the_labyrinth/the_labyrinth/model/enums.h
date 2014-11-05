@@ -17,3 +17,14 @@ const std::map<const Direction, const std::string> directionNames{
 	{ Direction::UPSTAIRS, "up" },
 	{ Direction::DOWNSTAIRS, "down" } };
 
+enum class ItemType { HEALTH, MAXHEALTH, LEVEL, EXPERIENCE, DEFENCE, ATTACK, PERCEPTION };
+
+const std::map<const std::string, const ItemType> keyItemTypeMap{
+	{ "health", ItemType::HEALTH },
+	{ "maxHealth", ItemType::MAXHEALTH },
+	{ "level", ItemType::LEVEL },
+	{ "experience", ItemType::EXPERIENCE },
+	{ "defence", ItemType::DEFENCE },
+	{ "attack", ItemType::ATTACK },
+	{ "perception", ItemType::PERCEPTION }
+};

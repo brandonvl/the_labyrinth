@@ -55,15 +55,32 @@ void Floor::createFloor(const int &size, const int &minLevel, const int &maxLeve
 
 Chamber &Floor::generateChamber(const int &minLevel, const int &maxLevel)
 {
+	// create new chamber with random size, state, lightning, inventory and inventory position
 	Chamber *chamber = new Chamber(FileManager::getRandomSize(),
 		FileManager::getRandomState(), FileManager::getRandomLightning(),
 		FileManager::getRandomInventory(), FileManager::getRandomInventoryPosition());
 
+	// add random number of random monsters
 	int numberOfMonsters = RandomGenerator::random(0, 3);
 	for (int i = 0; i < numberOfMonsters; i++) {
 		Monster *monster = FileManager::getRandomMonster(minLevel, maxLevel);
 		if (monster != nullptr) 
 			chamber->addMonster(*monster);
+	}
+
+	// add random number of random items
+	int numberOfItems = RandomGenerator::random(0, 3);
+	for (int i = 0; i < numberOfItems; i++) {
+		Item *item = FileManager::getRandomItem();
+		if (item != nullptr)
+			chamber->addItem(*item);
+	}
+
+	// 25% chance there's a trap in the chamber
+	if (RandomGenerator::random(0, 4) == 1) {
+		Trap *trap = FileManager::getRandomTrap();
+		if (trap != nullptr)
+			chamber->setTrap(*trap);
 	}
 
 	return *chamber;
