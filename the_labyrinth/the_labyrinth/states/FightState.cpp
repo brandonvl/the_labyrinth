@@ -4,6 +4,7 @@
 #include "model\Monster.h"
 #include "model\Chamber.h"
 #include <vector>
+#include "util\RandomGenerator.h"
 
 
 void FightState::init(Game &game)
@@ -32,7 +33,29 @@ void FightState::cleanUp()
 
 void FightState::doDisplayPlayerStatus()
 {
-	std::cout << "You have " << _player->getHealth() << " out of " << _player->getMaxHealth() << " HP remaining." << std::endl;
+	std::cout << "You have " << _player->getHealth() << " out of " << _player->getMaxHealth() << " HP remaining." << std::endl << std::endl;
+}
+
+void FightState::doMonsterActions()
+{
+	std::cout << "Monster actions: " << std::endl;
+	int damage;
+	std::string writeString = "";
+	for (Monster *monster : *_monsters)
+	{
+		if (_player->getHealth() > 0) {
+			damage = doCombat(*monster, *_player);
+			writeString = monster->getName() + " ( " + std::to_string(monster->getLevel()) + " ) attacks and ";
+			if (damage == -1)
+				writeString.append("misses");
+			else
+				writeString.append("deals " + std::to_string(damage) + " damage.");
+
+			std::cout << writeString << std::endl;
+		}
+	}
+
+	std::cout << std::endl;
 }
 
 void FightState::update()
@@ -42,13 +65,26 @@ void FightState::update()
 	{
 		doDisplayPlayerStatus();
 		displayOptions();
+		doOption();
+
 		_userInitiated = false;
 	}
 	else
 	{
+		doMonsterActions();
 		doDisplayPlayerStatus();
+		if (_player->getHealth() <= 0) {
+			std::cout << "You have died.. Press any key to continue." << std::endl;
+			std::cin.get();
+			// changeState(GameOverState::instance());
+		}
+		else
+		{
+			displayOptions();
+			doOption();
+		}
+		
 	}
-	std::cin.get();
 }
 
 void FightState::doDisplayMonsterInfo()
@@ -68,12 +104,25 @@ void FightState::displayInfo()
 
 void FightState::displayOptions()
 {
-
+	std::cout << "Options: [|fight|flee|inventory]" << std::endl;
+	std::cout << "Your choice: ";
+	std::getline(std::cin, _chosenOption);
+	std::cout << std::endl;
 }
 
-void FightState::doCombat(Creature &attacker, Creature &defender)
+int FightState::doCombat(Creature &attacker, Creature &defender)
 {
+	int attackRoll = RandomGenerator::random(0, attacker.getAttack());
+	int defenseRoll = RandomGenerator::random(0, defender.getDefense());
 
+	if (attackRoll > defenseRoll)
+	{
+		// do Attack
+		defender.addHealth(-2);
+		return 2;
+	}
+	else
+		return -1;
 }
 
 void FightState::doOption()
