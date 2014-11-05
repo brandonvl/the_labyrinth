@@ -1,5 +1,9 @@
 #pragma once
 #include "GameState.h"
+#include <vector>
+
+class Player;
+class Monster;
 
 class FightState :
 	public GameState
@@ -19,6 +23,8 @@ public:
 protected:
 	FightState() { }
 private:
+	Player *_player;
+	std::vector<Monster*> *_monsters;
 	void doOptionQuit();
 	void doOptionNew();
 };

@@ -6,9 +6,11 @@
 // For testing only!
 #include "Monster.h"
 
+#include <iostream>
+
 Dungeon::Dungeon()
 {
-	_floors.reserve(4);
+	_floors.reserve(5);
 	_currentFloor = nullptr;
 }
 
@@ -25,10 +27,21 @@ Dungeon::~Dungeon()
 void Dungeon::createDungeon()
 {
 	Floor *previousFloor = nullptr;
+
+	int maxLevel = 10;
+	int minLevel = 1;
+	int lastLevelMaxLevel = minLevel;
+	int increment = floor(maxLevel / _floors.capacity());
+
 	for (unsigned int i = 0; i < _floors.capacity(); i++)
 	{
 		Floor *floor = new Floor();
-		floor->createFloor(10, 1, 2);
+		if ((lastLevelMaxLevel + increment) > maxLevel)
+			floor->createFloor(10, lastLevelMaxLevel, maxLevel);
+		else
+			floor->createFloor(10, lastLevelMaxLevel, lastLevelMaxLevel + increment);
+
+		lastLevelMaxLevel += increment;
 		_floors.push_back(floor);
 
 		if (previousFloor != nullptr) {

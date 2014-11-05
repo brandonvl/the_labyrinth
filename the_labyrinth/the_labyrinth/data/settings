@@ -1,8 +1,8 @@
 {
 	chamber: {
-		sizes: [ "small", "medium", "large" ],
-		states: [ "clean", "dirty" ],
-		lightning: [ "candle", "torch", "fireplace" ],
+		sizes: [ "small", "medium", "large", "very large", "gigantic", "very small" ],
+		states: [ "clean", "dirty", "misty", "foggy" ],
+		lightning: [ "candle", "torch", "fireplace", "henk" ],
 		inventory: {
 			items: [ "table", "bed" ],
 			positions: [ "corner", "center" ]

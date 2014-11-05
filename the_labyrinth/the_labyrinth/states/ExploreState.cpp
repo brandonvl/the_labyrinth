@@ -218,6 +218,7 @@ void ExploreState::doOptionShowMap()
 		showMapInfo();
 
 		std::cout << "Press any key to continue..." << std::endl;
+		std::cin.get();
 		/*
 		std::cout << "==================================" << std::endl;
 		for (auto row : chambers)
