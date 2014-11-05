@@ -16,8 +16,7 @@ Chamber::~Chamber()
 		it.second = nullptr;
 	}
 
-	for (auto it : _monsters) 
-	{
+	for (auto it : _monsters) {
 		delete it;
 	}
 

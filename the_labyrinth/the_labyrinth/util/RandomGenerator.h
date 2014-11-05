@@ -8,7 +8,12 @@ class RandomGenerator
 {
 public:
 	static int random(const int min, const int max);
-	static const std::string &randomFromVector(const std::vector<std::string> &vect);
+
+	template <class T>
+	static const T &randomFromVector(const std::vector<T> &vect) {
+		int rand = random(0, vect.size() - 1);
+		return vect[rand];
+	}
 
 private:
 	RandomGenerator();

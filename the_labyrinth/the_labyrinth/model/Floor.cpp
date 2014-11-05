@@ -1,6 +1,6 @@
 #include "Floor.h"
 #include "Chamber.h"
-#include "RandomGenerator.h"
+#include "util\RandomGenerator.h"
 #include "util\FileManager.h"
 
 #include <stack>
@@ -58,6 +58,11 @@ Chamber &Floor::generateChamber(const int &minLevel, const int &maxLevel)
 	Chamber *chamber = new Chamber(FileManager::getRandomSize(),
 		FileManager::getRandomState(), FileManager::getRandomLightning(),
 		FileManager::getRandomInventory(), FileManager::getRandomInventoryPosition());
+
+	int numberOfMonsters = RandomGenerator::random(0, 3);
+	for (int i = 0; i < numberOfMonsters; i++) {
+		chamber->addMonster(FileManager::getRandomMonster(minLevel, maxLevel));
+	}
 
 	return *chamber;
 }

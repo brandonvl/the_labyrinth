@@ -7,5 +7,60 @@
 			items: [ "table", "bed" ],
 			positions: [ "corner", "center" ]
 		}
-	}
+	},
+	
+	monsters: [
+		{
+			name: "Rat",
+			level: 1,
+			health: 1,
+			attack: 1,
+			defense: 1,
+			perception: 1,
+			baseExperience: 1
+		},
+		{
+			name: "Elephant",
+			level: 2,
+			health: 5,
+			attack: 5,
+			defense: 5,
+			perception: 5,
+			baseExperience: 5
+		}
+	],
+	
+	bosses: [
+		{
+			name: "Harry de Beuker",
+			maxHP: 5,
+			attack: 5,
+			defense: 5,
+			perception: 5,
+			baseExperience: 5
+		},
+		{
+			name: "Brandon van Lent",
+			maxHP: 5,
+			attack: 5,
+			defense: 5,
+			perception: 5,
+			baseExperience: 5
+		}
+	],
+	
+	items: [
+		{ naam: "Health potion", type: "health", amount: 5 },
+		{ naam: "Max-health potion", type: "maxHealth", amount: 5 },
+		{ naam: "Level potion", type: "level", amount: 5 },
+		{ naam: "Experience potion", type: "experience", amount: 5 },
+		{ naam: "Defence potion", type: "defence", amount: 5 },
+		{ naam: "Attack potion", type: "attack", amount: 5 },
+		{ naam: "Perception potion", type: "perception", amount: 5 }
+	],
+	
+	traps: [
+		{ name: "Mouse trap", damage: 1 },
+		{ name: "Snake trap", damage: 2 }
+	]
 }

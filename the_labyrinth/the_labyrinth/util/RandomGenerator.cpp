@@ -1,5 +1,6 @@
 #include "RandomGenerator.h"
 #include <random>
+#include "model\Monster.h"
 
 RandomGenerator::RandomGenerator() : _dre(_dev())
 {
@@ -20,11 +21,6 @@ RandomGenerator &RandomGenerator::instance() {
 
 int RandomGenerator::random(int min, int max) {
 	return instance().getOrCreateDist(min, max)(instance()._dre);
-}
-
-const std::string &RandomGenerator::randomFromVector(const std::vector<std::string> &vect) {
-	int rand = random(0, vect.size() - 1);
-	return vect[rand];
 }
 
 std::uniform_int_distribution<int> &RandomGenerator::getOrCreateDist(const int min, const int max) {
