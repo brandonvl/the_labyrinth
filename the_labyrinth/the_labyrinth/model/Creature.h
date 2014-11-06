@@ -29,7 +29,7 @@ public:
 	void addDefence(const int &defense) { _defense += defense; }
 	void setAttack(const int &attack) { _attack = attack; }
 	void addAttack(const int &attack) { _attack += attack; }
-	void setAttackValue(const int &attack) { _attackValue = _attackValue; }
+	void setAttackValue(const int &attackValue) { _attackValue = attackValue; }
 	void setPerception(const int &perception) { _perception = perception; }
 	void addPerception(const int &perception) { _perception += perception; }
 protected:

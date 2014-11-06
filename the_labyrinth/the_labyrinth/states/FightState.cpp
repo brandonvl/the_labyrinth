@@ -41,11 +41,12 @@ void FightState::doMonsterActions()
 	std::cout << "Monster actions: " << std::endl;
 	int damage;
 	std::string writeString = "";
-	for (Monster *monster : *_monsters)
+	for (int i = 0; i < _monsters->size(); i++)
 	{
+		Monster *monster = (*_monsters)[i];
 		if (_player->getHealth() > 0) {
 			damage = doCombat(*monster, *_player);
-			writeString = monster->getName() + " ( " + std::to_string(monster->getLevel()) + " ) attacks and ";
+			writeString = std::to_string(i + 1) + ". " + monster->getName() + " ( " + std::to_string(monster->getLevel()) + " ) attacks and ";
 			if (damage == -1)
 				writeString.append("misses");
 			else
@@ -90,8 +91,9 @@ void FightState::update()
 void FightState::doDisplayMonsterInfo()
 {
 	std::cout << "Monster info: " << std::endl;
-	for (Monster *monster : *_monsters) {
-		std::cout << monster->getName() << " ( " << monster->getLevel() << " ): has " << monster->getHealth() << " HP left." << std::endl;
+	for(int i = 0; i < _monsters->size(); i++) {
+		Monster *monster = (*_monsters)[i];
+		std::cout << std::to_string(i + 1) << ". " << monster->getName() << " ( " << monster->getLevel() << " ): has " << monster->getHealth() << " HP left." << std::endl;
 	}
 
 	std::cout << std::endl;
