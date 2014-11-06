@@ -16,6 +16,13 @@ Chamber::~Chamber()
 	}
 
 	clearMonsters();
+
+	for (auto it : _items)
+		delete it;
+
+	delete _trap;
+
+	_monsters.clear();
 	
 	_neighbours.clear();
 }
@@ -25,8 +32,6 @@ void Chamber::clearMonsters()
 	for (auto it : _monsters) {
 		delete it;
 	}
-
-	_monsters.clear();
 }
 
 void Chamber::addNeighbour(const Direction &direction, Chamber &chamber)

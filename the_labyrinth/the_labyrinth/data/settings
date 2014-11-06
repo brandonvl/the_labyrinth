@@ -1,11 +1,11 @@
 {
 	chamber: {
 		sizes: [ "small", "medium", "large", "very large", "gigantic", "very small" ],
-		states: [ "clean", "dirty", "misty", "foggy" ],
-		lightning: [ "candle", "torch", "fireplace", "henk" ],
+		states: [ "clean", "dirty", "misty", "foggy", "dusty" ],
+		lightning: [ "candle", "torch", "fireplace", "chandelier" ],
 		furniture: {
-			items: [ "table", "bed" ],
-			positions: [ "corner", "center" ]
+			items: [ "table", "bed", "table with 6 chairs", "bench" ],
+			positions: [ "right corner", "center", "left corner" ]
 		}
 	},
 	

@@ -93,6 +93,9 @@
     <ClCompile Include="states\InventoryState.cpp">
       <Filter>Source Files\states</Filter>
     </ClCompile>
+    <ClCompile Include="states\GameOverState.cpp">
+      <Filter>Source Files\states</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="model\Chamber.h">
@@ -153,6 +156,9 @@
       <Filter>Header Files\util</Filter>
     </ClInclude>
     <ClInclude Include="states\InventoryState.h">
+      <Filter>Header Files\states</Filter>
+    </ClInclude>
+    <ClInclude Include="states\GameOverState.h">
       <Filter>Header Files\states</Filter>
     </ClInclude>
   </ItemGroup>

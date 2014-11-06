@@ -91,11 +91,17 @@ void FileManager::init() {
 }
 
 void FileManager::unload() {
-	for (auto monster : instance()._monsters)
-		delete monster;
+	for (auto it : instance()._monsters)
+		delete it;
 
-	for (auto item : instance()._items)
-		delete item;
+	for (auto it : instance()._bosses)
+		delete it;
+
+	for (auto it : instance()._items)
+		delete it;
+
+	for (auto it : instance()._traps)
+		delete it;
 
 	instance()._monsters.clear();
 	delete instance()._document;

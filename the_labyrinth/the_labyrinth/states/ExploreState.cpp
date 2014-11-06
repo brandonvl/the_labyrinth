@@ -21,6 +21,7 @@ void ExploreState::cleanUp()
 
 void ExploreState::update()
 {
+	system("cls");
 	displayInfo();
 	displayOptions();
 	doOption();
@@ -203,6 +204,8 @@ void ExploreState::doOptionFight()
 
 void ExploreState::doOptionShowMap()
 {
+	system("cls");
+
 	Dungeon *dungeon = &_game->getDungeon();
 	Floor *currentFloor = _game->getDungeon().getCurrentFloor();
 
