@@ -69,3 +69,26 @@ void Chamber::enter(Player &player)
 	if (!isVisited())
 		_visited = true;
 }
+
+JSON::JSONElement *Chamber::serialize(JSON::JSONElement *parent) {
+	JSON::JSONObject *obj = new JSON::JSONObject(parent);
+	obj->add("hasPlayer", (_player != nullptr));
+
+	// add monsters 
+	JSON::JSONArray *monsterArr = new JSON::JSONArray(obj);
+	for (auto monster : _monsters)
+		monsterArr->push(monster->serialize());
+	obj->add("monsters", monsterArr);
+
+	// add items 
+	JSON::JSONArray *itemArr = new JSON::JSONArray(obj);
+	for (auto item : _items)
+		monsterArr->push(item->serialize());
+	obj->add("items", itemArr);
+
+	// TODO: Serialize neighbours
+
+	obj->add("trap", _trap->serialize());
+
+	return obj;
+}

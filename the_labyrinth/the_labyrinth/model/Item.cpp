@@ -35,3 +35,9 @@ void Item::doEffect(Player &player) {
 		break;
 	}
 }
+
+JSON::JSONElement *Item::serialize(JSON::JSONElement *parent) {
+	JSON::JSONObject *obj = new JSON::JSONObject(parent);
+
+	return obj;
+}

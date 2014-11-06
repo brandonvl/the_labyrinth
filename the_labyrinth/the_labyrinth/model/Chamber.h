@@ -3,6 +3,7 @@
 #include <vector>
 #include <unordered_map>
 #include "enums.h"
+#include "JSONSerializable.h"
 
 class Player;
 class Monster;
@@ -10,7 +11,8 @@ class Monster;
 class Item;
 class Trap;
 
-class Chamber
+class Chamber :
+	public JSONSerializable
 {
 public:
 	Chamber(const std::string size, const std::string state, const std::string lightning, const std::string furniture, const std::string furniturePosition);
@@ -35,6 +37,7 @@ public:
 	const std::string &getLightning() { return _lightning; }
 	const std::string &getFurniture() { return _furniture; }
 	const std::string &getFurniturePosition() { return _furniturePosition; }
+	JSON::JSONElement *serialize(JSON::JSONElement *parent = nullptr) override;
 	
 private:
 	bool _explored;

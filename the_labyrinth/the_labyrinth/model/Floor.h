@@ -1,11 +1,12 @@
 #pragma once
-
+#include "JSONSerializable.h"
 #include <vector>
 
 class Chamber;
 struct ChamberEncap;
 
-class Floor
+class Floor :
+	public JSONSerializable
 {
 public:
 	Floor();
@@ -14,6 +15,8 @@ public:
 	std::vector<std::vector<Chamber*>> &getChambers() { return _chambers; }
 	Chamber &getStart() { return *_start; }
 	Chamber &getEnd() { return *_end; }
+	JSON::JSONElement *serialize(JSON::JSONElement *parent = nullptr) override;
+
 private:
 	Chamber *_start;
 	Chamber *_end;

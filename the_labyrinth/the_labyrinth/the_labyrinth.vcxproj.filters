@@ -97,7 +97,7 @@
       <Filter>Source Files\states</Filter>
     </ClCompile>
     <ClCompile Include="util\SaveGameManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\util</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -165,7 +165,10 @@
       <Filter>Header Files\states</Filter>
     </ClInclude>
     <ClInclude Include="util\SaveGameManager.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="model\JSONSerializable.h">
+      <Filter>Header Files\model</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

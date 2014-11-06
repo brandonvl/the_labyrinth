@@ -1,10 +1,12 @@
 #pragma once
+#include "JSONSerializable.h"
 
 class Player;
 class GameState;
 class Dungeon;
 
-class Game
+class Game :
+	public JSONSerializable
 {
 public:
 	Game();
@@ -15,6 +17,7 @@ public:
 	void stop();
 	void changeState(GameState &state);
 	void createDungeon(Player &player);
+	JSON::JSONElement *serialize(JSON::JSONElement *parent = nullptr) override;
 private:
 	GameState *_state;
 	Player *_player;

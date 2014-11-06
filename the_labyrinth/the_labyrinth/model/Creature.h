@@ -32,6 +32,7 @@ public:
 	void setAttackValue(const int &attackValue) { _attackValue = attackValue; }
 	void setPerception(const int &perception) { _perception = perception; }
 	void addPerception(const int &perception) { _perception += perception; }
+	virtual JSON::JSONElement *serialize(JSON::JSONElement *parent = nullptr) override;
 protected:
 	Inventory *_inventory;
 	Chamber *_currentRoom;

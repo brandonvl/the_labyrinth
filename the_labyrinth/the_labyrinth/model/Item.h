@@ -16,6 +16,7 @@ public:
 	const int getAmount() { return _amount; }
 	void setAmount(const int amount) { _amount = amount; }
 	void doEffect(Player &player);
+	JSON::JSONElement *serialize(JSON::JSONElement *parent = nullptr) override;
 
 private:
 	ItemType _type;
