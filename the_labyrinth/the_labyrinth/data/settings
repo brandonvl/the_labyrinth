@@ -4,53 +4,47 @@
 		states: [ "clean", "dirty", "misty", "foggy", "dusty" ],
 		lightning: [ "candle", "torch", "fireplace", "chandelier" ],
 		furniture: {
-			items: [ "table", "bed", "table with 6 chairs", "bench" ],
+			items: [ "table", "queen-size bed", "guest bed", "table with 6 chairs", "big sofa", "small closet", "large closet", "writing desk", "computer desk" ],
 			positions: [ "right corner", "center", "left corner" ]
 		}
 	},
 	
 	monsters: [
-		{
-			name: "Rat",
-			level: 1,
-			health: 1,
-			attack: 10,
-			attackValue: 5,
-			defense: 1,
-			perception: 1,
-			baseExperience: 1
-		},
-		{
-			name: "Elephant",
-			level: 2,
-			health: 5,
-			attack: 5,
-			attackValue: 5,
-			defense: 5,
-			perception: 5,
-			baseExperience: 5
-		}
+		{ name: "Mouse", level: 1, health: 1, attack: 5, attackValue: 5, defense: 5, perception: 5, baseExperience: 5 },
+		{ name: "Rat", level: 1, health: 1, attack: 10, attackValue: 5, defense: 1, perception: 1, baseExperience: 1 },
+		{ name: "Dirty cat", level: 1, health: 5, attack: 5, attackValue: 5, defense: 5, perception: 5, baseExperience: 5 },
+		{ name: "Tarantula", level: 2, health: 5, attack: 5, attackValue: 5, defense: 5, perception: 5, baseExperience: 5 },
+		{ name: "Bat", level: 2, health: 5, attack: 5, attackValue: 5, defense: 5, perception: 5, baseExperience: 5 },
+		{ name: "Kestrel", level: 2, health: 5, attack: 5, attackValue: 5, defense: 5, perception: 5, baseExperience: 5 },
+		{ name: "Wild dog", level: 3, health: 5, attack: 5, attackValue: 5, defense: 5, perception: 5, baseExperience: 5 },
+		{ name: "Angry swan", level: 3, health: 5, attack: 5, attackValue: 5, defense: 5, perception: 5, baseExperience: 5 },
+		{ name: "Cleaning lady", level: 3, health: 5, attack: 5, attackValue: 5, defense: 5, perception: 5, baseExperience: 5 },
+		{ name: "Ghost", level: 4, health: 5, attack: 5, attackValue: 5, defense: 5, perception: 5, baseExperience: 5 },
+		{ name: "Rattlesnake", level: 4, health: 5, attack: 5, attackValue: 5, defense: 5, perception: 5, baseExperience: 5 },
+		{ name: "Emu", level: 4, health: 5, attack: 5, attackValue: 5, defense: 5, perception: 5, baseExperience: 5 },
+		{ name: "Angry housekeeper", level: 5, health: 5, attack: 5, attackValue: 5, defense: 5, perception: 5, baseExperience: 5 },
+		{ name: "Wolf", level: 5, health: 5, attack: 5, attackValue: 5, defense: 5, perception: 5, baseExperience: 5 },
+		{ name: "Wild horse", level: 5, health: 5, attack: 5, attackValue: 5, defense: 5, perception: 5, baseExperience: 5 },
+		{ name: "Monster", level: 6, health: 5, attack: 5, attackValue: 5, defense: 5, perception: 5, baseExperience: 5 },
+		{ name: "Troll", level: 6, health: 5, attack: 5, attackValue: 5, defense: 5, perception: 5, baseExperience: 5 },
+		{ name: "Vampire", level: 6, health: 5, attack: 5, attackValue: 5, defense: 5, perception: 5, baseExperience: 5 },
+		{ name: "Centaur", level: 7, health: 5, attack: 5, attackValue: 5, defense: 5, perception: 5, baseExperience: 5 },
+		{ name: "Cowboy", level: 7, health: 5, attack: 5, attackValue: 5, defense: 5, perception: 5, baseExperience: 5 },
+		{ name: "Orc", level: 7, health: 5, attack: 5, attackValue: 5, defense: 5, perception: 5, baseExperience: 5 },
+		{ name: "Deathstalker", level: 8, health: 5, attack: 5, attackValue: 5, defense: 5, perception: 5, baseExperience: 5 },
+		{ name: "Quagga", level: 8, health: 5, attack: 5, attackValue: 5, defense: 5, perception: 5, baseExperience: 5 },
+		{ name: "Hyena", level: 8, health: 5, attack: 5, attackValue: 5, defense: 5, perception: 5, baseExperience: 5 },
+		{ name: "Magician", level: 9, health: 5, attack: 5, attackValue: 5, defense: 5, perception: 5, baseExperience: 5 },
+		{ name: "Tiger", level: 9, health: 5, attack: 5, attackValue: 5, defense: 5, perception: 5, baseExperience: 5 },
+		{ name: "Knight", level: 9, health: 5, attack: 5, attackValue: 5, defense: 5, perception: 5, baseExperience: 5 },
+		{ name: "Zombie", level: 10, health: 5, attack: 5, attackValue: 5, defense: 5, perception: 5, baseExperience: 5 },
+		{ name: "Komodo dragon", level: 10, health: 5, attack: 5, attackValue: 5, defense: 5, perception: 5, baseExperience: 5 },
+		{ name: "Elephant", level: 10, health: 5, attack: 5, attackValue: 5, defense: 5, perception: 5, baseExperience: 5 }
 	],
 	
 	bosses: [
-		{
-			name: "Harry de Beuker",
-			health: 5,
-			attack: 5,
-			attackValue: 5,
-			defense: 5,
-			perception: 5,
-			baseExperience: 5
-		},
-		{
-			name: "Brandon van Lent",
-			health: 5,
-			attack: 5,
-			attackValue: 5,
-			defense: 5,
-			perception: 5,
-			baseExperience: 5
-		}
+		{ name: "Harry de Beuker", health: 5, attack: 5, attackValue: 5, defense: 5, perception: 5, baseExperience: 5 },
+		{ name: "Dragon", health: 5, attack: 5, attackValue: 5, defense: 5, perception: 5, baseExperience: 5 }
 	],
 	
 	items: [
@@ -65,6 +59,9 @@
 	
 	traps: [
 		{ name: "Mouse trap", damage: 1 },
-		{ name: "Snake trap", damage: 2 }
+		{ name: "Snake trap", damage: 2 },
+		{ name: "Snare trap", damage: 3 },
+		{ name: "Booby trap", damage: 5 },
+		{ name: "Deadfall trap", damage: 8 }
 	]
 }
