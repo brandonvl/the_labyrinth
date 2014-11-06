@@ -74,3 +74,16 @@ JSON::JSONElement *Dungeon::serialize(JSON::JSONElement *parent) {
 
 	return obj;
 }
+
+void Dungeon::deserialize(JSON::JSONObject &element) {
+
+	JSON::JSONArray &floorArr = element.getArray("floors");
+	for (int i = 0; i < floorArr.size(); i++) {
+		Floor *floor = new Floor();
+		floor->deserialize(floorArr.getObject(i));
+		_floors.push_back(floor);
+	}
+
+	// TODO: Set current floor, start and end?
+
+}

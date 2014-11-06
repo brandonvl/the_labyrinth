@@ -18,5 +18,9 @@ void SaveGameManager::saveGame(Game &game) {
 }
 
 Game *SaveGameManager::loadGame() {
-	return nullptr;
+	JSON::JSONDocument *doc = JSON::JSONDocument::fromFile("data/savegame");
+	Game *game = new Game();
+	game->deserialize(doc->getRootObject());	
+	delete doc;
+	return game;
 }

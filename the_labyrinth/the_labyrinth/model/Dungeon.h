@@ -16,6 +16,8 @@ public:
 	Chamber &getDungeonStart() { return *_start; }
 	Chamber &getDungeonEnd() { return *_end; }
 	JSON::JSONElement *serialize(JSON::JSONElement *parent = nullptr) override;
+	void deserialize(JSON::JSONObject &element) override;
+
 private:
 	Floor &createFloor();
 	std::vector<Floor*> _floors;

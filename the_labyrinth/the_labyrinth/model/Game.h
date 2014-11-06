@@ -18,6 +18,8 @@ public:
 	void changeState(GameState &state);
 	void createDungeon(Player &player);
 	JSON::JSONElement *serialize(JSON::JSONElement *parent = nullptr) override;
+	void deserialize(JSON::JSONObject &element) override;
+
 private:
 	GameState *_state;
 	Player *_player;

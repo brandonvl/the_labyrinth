@@ -70,3 +70,12 @@ JSON::JSONElement *Game::serialize(JSON::JSONElement *parent) {
 
 	return obj;
 }
+
+void Game::deserialize(JSON::JSONObject &element) {
+
+	_player = new Player();
+	_player->deserialize(element.getObject("player"));
+
+	_dungeon = new Dungeon();
+	_dungeon->deserialize(element.getObject("dungeon"));
+}

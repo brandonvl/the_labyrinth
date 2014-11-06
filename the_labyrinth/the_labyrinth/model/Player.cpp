@@ -33,3 +33,13 @@ JSON::JSONElement *Player::serialize(JSON::JSONElement *parent) {
 
 	return obj;
 }
+
+void Player::deserialize(JSON::JSONObject &element) {
+	_level = element.getInt("level");
+	_healthPoints = element.getInt("healthPoints");
+	_maxHealthPoints = element.getInt("maxHealthPoints");
+	_defense = element.getInt("defense");
+	_attack = element.getInt("attack");
+	_perception = element.getInt("perception");
+	_experience = element.getInt("experience");
+}

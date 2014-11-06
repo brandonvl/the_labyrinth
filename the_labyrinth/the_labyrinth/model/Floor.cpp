@@ -210,3 +210,19 @@ JSON::JSONElement *Floor::serialize(JSON::JSONElement *parent) {
 
 	return obj;
 }
+
+void Floor::deserialize(JSON::JSONObject &element) {
+
+	JSON::JSONArray &chamberArr = element.getArray("chambers");
+	for (int i = 0; i < chamberArr.size(); i++) {
+		std::vector<Chamber*> vect;
+		JSON::JSONArray &subArr = chamberArr.getArray(i);
+		for (int j = 0; i < subArr.size(); i++) {
+			Chamber *chamber = new Chamber();
+			chamber->deserialize(subArr.getObject(i));
+			vect.push_back(chamber);
+		}
+		_chambers.push_back(vect);
+	}
+
+}

@@ -16,6 +16,7 @@ class Chamber :
 {
 public:
 	Chamber(const std::string size, const std::string state, const std::string lightning, const std::string furniture, const std::string furniturePosition);
+	Chamber();
 	virtual ~Chamber();
 	Player *getPlayer() { return _player; }
 	std::vector<Monster*> *getMonsters() { return &_monsters; }
@@ -41,6 +42,7 @@ public:
 	const std::string &getFurniture() { return _furniture; }
 	const std::string &getFurniturePosition() { return _furniturePosition; }
 	JSON::JSONElement *serialize(JSON::JSONElement *parent = nullptr) override;
+	void deserialize(JSON::JSONObject &element) override;
 	
 private:
 	bool _explored;

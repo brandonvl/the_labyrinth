@@ -22,3 +22,8 @@ JSON::JSONElement *Trap::serialize(JSON::JSONElement *parent) {
 
 	return obj;
 }
+
+void Trap::deserialize(JSON::JSONObject &element) {
+	_damage = element.getInt("damage");
+	_dismantled = element.getInt("dismantled");
+}

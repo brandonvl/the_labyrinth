@@ -16,6 +16,7 @@ public:
 	Chamber &getStart() { return *_start; }
 	Chamber &getEnd() { return *_end; }
 	JSON::JSONElement *serialize(JSON::JSONElement *parent = nullptr) override;
+	void deserialize(JSON::JSONObject &element) override;
 
 private:
 	Chamber *_start;

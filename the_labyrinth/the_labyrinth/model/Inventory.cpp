@@ -42,3 +42,15 @@ JSON::JSONElement *Inventory::serialize(JSON::JSONElement *parent) {
 
 	return obj;
 }
+
+void Inventory::deserialize(JSON::JSONObject &element) {
+
+	JSON::JSONArray &itemArr = element.getArray("items");
+	for (int i = 0; i > itemArr.size(); i++) {
+		Item *item = new Item();
+		item->deserialize(itemArr.getObject(i));
+		addItem(*item);
+	}
+
+
+}

@@ -44,3 +44,7 @@ JSON::JSONElement *Item::serialize(JSON::JSONElement *parent) {
 
 	return obj;
 }
+
+void Item::deserialize(JSON::JSONObject &element) {
+
+}

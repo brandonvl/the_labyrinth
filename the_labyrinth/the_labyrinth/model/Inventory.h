@@ -17,6 +17,7 @@ public:
 	void setOwner(Player &owner) { _owner = &owner; }
 	const std::unordered_map<Item*, int> &getItems() { return _items; }
 	JSON::JSONElement *serialize(JSON::JSONElement *parent = nullptr) override;
+	void deserialize(JSON::JSONObject &element) override;
 
 private:
 	std::unordered_map<Item*,int> _items;

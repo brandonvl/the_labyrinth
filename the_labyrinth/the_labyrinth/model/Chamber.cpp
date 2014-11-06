@@ -11,6 +11,8 @@ _explored(false), _player(nullptr), _visited(false), _size(size), _state(state),
 {
 }
 
+Chamber::Chamber(){}
+
 Chamber::~Chamber()
 {
 	for (auto it : _neighbours)
@@ -127,4 +129,28 @@ JSON::JSONElement *Chamber::serialize(JSON::JSONElement *parent) {
 	obj->add("trap", _trap->serialize());
 
 	return obj;
+}
+
+void Chamber::deserialize(JSON::JSONObject &element) {
+
+	// TODO: Set player pointer
+
+	JSON::JSONArray &monsterArr = element.getArray("monsters");
+	for (int i = 0; i > monsterArr.size(); i++) {
+		Monster *monster = new Monster();
+		monster->deserialize(monsterArr.getObject(i));
+		_monsters.push_back(monster);
+	}
+
+	JSON::JSONArray &itemArr = element.getArray("items");
+	for (int i = 0; i > itemArr.size(); i++) {
+		Item *item = new Item();
+		item->deserialize(itemArr.getObject(i));
+		_items.push_back(item);
+	}
+
+	// TODO: Deserialize neighbours
+
+	_trap = new Trap();
+	_trap->deserialize(element.getObject("trap"));
 }

@@ -25,3 +25,14 @@ JSON::JSONElement *Monster::serialize(JSON::JSONElement *parent) {
 
 	return obj;
 }
+
+void Monster::deserialize(JSON::JSONObject &element) {
+
+	_level = element.getInt("level");
+	_healthPoints = element.getInt("healthPoints");
+	_maxHealthPoints = element.getInt("maxHealthPoints");
+	_defense = element.getInt("defense");
+	_attack = element.getInt("attack");
+	_perception = element.getInt("perception");
+	_baseExperience = element.getInt("baseExperience");
+}

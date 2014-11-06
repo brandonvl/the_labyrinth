@@ -16,6 +16,7 @@ public:
 	bool isDismantled() { return _dismantled; }
 	void dismantle() { _dismantled = true; }
 	JSON::JSONElement *serialize(JSON::JSONElement *parent = nullptr) override;
+	void deserialize(JSON::JSONObject &element) override;
 
 private:
 	int _damage;
