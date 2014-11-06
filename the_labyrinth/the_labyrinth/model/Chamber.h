@@ -19,6 +19,7 @@ public:
 	Chamber();
 	virtual ~Chamber();
 	Player *getPlayer() { return _player; }
+	Trap *getTrap() { return _trap; }
 	std::vector<Monster*> *getMonsters() { return &_monsters; }
 	const int getNeighbourCount() { return _neighbours.size(); }
 	void clearMonsters();

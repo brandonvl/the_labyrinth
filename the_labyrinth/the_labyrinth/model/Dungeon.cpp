@@ -23,6 +23,21 @@ Dungeon::~Dungeon()
 	}
 }
 
+void Dungeon::setNextFloor()
+{
+	auto floor = std::find(_floors.begin(), _floors.end(), _currentFloor);
+	std::advance(floor, 1);
+	_currentFloor = *floor;
+}
+
+void Dungeon::setPreviousFloor()
+{
+	auto floor = std::find(_floors.begin(), _floors.end(), _currentFloor);
+	std::advance(floor, -1);
+
+	_currentFloor = *floor;
+}
+
 void Dungeon::createDungeon()
 {
 	Floor *previousFloor = nullptr;

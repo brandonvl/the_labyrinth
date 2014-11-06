@@ -13,6 +13,8 @@ public:
 	virtual ~Dungeon();
 	void createDungeon();
 	Floor *getCurrentFloor() { return _currentFloor; }
+	void setNextFloor();
+	void setPreviousFloor();
 	Chamber &getDungeonStart() { return *_start; }
 	Chamber &getDungeonEnd() { return *_end; }
 	JSON::JSONElement *serialize(JSON::JSONElement *parent = nullptr) override;
