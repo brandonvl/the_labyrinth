@@ -20,5 +20,6 @@ protected:
 	GameState() {}
 	Game *_game;
 	std::string _chosenOption;
+	void doOptionQuit();
 };
 

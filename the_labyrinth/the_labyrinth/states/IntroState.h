@@ -19,7 +19,6 @@ public:
 protected:
 	IntroState() { }
 private:
-	void doOptionQuit();
 	void doOptionNew();
 };
 

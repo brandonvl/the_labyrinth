@@ -61,11 +61,6 @@ void IntroState::doOption()
 	}
 }
 
-void IntroState::doOptionQuit()
-{
-	_game->stop();
-}
-
 void IntroState::doOptionNew()
 {
 

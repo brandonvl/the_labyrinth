@@ -28,7 +28,10 @@ public:
 	const bool hasNeighbour(const Direction &direction);
 	std::unordered_map<Direction, Chamber*> *getNeighbours() { return &_neighbours; }
 	Chamber *getNeighbour(const Direction &direction) { return hasNeighbour(direction) ?  _neighbours[direction] : nullptr; }
+	Chamber *getRandomNeighbour();
+	const Direction &getNeighBourDirection(Chamber &chamber);
 	void enter(Player &player);
+	void explore(Player &player);
 	void setPlayer(Player *player) { _player = player; }
 	const std::string &getSize() { return _size; }
 	const std::string &getState() { return _state; }

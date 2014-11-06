@@ -21,3 +21,8 @@ void GameState::changeState(GameState &state)
 	_game->changeState(state);
 }
 
+void GameState::doOptionQuit()
+{
+	_game->stop();
+}
+

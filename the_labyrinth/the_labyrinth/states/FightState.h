@@ -28,9 +28,11 @@ private:
 	bool _userInitiated = false;
 	Player *_player;
 	std::vector<Monster*> *_monsters;
-	void doOptionQuit();
 	void doDisplayMonsterInfo();
 	void doDisplayPlayerStatus();
 	void doMonsterActions();
+	void doOptionFlee();
+	void doOptionFight();
+	void doOptionInventory();
 	int doCombat(Creature &attacker, Creature &defender);
 };

@@ -107,9 +107,15 @@ void ExploreState::displayOptions()
 	if (chamber->getMonsters()->size() > 0) {
 		optionString += "|fight";
 	}
+	else
+		optionString += "|rest";
 
-	optionString += "|move|map|inventory|status|quit";
-	optionString += "]";
+	optionString += "|move|map|inventory|status";
+
+	if (!chamber->isExplored())
+		optionString += "|explore";
+
+	optionString += "|quit]";
 
 	std::cout << "Options: " << optionString << std::endl << std::endl;
 	std::cout << "You choose: ";
@@ -155,11 +161,6 @@ void ExploreState::doOption()
 
 	std::cout << std::endl;
 	_chosenOption = "";
-}
-
-void ExploreState::doOptionQuit()
-{
-	_game->stop();
 }
 
 void ExploreState::doOptionShowStatus(Player &player)
