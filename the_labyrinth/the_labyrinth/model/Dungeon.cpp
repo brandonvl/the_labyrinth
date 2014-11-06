@@ -65,5 +65,12 @@ void Dungeon::createDungeon()
 JSON::JSONElement *Dungeon::serialize(JSON::JSONElement *parent) {
 	JSON::JSONObject *obj = new JSON::JSONObject(parent);
 
+	JSON::JSONArray *floorArr = new JSON::JSONArray(obj);
+	for (auto floor : _floors)
+		floorArr->push(floor->serialize());
+	obj->add("floors", floorArr);
+
+	// TODO: Serialize current floor, start and end?
+
 	return obj;
 }

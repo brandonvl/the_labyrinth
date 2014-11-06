@@ -197,5 +197,16 @@ void Floor::connectChambers(ChamberEncap &chamberOne, ChamberEncap &chamberTwo)
 JSON::JSONElement *Floor::serialize(JSON::JSONElement *parent) {
 	JSON::JSONObject *obj = new JSON::JSONObject(parent);
 
+	// TODO: Serialize start and end?
+
+	JSON::JSONArray *chamberArr = new JSON::JSONArray(obj);
+	for (auto sub : _chambers) {
+		JSON::JSONArray *subArr = new JSON::JSONArray(chamberArr);
+		for (auto chamber : sub)
+			subArr->push(chamber);
+		chamberArr->push(subArr);
+	}
+	obj->add("chambers", chamberArr);
+
 	return obj;
 }

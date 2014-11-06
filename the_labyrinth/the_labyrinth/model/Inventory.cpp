@@ -31,5 +31,14 @@ void Inventory::useItem(Item &item) {
 JSON::JSONElement *Inventory::serialize(JSON::JSONElement *parent) {
 	JSON::JSONObject *obj = new JSON::JSONObject(parent);
 
+	JSON::JSONArray *itemArr = new JSON::JSONArray(obj);
+	for (auto item : _items) {
+		for (int i = 0; i < item.second; i++)
+			itemArr->push(item.first->serialize());
+	}
+	obj->add("items", itemArr);
+
+	// TODO: Pointer to owner?
+
 	return obj;
 }

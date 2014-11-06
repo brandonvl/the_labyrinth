@@ -39,5 +39,8 @@ void Item::doEffect(Player &player) {
 JSON::JSONElement *Item::serialize(JSON::JSONElement *parent) {
 	JSON::JSONObject *obj = new JSON::JSONObject(parent);
 
+	obj->add("type", static_cast<int>(_type));
+	obj->add("amount", _amount);
+
 	return obj;
 }

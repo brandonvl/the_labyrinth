@@ -13,9 +13,12 @@ public:
 	const int getDamage() { return _damage; }
 	void setDamage(int damage) { _damage = damage; }
 	void doEffect(Player &player);
+	bool isDismantled() { return _dismantled; }
+	void dismantle() { _dismantled = true; }
 	JSON::JSONElement *serialize(JSON::JSONElement *parent = nullptr) override;
 
 private:
 	int _damage;
+	bool _dismantled;
 };
 
