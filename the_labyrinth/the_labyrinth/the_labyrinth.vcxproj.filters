@@ -96,6 +96,9 @@
     <ClCompile Include="states\GameOverState.cpp">
       <Filter>Source Files\states</Filter>
     </ClCompile>
+    <ClCompile Include="util\SaveGameManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="model\Chamber.h">
@@ -160,6 +163,9 @@
     </ClInclude>
     <ClInclude Include="states\GameOverState.h">
       <Filter>Header Files\states</Filter>
+    </ClInclude>
+    <ClInclude Include="util\SaveGameManager.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

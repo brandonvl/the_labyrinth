@@ -103,6 +103,7 @@
     <ClCompile Include="the_labyrinth.cpp" />
     <ClCompile Include="util\ChamberDescriptionBuilder.cpp" />
     <ClCompile Include="util\FileManager.cpp" />
+    <ClCompile Include="util\SaveGameManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="model\Chamber.h" />
@@ -126,6 +127,7 @@
     <ClInclude Include="states\IntroState.h" />
     <ClInclude Include="util\ChamberDescriptionBuilder.h" />
     <ClInclude Include="util\FileManager.h" />
+    <ClInclude Include="util\SaveGameManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
