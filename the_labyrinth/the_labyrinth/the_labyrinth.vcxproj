@@ -116,6 +116,7 @@
     <ClInclude Include="model\Item.h" />
     <ClInclude Include="model\Monster.h" />
     <ClInclude Include="model\Player.h" />
+    <ClInclude Include="model\JSONSerializable.h" />
     <ClInclude Include="model\Thing.h" />
     <ClInclude Include="model\Trap.h" />
     <ClInclude Include="states\GameOverState.h" />

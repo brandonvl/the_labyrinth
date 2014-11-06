@@ -61,3 +61,8 @@ void Game::createDungeon(Player &player)
 	_dungeon->createDungeon();
 	_dungeon->getDungeonStart().enter(*_player);
 }
+
+JSON::JSONElement *Game::serialize(JSON::JSONElement *parent) {
+	JSON::JSONObject *obj = new JSON::JSONObject(parent);
+	return obj;
+}

@@ -193,3 +193,9 @@ void Floor::connectChambers(ChamberEncap &chamberOne, ChamberEncap &chamberTwo)
 		chamberTwo.chamber->addNeighbour(directionChamber2, *chamberOne.chamber);
 	}
 }
+
+JSON::JSONElement *Floor::serialize(JSON::JSONElement *parent) {
+	JSON::JSONObject *obj = new JSON::JSONObject(parent);
+
+	return obj;
+}

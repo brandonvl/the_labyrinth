@@ -61,3 +61,9 @@ void Dungeon::createDungeon()
 
 	_end->addMonster(*monster);
 }
+
+JSON::JSONElement *Dungeon::serialize(JSON::JSONElement *parent) {
+	JSON::JSONObject *obj = new JSON::JSONObject(parent);
+
+	return obj;
+}

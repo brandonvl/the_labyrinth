@@ -18,3 +18,9 @@ Player::~Player()
 {
 	delete _inventory;
 }
+
+JSON::JSONElement *Player::serialize(JSON::JSONElement *parent) {
+	JSON::JSONObject *obj = new JSON::JSONObject(parent);
+
+	return obj;
+}

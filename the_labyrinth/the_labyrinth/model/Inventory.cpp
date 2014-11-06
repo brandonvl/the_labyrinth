@@ -27,3 +27,9 @@ void Inventory::useItem(Item &item) {
 		_items.erase(_items.find(&item));
 	}
 }
+
+JSON::JSONElement *Inventory::serialize(JSON::JSONElement *parent) {
+	JSON::JSONObject *obj = new JSON::JSONObject(parent);
+
+	return obj;
+}
