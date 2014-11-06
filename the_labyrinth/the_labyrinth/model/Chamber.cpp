@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Monster.h"
 #include "Item.h"
+#include "Trap.h"
 
 Chamber::Chamber(const std::string size, const std::string state, const std::string lightning, const std::string furniture, const std::string furniturePosition) :
 _explored(false), _player(nullptr), _visited(false), _size(size), _state(state), _lightning(lightning), _furniture(furniture), _furniturePosition(furniturePosition)
@@ -22,7 +23,7 @@ Chamber::~Chamber()
 
 	delete _trap;
 
-	_monsters.clear();
+	
 	
 	_neighbours.clear();
 }
@@ -32,6 +33,7 @@ void Chamber::clearMonsters()
 	for (auto it : _monsters) {
 		delete it;
 	}
+	_monsters.clear();
 }
 
 void Chamber::addNeighbour(const Direction &direction, Chamber &chamber)

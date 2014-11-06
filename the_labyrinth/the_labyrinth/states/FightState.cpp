@@ -118,8 +118,8 @@ int FightState::doCombat(Creature &attacker, Creature &defender)
 	if (attackRoll > defenseRoll)
 	{
 		// do Attack
-		defender.addHealth(-2);
-		return 2;
+		defender.addHealth(-defender.getAttackValue());
+		return defender.getAttackValue();
 	}
 	else
 		return -1;

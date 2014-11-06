@@ -43,8 +43,8 @@
 	],
 	
 	bosses: [
-		{ name: "Harry de Beuker", health: 5, attack: 5, attackValue: 5, defense: 5, perception: 5, baseExperience: 5 },
-		{ name: "Dragon", health: 5, attack: 5, attackValue: 5, defense: 5, perception: 5, baseExperience: 5 }
+		{ name: "Bob Polis", health: 5, attack: 5, attackValue: 5, defense: 5, perception: 5, baseExperience: 5 },
+		{ name: "Bart Gelens", health: 5, attack: 5, attackValue: 5, defense: 5, perception: 5, baseExperience: 5 }
 	],
 	
 	items: [
