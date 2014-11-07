@@ -33,7 +33,7 @@ public:
 	void addAttackValue(const int &attackValue) { _attackValue += attackValue; }
 	void setPerception(const int &perception) { _perception = perception; }
 	void addPerception(const int &perception) { _perception += perception; }
-	virtual JSON::JSONElement *serialize(JSON::JSONElement *parent = nullptr) override;
+	virtual JSON::JSONElement &serialize(JSON::JSONElement *parent = nullptr) override;
 	virtual void deserialize(JSON::JSONObject &element) override;
 
 protected:

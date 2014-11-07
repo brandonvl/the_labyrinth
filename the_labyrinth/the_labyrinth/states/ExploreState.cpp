@@ -8,6 +8,7 @@
 #include "util\ChamberDescriptionBuilder.h"
 #include "FightState.h"
 #include "model\Monster.h"
+#include "util\SaveGameManager.h"
 #include "model\Trap.h"
 #include "states\GameOverState.h"
 #include "util\RandomGenerator.h"
@@ -122,7 +123,7 @@ void ExploreState::displayOptions()
 	if (!chamber->isExplored())
 		optionString += "|explore";
 
-	optionString += "|quit]";
+	optionString += "|save|quit]";
 
 	std::cout << "Options: " << optionString << std::endl << std::endl;
 	std::cout << "You choose: ";
@@ -162,6 +163,10 @@ void ExploreState::doOption()
 	else if (_chosenOption == "inventory")
 	{
 		doOptionShowInventory();
+	}
+	else if (_chosenOption == "save")
+	{
+		doOptionSave();
 	}
 	else if (_chosenOption == "quit") {
 		doOptionQuit();
@@ -310,6 +315,20 @@ void ExploreState::doOptionShowInventory() {
 	changeState(InventoryState::instance());
 }
 
+void ExploreState::doOptionSave() {
+	try{
+		SaveGameManager::saveGame(*_game);
+		std::cout << "Game is saved";
+	}
+	catch (...) {
+		std::cout << "An error occurred saving the game.";
+	}
+
+	std::cout << std::endl << std::endl;
+	std::cout << "Press any key to continue...";
+	std::cin.get();
+}
+
 void ExploreState::doOptionExplore()
 {
 	Player &player = _game->getPlayer();
@@ -329,7 +348,6 @@ void ExploreState::doOptionExplore()
 
 	std::cout << "Press any key to continue..." << std::endl;
 	std::cin.get();
-
 }
 
 void ExploreState::showChamber(Chamber *cham)

@@ -2,6 +2,7 @@
 #include "Chamber.h"
 #include "util\RandomGenerator.h"
 #include "util\FileManager.h"
+#include "Dungeon.h"
 
 #include <stack>
 #include <random>
@@ -82,6 +83,8 @@ Chamber &Floor::generateChamber(const int &minLevel, const int &maxLevel)
 		if (trap != nullptr)
 			chamber->setTrap(*trap);
 	}
+
+	chamber->setFloor(*this);
 
 	return *chamber;
 }
@@ -194,35 +197,80 @@ void Floor::connectChambers(ChamberEncap &chamberOne, ChamberEncap &chamberTwo)
 	}
 }
 
-JSON::JSONElement *Floor::serialize(JSON::JSONElement *parent) {
+void Floor::findChamberPosition(Chamber &chamber, int &outX, int &outY) {
+	for (int y = 0; y < _chambers.size(); y++) {
+		for (int x = 0; x < _chambers[y].size(); x++) {
+			if (_chambers[y][x] == &chamber) {
+				outX = x;
+				outY = y;
+				return;
+			}
+		}
+	}
+	outX = -1;
+	outY = -1;
+}
+
+JSON::JSONElement &Floor::serialize(JSON::JSONElement *parent) {
 	JSON::JSONObject *obj = new JSON::JSONObject(parent);
 
-	// TODO: Serialize start and end?
+	int startX = 0, startY = 0, endX = 0, endY = 0;
 
 	JSON::JSONArray *chamberArr = new JSON::JSONArray(obj);
-	for (auto sub : _chambers) {
+	for (int y = 0; y < _chambers.size(); y++) {
 		JSON::JSONArray *subArr = new JSON::JSONArray(chamberArr);
-		for (auto chamber : sub)
-			subArr->push(chamber);
-		chamberArr->push(subArr);
-	}
-	obj->add("chambers", chamberArr);
+		for (int x = 0; x < _chambers[y].size(); x++) {
+			subArr->push(_chambers[y][x]->serialize());
 
-	return obj;
+			if (_chambers[y][x] == _start) {
+				startX = x;
+				startY = y;
+			}
+
+			if (_chambers[y][x] == _end) {
+				endX = x;
+				endY = y;
+			}
+		}
+			
+		chamberArr->push(*subArr);
+	}
+	obj->add("chambers", *chamberArr);
+
+	JSON::JSONObject *startObj = new JSON::JSONObject(obj);
+	startObj->add("x", int(startX));
+	startObj->add("y", int(startY));
+	obj->add("start", *startObj);
+
+	JSON::JSONObject *endObj = new JSON::JSONObject(obj);
+	endObj->add("x", int(endX));
+	endObj->add("y", int(endY));
+	obj->add("end", *endObj);
+
+	return *obj;
 }
 
 void Floor::deserialize(JSON::JSONObject &element) {
 
 	JSON::JSONArray &chamberArr = element.getArray("chambers");
-	for (int i = 0; i < chamberArr.size(); i++) {
+	for (int y = 0; y < chamberArr.size(); y++) {
 		std::vector<Chamber*> vect;
-		JSON::JSONArray &subArr = chamberArr.getArray(i);
-		for (int j = 0; i < subArr.size(); i++) {
+		JSON::JSONArray &subArr = chamberArr.getArray(y);
+		for (int x = 0; x < subArr.size(); x++) {
+			JSON::JSONObject &chamberObj = subArr.getObject(x);
 			Chamber *chamber = new Chamber();
-			chamber->deserialize(subArr.getObject(i));
+			chamber->setFloor(*this);
+			chamber->deserialize(chamberObj);
 			vect.push_back(chamber);
 		}
 		_chambers.push_back(vect);
 	}
 
+	int startX = element.getObject("start").getInt("x");
+	int startY = element.getObject("start").getInt("y");
+	_start = _chambers[startX][startY];
+
+	int endX = element.getObject("end").getInt("x");
+	int endY = element.getObject("end").getInt("y");
+	_end = _chambers[endX][endY];
 }

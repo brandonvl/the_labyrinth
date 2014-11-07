@@ -36,10 +36,8 @@ Creature::~Creature()
 {
 }
 
-JSON::JSONElement *Creature::serialize(JSON::JSONElement *parent) {
+JSON::JSONElement &Creature::serialize(JSON::JSONElement *parent) {
 	JSON::JSONObject *obj = new JSON::JSONObject(nullptr);
-
-	// TODO: Serialize current room?
 
 	obj->add("level", _level);
 	obj->add("healthPoints", _healthPoints);
@@ -49,12 +47,10 @@ JSON::JSONElement *Creature::serialize(JSON::JSONElement *parent) {
 	obj->add("perception", _perception);
 	obj->add("attackValue", _attackValue);
 
-	return obj;
+	return *obj;
 }
 
 void Creature::deserialize(JSON::JSONObject &element) {
-
-	// TODO: Set current room?
 
 	_level = element.getInt("level");
 	_healthPoints = element.getInt("healthPoints");
@@ -62,4 +58,5 @@ void Creature::deserialize(JSON::JSONObject &element) {
 	_defense = element.getInt("defense");
 	_attack = element.getInt("attack");
 	_perception = element.getInt("perception");
+	_attackValue = element.getInt("attackValue");
 }

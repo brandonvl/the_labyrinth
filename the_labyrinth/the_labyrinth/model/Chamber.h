@@ -10,6 +10,7 @@ class Monster;
 class Monster;
 class Item;
 class Trap;
+class Floor;
 
 class Chamber :
 	public JSONSerializable
@@ -42,18 +43,21 @@ public:
 	const std::string &getLightning() { return _lightning; }
 	const std::string &getFurniture() { return _furniture; }
 	const std::string &getFurniturePosition() { return _furniturePosition; }
-	JSON::JSONElement *serialize(JSON::JSONElement *parent = nullptr) override;
+	void setFloor(Floor &floor) { _floor = &floor; }
+	Floor &getFloor() { return *_floor; }
+	JSON::JSONElement &serialize(JSON::JSONElement *parent = nullptr) override;
 	void deserialize(JSON::JSONObject &element) override;
 	
 private:
 	bool _explored;
 	bool _visited;
-	const std::string _size, _state, _lightning, _furniture, _furniturePosition;
+	std::string _size, _state, _lightning, _furniture, _furniturePosition;
 
 	Player *_player;
 	std::vector<Monster*> _monsters;
 	std::vector<Item*> _items;
 	std::unordered_map<Direction, Chamber*> _neighbours;
 	Trap *_trap;
+	Floor *_floor;
 };
 

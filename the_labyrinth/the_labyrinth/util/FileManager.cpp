@@ -104,7 +104,11 @@ void FileManager::unload() {
 		delete it;
 
 	instance()._monsters.clear();
+	instance()._bosses.clear();
+	instance()._items.clear();
+	instance()._traps.clear();
 	delete instance()._document;
+	instance()._document = nullptr;
 }
 
 const std::string &FileManager::getRandomSize() {

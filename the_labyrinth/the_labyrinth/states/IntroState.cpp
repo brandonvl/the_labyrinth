@@ -2,7 +2,7 @@
 #include "model\Game.h"
 #include "model\Player.h"
 #include "ExploreState.h"
-
+#include "util\SaveGameManager.h"
 
 void IntroState::init(Game &game)
 {
@@ -33,7 +33,7 @@ void IntroState::displayInfo()
 
 void IntroState::displayOptions()
 {
-	std::cout << "Options: [new|quit]" << std::endl;
+	std::cout << "Options: [new|load|quit]" << std::endl;
 	std::cout << "You choose: ";
 	std::getline(std::cin, _chosenOption);
 }
@@ -51,6 +51,16 @@ void IntroState::doOption()
 		player->setName(playerName);
 		_game->createDungeon(*player);
 		changeState(ExploreState::instance());
+	}
+	else if (_chosenOption == "load") {
+		try{
+			SaveGameManager::loadGame(_game);
+			changeState(ExploreState::instance());
+		}
+		catch (...) {
+			std::cout << "Cannot load file...";
+			std::cin.get();
+		}
 	}
 	else if (_chosenOption == "quit") {
 		doOptionQuit();

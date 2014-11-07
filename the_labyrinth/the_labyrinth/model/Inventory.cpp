@@ -37,7 +37,7 @@ void Inventory::useItem(Item &item) {
 	}
 }
 
-JSON::JSONElement *Inventory::serialize(JSON::JSONElement *parent) {
+JSON::JSONElement &Inventory::serialize(JSON::JSONElement *parent) {
 	JSON::JSONObject *obj = new JSON::JSONObject(parent);
 
 	JSON::JSONArray *itemArr = new JSON::JSONArray(obj);
@@ -45,11 +45,9 @@ JSON::JSONElement *Inventory::serialize(JSON::JSONElement *parent) {
 		for (int i = 0; i < item.second; i++)
 			itemArr->push(item.first->serialize());
 	}
-	obj->add("items", itemArr);
+	obj->add("items", *itemArr);
 
-	// TODO: Pointer to owner?
-
-	return obj;
+	return *obj;
 }
 
 void Inventory::deserialize(JSON::JSONObject &element) {
