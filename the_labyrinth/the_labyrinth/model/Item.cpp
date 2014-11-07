@@ -39,6 +39,7 @@ void Item::doEffect(Player &player) {
 JSON::JSONElement &Item::serialize(JSON::JSONElement *parent) {
 	JSON::JSONObject *obj = new JSON::JSONObject(parent);
 
+	obj->add("name", getName());
 	obj->add("type", static_cast<int>(_type));
 	obj->add("amount", _amount);
 
@@ -46,5 +47,7 @@ JSON::JSONElement &Item::serialize(JSON::JSONElement *parent) {
 }
 
 void Item::deserialize(JSON::JSONObject &element) {
-
+	setName(element.getString("name"));
+	_type = static_cast<ItemType>(element.getInt("type"));
+	_amount = element.getInt("amount");
 }

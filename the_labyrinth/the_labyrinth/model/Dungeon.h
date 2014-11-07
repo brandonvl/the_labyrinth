@@ -16,8 +16,9 @@ public:
 	Floor *getCurrentFloor() { return _currentFloor; }
 	void setNextFloor();
 	void setPreviousFloor();
-	Floor *getNextFloor();
-	Floor *getPreviousFloor();
+	Floor *getNextFloor(Floor &floor);
+	Floor *getPreviousFloor(Floor &floor);
+	int getFloorIndex(Floor &floor);
 	Chamber &getDungeonStart() { return *_start; }
 	Chamber &getDungeonEnd() { return *_end; }
 	void setGame(Game &game) { _game = &game; }

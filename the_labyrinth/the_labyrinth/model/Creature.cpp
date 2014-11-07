@@ -39,6 +39,7 @@ Creature::~Creature()
 JSON::JSONElement &Creature::serialize(JSON::JSONElement *parent) {
 	JSON::JSONObject *obj = new JSON::JSONObject(nullptr);
 
+	obj->add("name", getName());
 	obj->add("level", _level);
 	obj->add("healthPoints", _healthPoints);
 	obj->add("maxHealthPoints", _maxHealthPoints);
@@ -51,7 +52,7 @@ JSON::JSONElement &Creature::serialize(JSON::JSONElement *parent) {
 }
 
 void Creature::deserialize(JSON::JSONObject &element) {
-
+	setName(element.getString("name"));
 	_level = element.getInt("level");
 	_healthPoints = element.getInt("healthPoints");
 	_maxHealthPoints = element.getInt("maxHealthPoints");

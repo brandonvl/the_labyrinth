@@ -133,7 +133,7 @@ JSON::JSONElement &Chamber::serialize(JSON::JSONElement *parent) {
 	// add items 
 	JSON::JSONArray *itemArr = new JSON::JSONArray(obj);
 	for (auto item : _items)
-		monsterArr->push(item->serialize());
+		itemArr->push(item->serialize());
 	obj->add("items", *itemArr);
 
 	JSON::JSONArray *neighbourArr = new JSON::JSONArray(obj);
@@ -169,7 +169,7 @@ void Chamber::deserialize(JSON::JSONObject &element) {
 	}
 
 	JSON::JSONArray &monsterArr = element.getArray("monsters");
-	for (int i = 0; i > monsterArr.size(); i++) {
+	for (int i = 0; i < monsterArr.size(); i++) {
 		Monster *monster = new Monster();
 		monster->deserialize(monsterArr.getObject(i));
 		monster->setChamber(this);
@@ -177,7 +177,7 @@ void Chamber::deserialize(JSON::JSONObject &element) {
 	}
 
 	JSON::JSONArray &itemArr = element.getArray("items");
-	for (int i = 0; i > itemArr.size(); i++) {
+	for (int i = 0; i < itemArr.size(); i++) {
 		Item *item = new Item();
 		item->deserialize(itemArr.getObject(i));
 		_items.push_back(item);

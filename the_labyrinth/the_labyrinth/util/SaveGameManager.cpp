@@ -21,25 +21,28 @@ void SaveGameManager::loadGame(Game *game) {
 
 void SaveGameManager::attachNeightbours() {
 	for (auto it : _attachNeightbourList) {
-		for (int i = 0; i > it.second->size(); i++) {
+		for (int i = 0; i < it.second->size(); i++) {
 			JSON::JSONObject &neighbourObj = it.second->getObject(i);
 			Direction direction = static_cast<Direction>(neighbourObj.getInt("direction"));
 			Chamber *chamber = nullptr;
+			int x = neighbourObj.getInt("x");
+			int y = neighbourObj.getInt("y");
 
-			switch (direction) {
-			case Direction::UPSTAIRS:
-				chamber = (&it.first->getFloor() + 1)->getChamber(neighbourObj.getInt("y"), neighbourObj.getInt("x"));
-				break;
-			case Direction::DOWNSTAIRS:
-				chamber = (&it.first->getFloor() - 1)->getChamber(neighbourObj.getInt("y"), neighbourObj.getInt("x"));
-				break;
-			default:
-				chamber = it.first->getFloor().getChamber(neighbourObj.getInt("y"), neighbourObj.getInt("x"));
-				break;
+			if (x > 0 && y > 0) {
+				if (direction == Direction::UPSTAIRS) {
+					Floor *floor = it.first->getFloor().getDungeon()->getNextFloor(it.first->getFloor());
+					if (floor != nullptr) chamber = floor->getChamber(y, x);
+				}
+				else if (direction == Direction::DOWNSTAIRS){
+					Floor *floor = it.first->getFloor().getDungeon()->getPreviousFloor(it.first->getFloor());
+					if (floor != nullptr) chamber = floor->getChamber(y, x);
+				}
+				else {
+					chamber = it.first->getFloor().getChamber(y, x);
+				}
 			}
 			
-			if (chamber != nullptr)
-				it.first->addNeighbour(direction, *chamber);
+			it.first->addNeighbour(direction, *chamber);
 		}
 	}
 }

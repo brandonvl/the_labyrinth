@@ -42,6 +42,7 @@ Player::~Player()
 JSON::JSONElement &Player::serialize(JSON::JSONElement *parent) {
 	JSON::JSONObject *obj = new JSON::JSONObject(parent);
 
+	obj->add("name", getName());
 	obj->add("level", _level);
 	obj->add("healthPoints", _healthPoints);
 	obj->add("maxHealthPoints", _maxHealthPoints);
@@ -55,6 +56,7 @@ JSON::JSONElement &Player::serialize(JSON::JSONElement *parent) {
 }
 
 void Player::deserialize(JSON::JSONObject &element) {
+	setName(element.getString("name"));
 	_level = element.getInt("level");
 	_healthPoints = element.getInt("healthPoints");
 	_maxHealthPoints = element.getInt("maxHealthPoints");

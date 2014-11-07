@@ -31,6 +31,7 @@ void Inventory::useItem(Item &item) {
 JSON::JSONElement &Inventory::serialize(JSON::JSONElement *parent) {
 	JSON::JSONObject *obj = new JSON::JSONObject(parent);
 
+
 	JSON::JSONArray *itemArr = new JSON::JSONArray(obj);
 	for (auto item : _items) {
 		for (int i = 0; i < item.second; i++)
@@ -44,7 +45,7 @@ JSON::JSONElement &Inventory::serialize(JSON::JSONElement *parent) {
 void Inventory::deserialize(JSON::JSONObject &element) {
 
 	JSON::JSONArray &itemArr = element.getArray("items");
-	for (int i = 0; i > itemArr.size(); i++) {
+	for (int i = 0; i < itemArr.size(); i++) {
 		Item *item = new Item();
 		item->deserialize(itemArr.getObject(i));
 		addItem(*item);

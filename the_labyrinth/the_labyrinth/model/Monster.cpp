@@ -14,6 +14,7 @@ Monster::~Monster()
 JSON::JSONElement &Monster::serialize(JSON::JSONElement *parent) {
 	JSON::JSONObject *obj = new JSON::JSONObject(parent);
 
+	obj->add("name", getName());
 	obj->add("level", _level);
 	obj->add("healthPoints", _healthPoints);
 	obj->add("maxHealthPoints", _maxHealthPoints);
@@ -28,6 +29,7 @@ JSON::JSONElement &Monster::serialize(JSON::JSONElement *parent) {
 
 void Monster::deserialize(JSON::JSONObject &element) {
 
+	setName(element.getString("name"));
 	_level = element.getInt("level");
 	_healthPoints = element.getInt("healthPoints");
 	_maxHealthPoints = element.getInt("maxHealthPoints");

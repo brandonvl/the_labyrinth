@@ -38,12 +38,23 @@ void Dungeon::setPreviousFloor()
 	_currentFloor = *floor;
 }
 
-Floor *Dungeon::getNextFloor() {
-	return _currentFloor + 1;
+Floor *Dungeon::getNextFloor(Floor &floor) {
+	int index = getFloorIndex(floor);
+	if (index < _floors.size()) return _floors[index + 1];
+	return nullptr;
 }
 
-Floor *Dungeon::getPreviousFloor() {
-	return _currentFloor - 1;
+Floor *Dungeon::getPreviousFloor(Floor &floor) {	
+	int index = getFloorIndex(floor);	
+	if (index > 0) return _floors[index - 1];
+	return nullptr;
+}
+
+int Dungeon::getFloorIndex(Floor &floor) {
+	for (int i = 0; i < _floors.size(); i++) {
+		if (_floors[i] == &floor) return i;
+	}
+	return -1;
 }
 
 void Dungeon::createDungeon()
