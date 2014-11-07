@@ -5,6 +5,11 @@
 #include "Trap.h"
 #include "util\RandomGenerator.h"
 #include <algorithm>
+#include "Floor.h"
+#include "Game.h"
+#include "Player.h"
+#include "Dungeon.h"
+#include "util\SaveGameManager.h"
 
 Chamber::Chamber(const std::string size, const std::string state, const std::string lightning, const std::string furniture, const std::string furniturePosition) :
 _explored(false), _player(nullptr), _visited(false), _size(size), _state(state), _lightning(lightning), _furniture(furniture), _furniturePosition(furniturePosition)
@@ -108,37 +113,66 @@ const Direction &Chamber::getNeighBourDirection(Chamber &chamber)
 		return Direction::INVALID;
 }
 
-JSON::JSONElement *Chamber::serialize(JSON::JSONElement *parent) {
+JSON::JSONElement &Chamber::serialize(JSON::JSONElement *parent) {
 	JSON::JSONObject *obj = new JSON::JSONObject(parent);
+	obj->add("explored", _explored);
+	obj->add("visited", _visited);
+	obj->add("size", _size);
+	obj->add("state", _state);
+	obj->add("lightning", _lightning);
+	obj->add("furniture", _furniture);
+	obj->add("furniturePosition", _furniturePosition);
 	obj->add("hasPlayer", (_player != nullptr));
 
 	// add monsters 
 	JSON::JSONArray *monsterArr = new JSON::JSONArray(obj);
 	for (auto monster : _monsters)
 		monsterArr->push(monster->serialize());
-	obj->add("monsters", monsterArr);
+	obj->add("monsters", *monsterArr);
 
 	// add items 
 	JSON::JSONArray *itemArr = new JSON::JSONArray(obj);
 	for (auto item : _items)
 		monsterArr->push(item->serialize());
-	obj->add("items", itemArr);
+	obj->add("items", *itemArr);
 
-	// TODO: Serialize neighbours
+	JSON::JSONArray *neighbourArr = new JSON::JSONArray(obj);
+	for (auto it : _neighbours) {
+		JSON::JSONObject *neighbourObj = new JSON::JSONObject(neighbourArr);		
+		neighbourObj->add("direction", static_cast<int>(it.first));
+		int x, y;
+		_floor->findChamberPosition(*it.second, x, y);
+		neighbourObj->add("x", x);
+		neighbourObj->add("y", y);
+		neighbourArr->push(*neighbourObj);
+	}
+	obj->add("neighbours", *neighbourArr);
 
-	obj->add("trap", _trap->serialize());
+	if (_trap != nullptr) 
+		obj->add("trap", _trap->serialize());
 
-	return obj;
+	return *obj;
 }
 
 void Chamber::deserialize(JSON::JSONObject &element) {
+	_explored = element.getBoolean("explored");
+	_visited = element.getBoolean("visited");
+	_size = element.getString("size");
+	_state = element.getString("state");
+	_lightning = element.getString("lightning");
+	_furniture = element.getString("furniture");
+	_furniturePosition = element.getString("furniturePosition");
 
-	// TODO: Set player pointer
+	if (element.getBoolean("hasPlayer")) {
+		_player = &_floor->getDungeon()->getGame()->getPlayer();
+		_floor->getDungeon()->getGame()->getPlayer().setChamber(this);
+	}
 
 	JSON::JSONArray &monsterArr = element.getArray("monsters");
 	for (int i = 0; i > monsterArr.size(); i++) {
 		Monster *monster = new Monster();
 		monster->deserialize(monsterArr.getObject(i));
+		monster->setChamber(this);
 		_monsters.push_back(monster);
 	}
 
@@ -149,8 +183,10 @@ void Chamber::deserialize(JSON::JSONObject &element) {
 		_items.push_back(item);
 	}
 
-	// TODO: Deserialize neighbours
+	SaveGameManager::addToAttachNeightbourList(this, &element.getArray("neighbours"));
 
-	_trap = new Trap();
-	_trap->deserialize(element.getObject("trap"));
+	if (element.exists("trap")) {
+		_trap = new Trap();
+		_trap->deserialize(element.getObject("trap"));
+	}
 }

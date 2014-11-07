@@ -11,7 +11,7 @@ Monster::~Monster()
 {
 }
 
-JSON::JSONElement *Monster::serialize(JSON::JSONElement *parent) {
+JSON::JSONElement &Monster::serialize(JSON::JSONElement *parent) {
 	JSON::JSONObject *obj = new JSON::JSONObject(parent);
 
 	obj->add("level", _level);
@@ -23,7 +23,7 @@ JSON::JSONElement *Monster::serialize(JSON::JSONElement *parent) {
 	obj->add("attackValue", _attackValue);
 	obj->add("baseExperience", _baseExperience);
 
-	return obj;
+	return *obj;
 }
 
 void Monster::deserialize(JSON::JSONObject &element) {
@@ -34,5 +34,6 @@ void Monster::deserialize(JSON::JSONObject &element) {
 	_defense = element.getInt("defense");
 	_attack = element.getInt("attack");
 	_perception = element.getInt("perception");
+	_attackValue = element.getInt("attackValue");
 	_baseExperience = element.getInt("baseExperience");
 }

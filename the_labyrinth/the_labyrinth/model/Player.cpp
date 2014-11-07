@@ -19,7 +19,7 @@ Player::~Player()
 	delete _inventory;
 }
 
-JSON::JSONElement *Player::serialize(JSON::JSONElement *parent) {
+JSON::JSONElement &Player::serialize(JSON::JSONElement *parent) {
 	JSON::JSONObject *obj = new JSON::JSONObject(parent);
 
 	obj->add("level", _level);
@@ -31,7 +31,7 @@ JSON::JSONElement *Player::serialize(JSON::JSONElement *parent) {
 	obj->add("attackValue", _attackValue);
 	obj->add("experience", _experience);
 
-	return obj;
+	return *obj;
 }
 
 void Player::deserialize(JSON::JSONObject &element) {
@@ -41,5 +41,6 @@ void Player::deserialize(JSON::JSONObject &element) {
 	_defense = element.getInt("defense");
 	_attack = element.getInt("attack");
 	_perception = element.getInt("perception");
+	_attackValue = element.getInt("attackValue");
 	_experience = element.getInt("experience");
 }

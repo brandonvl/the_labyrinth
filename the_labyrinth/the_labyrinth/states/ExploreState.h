@@ -32,6 +32,7 @@ private:
 	void doOptionShowStatus(Player &player);
 	void doOptionFight();
 	void doOptionShowInventory();
+	void doOptionSave();
 
 	const bool TEST_MODE = false;
 };

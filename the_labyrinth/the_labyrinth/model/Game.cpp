@@ -57,18 +57,19 @@ void Game::changeState(GameState &state)
 void Game::createDungeon(Player &player)
 {
 	_dungeon = new Dungeon();
+	_dungeon->setGame(*this);
 	_player = &player;
 	_dungeon->createDungeon();
 	_dungeon->getDungeonStart().enter(*_player);
 }
 
-JSON::JSONElement *Game::serialize(JSON::JSONElement *parent) {
+JSON::JSONElement &Game::serialize(JSON::JSONElement *parent) {
 	JSON::JSONObject *obj = new JSON::JSONObject(parent);
 
 	obj->add("player", _player->serialize());
 	obj->add("dungeon", _dungeon->serialize());
 
-	return obj;
+	return *obj;
 }
 
 void Game::deserialize(JSON::JSONObject &element) {

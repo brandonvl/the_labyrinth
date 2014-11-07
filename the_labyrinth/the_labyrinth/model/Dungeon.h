@@ -4,6 +4,7 @@
 
 class Floor;
 class Chamber;
+class Game;
 
 class Dungeon :
 	public JSONSerializable
@@ -15,7 +16,9 @@ public:
 	Floor *getCurrentFloor() { return _currentFloor; }
 	Chamber &getDungeonStart() { return *_start; }
 	Chamber &getDungeonEnd() { return *_end; }
-	JSON::JSONElement *serialize(JSON::JSONElement *parent = nullptr) override;
+	void setGame(Game &game) { _game = &game; }
+	Game *getGame() { return _game; }
+	JSON::JSONElement &serialize(JSON::JSONElement *parent = nullptr) override;
 	void deserialize(JSON::JSONObject &element) override;
 
 private:
@@ -24,6 +27,7 @@ private:
 	Floor *_currentFloor;
 	Chamber *_start;
 	Chamber *_end;
+	Game *_game;
 
 };
 
