@@ -9,6 +9,11 @@
 #include "FightState.h"
 #include "model\Monster.h"
 #include "util\SaveGameManager.h"
+#include "model\Trap.h"
+#include "states\GameOverState.h"
+#include "util\RandomGenerator.h"
+#include "util\FileManager.h"
+#include "model\Inventory.h"
 
 void ExploreState::init(Game &game)
 {
@@ -90,6 +95,8 @@ std::string getMonsterString(Chamber &chamber)
 void ExploreState::displayInfo()
 {
 	Chamber &chamber = *_game->getPlayer().getCurrentRoom();
+	if (TEST_MODE && chamber.getTrap() != nullptr)
+		std::cout << "HAS TRAP";
 	std::cout << "Description: " << ChamberDescriptionBuilder::getDescription(chamber) << std::endl << std::endl;
 	std::cout << "Exits: " << getNeighBourString(chamber) << std::endl << std::endl;
 	std::cout << "Monsters: " << getMonsterString(chamber);
@@ -126,10 +133,18 @@ void ExploreState::displayOptions()
 
 void ExploreState::doOption()
 {
-	if (_chosenOption == "fight") {
+	if (_chosenOption == "fight" && _game->getPlayer().getCurrentRoom()->getMonsters()->size() > 0) {
 		doOptionFight();
 		_chosenOption = "";
 		return;
+	}
+	else if (_chosenOption == "rest" && _game->getPlayer().getCurrentRoom()->getMonsters()->size() == 0)
+	{
+		doOptionRest();
+	}
+	else if (_chosenOption == "explore" && !_game->getPlayer().getCurrentRoom()->isExplored())
+	{
+		doOptionExplore();
 	}
 	else if (_chosenOption == "move")
 	{
@@ -158,7 +173,9 @@ void ExploreState::doOption()
 	}
 	else
 	{
-		std::cout << "Invalid choice." << std::endl;
+		std::cout << "Invalid choice, you have lost a turn." << std::endl;
+		std::cout << "Press any key to continue...";
+		std::cin.get();
 	}
 
 	/*if (_game->getPlayer().getCurrentRoom()->getMonsters()->size() > 0)
@@ -166,6 +183,26 @@ void ExploreState::doOption()
 
 	std::cout << std::endl;
 	_chosenOption = "";
+}
+
+void ExploreState::doOptionRest()
+{
+	int enemyEncounter = RandomGenerator::random(0, 100);
+	Player &player = _game->getPlayer();
+	player.addHealth(5);
+	std::cout << "You have regained some health while resting." << std::endl;
+
+	if (enemyEncounter < 30) {
+		
+		int minLevel = player.getLevel() > 2 ? player.getLevel() - 2 : 1;
+		int maxLevel = player.getLevel();
+		Monster *monster = FileManager::getRandomMonster(minLevel, maxLevel);
+		player.getCurrentRoom()->addMonster(*monster);
+		std::cout << "While you were resting a level " << monster->getLevel() << " " << monster->getName() << " has entered the room!" << std::endl;
+	}
+
+	std::cout << "Press any key to continue...";
+	std::cin.get();
 }
 
 void ExploreState::doOptionShowStatus(Player &player)
@@ -197,9 +234,38 @@ void ExploreState::doOptionMove(Player &player, Chamber &chamber)
 	}
 
 	if (chamber.hasNeighbour(direction)) {
+
+		Trap *trap = chamber.getTrap();
+
+		if (trap != nullptr && !trap->isDismantled()) {
+			std::cout << "While you were moving, you have sprung a " << trap->getName() << " that dealt " << trap->getDamage() << " damage." << std::endl;
+			trap->doEffect(player);
+
+			if (player.getHealth() == 0)
+			{
+				std::cout << "You have died... Press any key to continue" << std::endl;
+				std::cin.get();
+				changeState(GameOverState::instance());
+				return;
+			}
+			std::cout << "Press any key to continue" << std::endl;
+			std::cin.get();
+		}
+
+		if (direction == Direction::UPSTAIRS)
+			_game->getDungeon().setNextFloor();
+		else if (direction == Direction::DOWNSTAIRS)
+			_game->getDungeon().setPreviousFloor();
+
 		chamber.getNeighbour(direction)->enter(player);
 	}
-	else std::cout << "That option is invalid.";
+	else
+	{
+		std::cout << "Invalid choice, you have lost a turn." << std::endl;
+		std::cout << "Press any key to continue...";
+		std::cin.get();
+	}
+
 }
 
 void ExploreState::doOptionFight()
@@ -244,23 +310,6 @@ void ExploreState::doOptionShowMap()
 
 		std::cout << "Press any key to continue..." << std::endl;
 		std::cin.get();
-		/*
-		std::cout << "==================================" << std::endl;
-		for (auto row : chambers)
-		{
-		for (Chamber *cham : row)
-		{
-		std::unordered_map<Direction, Chamber*> *neighbours = cham->getNeighbours();
-
-		for (auto item : *neighbours)
-		{
-		std::cout << "Direction: " << static_cast<int>(item.first) << ", Chamber: " << item.second << std::endl;
-		}
-		std::cout << "==== end chamber ==" << std::endl;
-		}
-
-		std::cout << "==== end row ==" << std::endl;
-		}*/
 	}
 }
 
@@ -279,6 +328,27 @@ void ExploreState::doOptionSave() {
 
 	std::cout << std::endl << std::endl;
 	std::cout << "Press any key to continue...";
+	std::cin.get();
+}
+
+void ExploreState::doOptionExplore()
+{
+	Player &player = _game->getPlayer();
+	Chamber *chamber = player.getCurrentRoom();
+
+	int beforeItemCount = player.getInventory()->getItemCount();
+
+	chamber->explore(player);
+
+	if (player.getInventory()->getItemCount() > beforeItemCount)
+		std::cout << "During your search, you acquired new items" << std::endl;
+	else
+		std::cout << "During your search, you found no items" << std::endl;
+
+	if (chamber->getTrap() != nullptr && chamber->getTrap()->isDismantled())
+		std::cout << "While exploring, you found a " << chamber->getTrap()->getName() << " and you dismantled it." << std::endl;
+
+	std::cout << "Press any key to continue..." << std::endl;
 	std::cin.get();
 }
 

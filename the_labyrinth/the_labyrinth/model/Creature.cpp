@@ -23,6 +23,14 @@ void Creature::addHealth(const int &health)
 		_healthPoints = 0;
 }
 
+void Creature::addMaxHealth(const int &maxHealth, const bool &fillUpHealth)
+{
+	_maxHealthPoints += maxHealth;
+
+	if (fillUpHealth)
+		_healthPoints = _maxHealthPoints;
+}
+
 
 Creature::~Creature()
 {

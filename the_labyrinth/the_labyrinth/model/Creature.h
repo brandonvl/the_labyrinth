@@ -24,12 +24,13 @@ public:
 	void setHealth(const int &health) { _healthPoints = health; }
 	void addHealth(const int &health);
 	void setMaxHealth(const int &maxHealth, const bool &fillUpHealth = false);
-	void addMaxHealth(const int &maxHealth) { _maxHealthPoints += maxHealth; }
+	void addMaxHealth(const int &maxHealth, const bool &fillUpHealth = false);
 	void setDefense(const int &defense) { _defense = defense; }
 	void addDefence(const int &defense) { _defense += defense; }
 	void setAttack(const int &attack) { _attack = attack; }
 	void addAttack(const int &attack) { _attack += attack; }
 	void setAttackValue(const int &attackValue) { _attackValue = attackValue; }
+	void addAttackValue(const int &attackValue) { _attackValue += attackValue; }
 	void setPerception(const int &perception) { _perception = perception; }
 	void addPerception(const int &perception) { _perception += perception; }
 	virtual JSON::JSONElement &serialize(JSON::JSONElement *parent = nullptr) override;

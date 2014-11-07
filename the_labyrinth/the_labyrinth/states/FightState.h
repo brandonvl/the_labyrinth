@@ -26,6 +26,7 @@ protected:
 	FightState() { }
 private:
 	bool _userInitiated = false;
+	bool _hasFled = false;
 	Player *_player;
 	std::vector<Monster*> *_monsters;
 	void doDisplayMonsterInfo();
@@ -34,5 +35,6 @@ private:
 	void doOptionFlee();
 	void doOptionFight();
 	void doOptionInventory();
+	void doCheckMonsterHealth();
 	int doCombat(Creature &attacker, Creature &defender);
 };

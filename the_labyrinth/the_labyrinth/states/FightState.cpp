@@ -3,9 +3,13 @@
 #include "model\Player.h"
 #include "model\Monster.h"
 #include "model\Chamber.h"
+#include "model\Dungeon.h"
+#include "model\Trap.h"
 #include <vector>
 #include "util\RandomGenerator.h"
 #include "GameOverState.h"
+#include "ExploreState.h"
+#include "InventoryState.h"
 
 
 void FightState::init(Game &game)
@@ -30,6 +34,7 @@ void FightState::cleanUp()
 {
 	_game = nullptr;
 	_userInitiated = false;
+	_hasFled = false;
 }
 
 void FightState::doDisplayPlayerStatus()
@@ -86,7 +91,46 @@ void FightState::update()
 			displayOptions();
 			doOption();
 		}
-		
+	}
+
+	doCheckMonsterHealth();
+}
+
+void FightState::doCheckMonsterHealth()
+{
+	if (!_hasFled) {
+
+		int deathCounter = 0;
+		int experienceGain = 0;
+		for (auto it : *_monsters) {
+			if (it->getHealth() == 0) {
+				deathCounter++;
+				experienceGain += it->getExperienceValue();
+			}
+		}
+
+		if (deathCounter == _monsters->size()) {
+			std::cout << "You have gained " << experienceGain << " exp." << std::endl;
+			Player &player = _game->getPlayer();
+			player.getCurrentRoom()->clearMonsters();
+			player.addExperience(experienceGain);
+
+			if (player.isLevelUp()) {
+				std::cout << "You have leveled up from " << player.getLevel() << " to " << player.getLevel() + 1 << "." << std::endl;
+				std::cout << "Your stats have increased.";
+			}
+
+			std::cout << "Press any key to continue..";
+			std::cin.get();
+			changeState(ExploreState::instance());
+		}
+	}
+	else
+	{
+		for (auto it : *_monsters)
+		{
+			it->setMaxHealth(it->getMaxHealth(), true);
+		}
 	}
 }
 
@@ -206,7 +250,31 @@ void FightState::doOptionFlee()
 		}
 		else
 		{
+			Trap *trap = _player->getCurrentRoom()->getTrap();
+
+			if (trap != nullptr && !trap->isDismantled()) {
+				std::cout << "While you were trying to flee, you have sprung a " << trap->getName() << " that dealt " << trap->getDamage() << " damage." << std::endl;
+				trap->doEffect(*_player);
+
+				if (_player->getHealth() == 0)
+				{
+					std::cout << "You have died... Press any key to continue" << std::endl;
+					std::cin.get();
+					changeState(GameOverState::instance());
+					return;
+				}
+			}
+
+			if (direction == Direction::UPSTAIRS)
+				_game->getDungeon().setNextFloor();
+			else if (direction == Direction::DOWNSTAIRS)
+				_game->getDungeon().setPreviousFloor();
+
 			std::cout << "You have successfully fled " << directionNames.find(direction)->second << std::endl;
+
+			_hasFled = true;
+			randomNeighbour->enter(*_player);
+			changeState(ExploreState::instance());
 		}
 	}
 
@@ -216,5 +284,5 @@ void FightState::doOptionFlee()
 
 void FightState::doOptionInventory()
 {
-	// Inventory stuff
+	changeState(InventoryState::instance());
 }

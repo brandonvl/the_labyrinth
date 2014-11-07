@@ -29,6 +29,7 @@ private:
 	void doOptionMove(Player &player, Chamber &chamber);
 	void doOptionShowMap();
 	void doOptionExplore();
+	void doOptionRest();
 	void doOptionShowStatus(Player &player);
 	void doOptionFight();
 	void doOptionShowInventory();

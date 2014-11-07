@@ -13,6 +13,26 @@ Player::Player()
 	_inventory = new Inventory(*this);
 }
 
+bool Player::isLevelUp()
+{
+	if (_level < 10){
+		return _experience >= _level * 100;
+	}
+	else return false;
+}
+
+void Player::doLevelUp()
+{
+	if (_level < 10) {
+		_level++;
+		addAttack(1);
+		addDefence(1);
+		addMaxHealth(5, true);
+		addAttackValue(2);
+		addPerception(1);
+	}
+}
+
 
 Player::~Player()
 {

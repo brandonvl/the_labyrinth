@@ -1,7 +1,7 @@
 #include "Trap.h"
 #include "Player.h"
 
-Trap::Trap()
+Trap::Trap() : _dismantled(false)
 {
 }
 
