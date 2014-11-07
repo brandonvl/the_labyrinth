@@ -110,14 +110,17 @@ void FightState::doCheckMonsterHealth()
 		}
 
 		if (deathCounter == _monsters->size()) {
+			std::cout << "The monsters have been defeated." << std::endl;
 			std::cout << "You have gained " << experienceGain << " exp." << std::endl;
 			Player &player = _game->getPlayer();
 			player.getCurrentRoom()->clearMonsters();
 			player.addExperience(experienceGain);
 
 			if (player.isLevelUp()) {
-				std::cout << "You have leveled up from " << player.getLevel() << " to " << player.getLevel() + 1 << "." << std::endl;
-				std::cout << "Your stats have increased.";
+				int levelBefore = player.getLevel();
+				player.doLevelUp();
+				std::cout << "You have leveled up from " << levelBefore << " to " << player.getLevel() << "." << std::endl;
+				std::cout << "Your stats have increased." << std::endl;
 			}
 
 			std::cout << "Press any key to continue..";
@@ -284,5 +287,6 @@ void FightState::doOptionFlee()
 
 void FightState::doOptionInventory()
 {
+	InventoryState::instance().setFightStateSend();
 	changeState(InventoryState::instance());
 }

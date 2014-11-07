@@ -1,6 +1,8 @@
 #include "Player.h"
 #include "Inventory.h"
 
+const int EXPERIENCE_THRESHOLD = 2;
+
 Player::Player()
 {
 	setMaxHealth(15, true);
@@ -16,7 +18,7 @@ Player::Player()
 bool Player::isLevelUp()
 {
 	if (_level < 10){
-		return _experience >= _level * 100;
+		return _experience >= _level * EXPERIENCE_THRESHOLD;
 	}
 	else return false;
 }
@@ -24,12 +26,15 @@ bool Player::isLevelUp()
 void Player::doLevelUp()
 {
 	if (_level < 10) {
-		_level++;
-		addAttack(1);
-		addDefence(1);
-		addMaxHealth(5, true);
-		addAttackValue(2);
-		addPerception(1);
+		do
+		{
+			_level++;
+			addAttack(1);
+			addDefence(1);
+			addMaxHealth(5, true);
+			addAttackValue(2);
+			addPerception(1);
+		} while (_experience >= _level * EXPERIENCE_THRESHOLD);
 	}
 }
 

@@ -4,6 +4,7 @@
 #include "model\Inventory.h"
 #include "model\Item.h"
 #include "ExploreState.h"
+#include "FightState.h"
 
 void InventoryState::init(Game &game)
 {
@@ -15,6 +16,7 @@ void InventoryState::init(Game &game)
 void InventoryState::cleanUp()
 {
 	_game = nullptr;
+	_fightStateSend = false;
 }
 
 void InventoryState::update()
@@ -54,19 +56,39 @@ void InventoryState::displayInfo()
 void InventoryState::displayOptions()
 {
 	if (_player->getInventory()->getItemCount() > 0) {
-
+		std::cout << "Options: [|use|back]" << std::endl;
+		std::cout << "Your choice: ";
+		std::getline(std::cin, _chosenOption);
 	}
-	return;
+}
+
+void InventoryState::doOptionBack()
+{
+	if (!_fightStateSend)
+		changeState(ExploreState::instance());
+	else
+		changeState(FightState::instance());
+}
+
+void InventoryState::doOptionUse()
+{
+
 }
 
 void InventoryState::doOption() 
 {
 	if (_player->getInventory()->getItemCount() > 0) {
 
+		if (_chosenOption == "use") {
+
+		}
+		else if (_chosenOption == "back") {
+			doOptionBack();
+		}
 	}
 	else
 	{
-		changeState(ExploreState::instance());
+		doOptionBack();
 	}
 	
 }
