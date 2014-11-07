@@ -35,6 +35,6 @@ private:
 	void doOptionShowInventory();
 	void doOptionSave();
 
-	const bool TEST_MODE = false;
+	const bool TEST_MODE = true;
 };
 

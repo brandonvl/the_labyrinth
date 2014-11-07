@@ -7,9 +7,12 @@
 
 #include <iostream>
 
+const int FLOORS = 2;
+const int FLOOR_DIMENSION = 2;
+
 Dungeon::Dungeon()
 {
-	_floors.reserve(5);
+	_floors.reserve(FLOORS);
 	_currentFloor = nullptr;
 }
 
@@ -71,9 +74,9 @@ void Dungeon::createDungeon()
 		Floor *floor = new Floor();
 		floor->setDungeon(*this);
 		if ((lastLevelMaxLevel + increment) > maxLevel)
-			floor->createFloor(10, lastLevelMaxLevel, maxLevel);
+			floor->createFloor(FLOOR_DIMENSION, lastLevelMaxLevel, maxLevel);
 		else
-			floor->createFloor(10, lastLevelMaxLevel, lastLevelMaxLevel + increment);
+			floor->createFloor(FLOOR_DIMENSION, lastLevelMaxLevel, lastLevelMaxLevel + increment);
 
 		lastLevelMaxLevel += increment;
 		_floors.push_back(floor);

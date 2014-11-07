@@ -25,12 +25,15 @@ void GameOverState::update()
 	
 	std::cout << std::endl;
 	std::cout << "---------------------------------" << std::endl;
-	std::cout << "STATS";
+	std::cout << "FINAL STATS";
 	std::cout << "---------------------------------" << std::endl << std::endl;
 
-	std::cout << "Experience: " << _player->getExperience();
-	std::cout << "Health: " << _player->getHealth();
-	std::cout << "Level: " << _player->getLevel();
+	std::cout << "Level: " << _player->getLevel() << std::endl;
+	std::cout << "HP / MaxHP: " << _player->getHealth() << " / " << _player->getMaxHealth() << std::endl;
+	std::cout << "AttackValue: " << _player->getAttackValue() << std::endl;
+	std::cout << "Defense: " << _player->getDefense() << std::endl;
+	std::cout << "Attack: " << _player->getAttack() << std::endl;
+	std::cout << "Perception: " << _player->getPerception() << std::endl;
 
 	std::cout << std::endl << std::endl;
 

@@ -5,6 +5,7 @@
 #include "model\Item.h"
 #include "ExploreState.h"
 #include "FightState.h"
+#include <algorithm>
 
 void InventoryState::init(Game &game)
 {
@@ -48,9 +49,6 @@ void InventoryState::displayInfo()
 	}
 
 	std::cout << std::endl << std::endl;
-	std::cout << "Press any key to exit...";
-
-	std::cin.get();
 }
 
 void InventoryState::displayOptions()
@@ -70,9 +68,73 @@ void InventoryState::doOptionBack()
 		changeState(FightState::instance());
 }
 
+std::string InventoryState::getItemTypeText(Item &item)
+{
+	auto lamba = [&item](const std::pair<std::string, ItemType> value){ return value.second == item.getType(); };
+	auto keyValue = std::find_if(keyItemTypeMap.begin(), keyItemTypeMap.end(), lamba);
+
+	if (keyValue != keyItemTypeMap.end())
+		return (*keyValue).first;
+	else
+		return "??unknown??";
+}
+
 void InventoryState::doOptionUse()
 {
+	bool didUseItem = false;
+	int itemSlot;
+	std::string userInput = "";
 
+	do
+	{
+		std::cout << "Use item: ";
+		std::getline(std::cin, userInput);
+
+		try
+		{
+			itemSlot = std::stoi(userInput);
+
+			if (_player->getInventory()->getItemCount() < itemSlot || itemSlot < 1) {
+				std::cout << "Invalid item slot. Pick a item slot number (the number before the names)." << std::endl;
+			}
+			else
+			{
+				Item *item;
+
+				auto it = _player->getInventory()->getItems().begin();
+				std::advance(it, itemSlot - 1);
+				item = it->first;
+
+				_player->getInventory()->useItem(*item);
+				std::cout << "Using " << item->getName() << " has increased your " << getItemTypeText(*item) << " by " << item->getAmount() << std::endl;
+
+				if (item->getType() == ItemType::EXPERIENCE) {
+					if (_player->isLevelUp()) {
+						int levelBefore = _player->getLevel();
+						_player->doLevelUp();
+						std::cout << "You have leveled up from " << levelBefore << " to " << _player->getLevel() << "." << std::endl;
+						std::cout << "Your stats have increased." << std::endl;
+					}
+				}
+
+				didUseItem = true;
+
+			}
+		}
+		catch (std::invalid_argument)
+		{
+			std::cout << "Invalid item slot. Pick a item slot number (the number before the names)." << std::endl;
+		}
+		catch (std::out_of_range)
+		{
+			std::cout << "Invalid item slot. Pick a item slot number (the number before the names)." << std::endl;
+		}
+
+	} while (!didUseItem);
+
+	std::cout << "Press any key to continue...";
+	std::cin.get();
+	doOptionBack();
 }
 
 void InventoryState::doOption() 
@@ -80,10 +142,16 @@ void InventoryState::doOption()
 	if (_player->getInventory()->getItemCount() > 0) {
 
 		if (_chosenOption == "use") {
-
+			doOptionUse();
 		}
 		else if (_chosenOption == "back") {
 			doOptionBack();
+		}
+		else
+		{
+			std::cout << "Invalid choice. You lost a turn." << std::endl;
+			std::cout << "Press any key to continue..";
+			std::cin.get();
 		}
 	}
 	else

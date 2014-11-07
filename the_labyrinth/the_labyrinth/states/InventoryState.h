@@ -2,6 +2,7 @@
 #include "GameState.h"
 
 class Player;
+class Item;
 
 class InventoryState :
 	public GameState
@@ -23,6 +24,7 @@ protected:
 private:
 	void doOptionBack();
 	void doOptionUse();
+	std::string getItemTypeText(Item &item);
 	Player *_player;
 	bool _fightStateSend = false;
 };

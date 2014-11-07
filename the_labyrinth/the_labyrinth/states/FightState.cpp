@@ -33,6 +33,7 @@ void FightState::init(Game &game)
 void FightState::cleanUp()
 {
 	_game = nullptr;
+	_monsters = nullptr;
 	_userInitiated = false;
 	_hasFled = false;
 }
@@ -110,9 +111,14 @@ void FightState::doCheckMonsterHealth()
 		}
 
 		if (deathCounter == _monsters->size()) {
+			bool bossSlain = false;
 			std::cout << "The monsters have been defeated." << std::endl;
 			std::cout << "You have gained " << experienceGain << " exp." << std::endl;
 			Player &player = _game->getPlayer();
+
+			if (_monsters->size() == 1 && (*_monsters)[0]->getLevel() == 11)
+				bossSlain = true;
+
 			player.getCurrentRoom()->clearMonsters();
 			player.addExperience(experienceGain);
 
@@ -122,6 +128,12 @@ void FightState::doCheckMonsterHealth()
 				std::cout << "You have leveled up from " << levelBefore << " to " << player.getLevel() << "." << std::endl;
 				std::cout << "Your stats have increased." << std::endl;
 			}
+
+			if (bossSlain) {
+				changeState(GameOverState::instance());
+				return;
+			}
+			
 
 			std::cout << "Press any key to continue..";
 			std::cin.get();
@@ -190,6 +202,8 @@ void FightState::doOption()
 	else
 	{
 		std::cout << "Invalid choice. Your lost a turn!" << std::endl;
+		std::cout << "Press any key to continue...";
+		std::cin.get();
 	}
 }
 
@@ -209,8 +223,9 @@ void FightState::doOptionFight()
 		{
 			monsterSlot = std::stoi(userInput);
 
-			if (monsterSize < monsterSlot || monsterSlot < 1)
+			if (monsterSize < monsterSlot || monsterSlot < 1) {
 				std::cout << "Invalid monster slot. Pick a monster slot number (the number before their names)." << std::endl;
+			}
 			else
 			{
 				int damage = -1;
