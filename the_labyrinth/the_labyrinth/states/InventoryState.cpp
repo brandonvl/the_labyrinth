@@ -35,8 +35,10 @@ void InventoryState::displayInfo()
 
 	if (inventory != nullptr && inventory->getItemCount() > 0) {
 
+		int index = 0;
 		for (auto item : inventory->getItems()) {
-			std::cout << item.second << "x " << item.first->getName() << std::endl;
+			index++;
+			std::cout << index << ". " << item.second << "x " << item.first->getName() << std::endl;
 		}
 	}
 	else {
@@ -47,15 +49,24 @@ void InventoryState::displayInfo()
 	std::cout << "Press any key to exit...";
 
 	std::cin.get();
-	doOption();
 }
 
 void InventoryState::displayOptions()
 {
+	if (_player->getInventory()->getItemCount() > 0) {
 
+	}
+	return;
 }
 
 void InventoryState::doOption() 
 {
-	changeState(ExploreState::instance());
+	if (_player->getInventory()->getItemCount() > 0) {
+
+	}
+	else
+	{
+		changeState(ExploreState::instance());
+	}
+	
 }
