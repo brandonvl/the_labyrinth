@@ -32,8 +32,10 @@ void Inventory::useItem(Item &item) {
 		item.doEffect(*_owner);
 		it->second--;
 
-		if (it->second == 0)
+		if (it->second == 0) {
+			delete it->first;
 			_items.erase(_items.find(&item));
+		}
 	}
 }
 

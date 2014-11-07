@@ -25,7 +25,7 @@ void GameOverState::update()
 	
 	std::cout << std::endl;
 	std::cout << "---------------------------------" << std::endl;
-	std::cout << "FINAL STATS";
+	std::cout << "FINAL STATS" << std::endl;
 	std::cout << "---------------------------------" << std::endl << std::endl;
 
 	std::cout << "Level: " << _player->getLevel() << std::endl;

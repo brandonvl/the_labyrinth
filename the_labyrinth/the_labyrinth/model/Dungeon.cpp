@@ -7,8 +7,8 @@
 
 #include <iostream>
 
-const int FLOORS = 2;
-const int FLOOR_DIMENSION = 2;
+const int FLOORS = 5;
+const int FLOOR_DIMENSION = 10;
 
 Dungeon::Dungeon()
 {

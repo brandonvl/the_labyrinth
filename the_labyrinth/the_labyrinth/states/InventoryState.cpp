@@ -105,10 +105,12 @@ void InventoryState::doOptionUse()
 				std::advance(it, itemSlot - 1);
 				item = it->first;
 
-				_player->getInventory()->useItem(*item);
+				
 				std::cout << "Using " << item->getName() << " has increased your " << getItemTypeText(*item) << " by " << item->getAmount() << std::endl;
+				
 
 				if (item->getType() == ItemType::EXPERIENCE) {
+					_player->getInventory()->useItem(*item);
 					if (_player->isLevelUp()) {
 						int levelBefore = _player->getLevel();
 						_player->doLevelUp();
@@ -116,6 +118,8 @@ void InventoryState::doOptionUse()
 						std::cout << "Your stats have increased." << std::endl;
 					}
 				}
+				else
+					_player->getInventory()->useItem(*item);
 
 				didUseItem = true;
 

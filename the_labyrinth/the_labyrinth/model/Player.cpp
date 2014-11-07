@@ -1,7 +1,7 @@
 #include "Player.h"
 #include "Inventory.h"
 
-const int EXPERIENCE_THRESHOLD = 2;
+const int EXPERIENCE_THRESHOLD = 50;
 
 Player::Player()
 {
@@ -34,7 +34,7 @@ void Player::doLevelUp()
 			addMaxHealth(5, true);
 			addAttackValue(2);
 			addPerception(1);
-		} while (_experience >= _level * EXPERIENCE_THRESHOLD);
+		} while (_experience >= _level * EXPERIENCE_THRESHOLD && _level < 10);
 	}
 }
 
@@ -56,6 +56,8 @@ JSON::JSONElement &Player::serialize(JSON::JSONElement *parent) {
 	obj->add("perception", _perception);
 	obj->add("attackValue", _attackValue);
 	obj->add("experience", _experience);
+	obj->add("inventory", _inventory->serialize());
+
 
 	return *obj;
 }
@@ -70,4 +72,5 @@ void Player::deserialize(JSON::JSONObject &element) {
 	_perception = element.getInt("perception");
 	_attackValue = element.getInt("attackValue");
 	_experience = element.getInt("experience");
+	_inventory->deserialize(element.getObject("inventory"));
 }

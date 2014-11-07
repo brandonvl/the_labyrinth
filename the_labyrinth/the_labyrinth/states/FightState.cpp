@@ -33,7 +33,7 @@ void FightState::init(Game &game)
 void FightState::cleanUp()
 {
 	_game = nullptr;
-	_monsters = nullptr;
+	//_monsters = nullptr;
 	_userInitiated = false;
 	_hasFled = false;
 }
@@ -86,6 +86,7 @@ void FightState::update()
 			std::cout << "You have died.. Press any key to continue." << std::endl;
 			std::cin.get();
 			changeState(GameOverState::instance());
+			return;
 		}
 		else
 		{

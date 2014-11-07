@@ -22,16 +22,13 @@ void Item::doEffect(Player &player) {
 		player.addExperience(_amount);
 		break;
 	case ItemType::HEALTH:
-		player.setHealth(_amount);
-		break;
-	case ItemType::LEVEL:
-		player.setLevel(_amount);
+		player.addHealth(_amount);
 		break;
 	case ItemType::MAXHEALTH:
-		player.setMaxHealth(_amount);
+		player.addMaxHealth(_amount, true);
 		break;
 	case ItemType::PERCEPTION:
-		player.setPerception(_amount);
+		player.addPerception(_amount);
 		break;
 	case ItemType::ATTACKVALUE:
 		player.addAttackValue(_amount);
