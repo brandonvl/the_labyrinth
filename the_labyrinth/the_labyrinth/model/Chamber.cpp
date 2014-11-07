@@ -83,9 +83,12 @@ void Chamber::enter(Player &player)
 void Chamber::explore(Player &player)
 {
 	if (_trap != nullptr) {
-		int exploreroll = RandomGenerator::random(player.getPerception() / 2, 10);
 
-		if (exploreroll > 6)
+		int perception = player.getPerception() > 10 ? 10 : player.getPerception();
+
+		int exploreroll = RandomGenerator::random(perception, 10);
+
+		if (exploreroll > 8)
 			_trap->dismantle();
 	}
 
