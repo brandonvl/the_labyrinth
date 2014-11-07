@@ -17,7 +17,7 @@ const std::map<const Direction, const std::string> directionNames{
 	{ Direction::UPSTAIRS, "up" },
 	{ Direction::DOWNSTAIRS, "down" } };
 
-enum class ItemType { HEALTH, MAXHEALTH, LEVEL, EXPERIENCE, DEFENCE, ATTACK, PERCEPTION };
+enum class ItemType { HEALTH, MAXHEALTH, LEVEL, EXPERIENCE, DEFENCE, ATTACK, PERCEPTION, ATTACKVALUE };
 
 const std::map<const std::string, const ItemType> keyItemTypeMap{
 	{ "health", ItemType::HEALTH },
@@ -26,5 +26,6 @@ const std::map<const std::string, const ItemType> keyItemTypeMap{
 	{ "experience", ItemType::EXPERIENCE },
 	{ "defence", ItemType::DEFENCE },
 	{ "attack", ItemType::ATTACK },
-	{ "perception", ItemType::PERCEPTION }
+	{ "perception", ItemType::PERCEPTION },
+	{ "attackValue", ItemType::ATTACKVALUE }
 };

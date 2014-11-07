@@ -48,13 +48,57 @@
 	],
 	
 	items: [
-		{ name: "Health potion", type: "health", amount: 5 },
-		{ name: "Max-health potion", type: "maxHealth", amount: 5 },
-		{ name: "Level potion", type: "level", amount: 5 },
-		{ name: "Experience potion", type: "experience", amount: 5 },
-		{ name: "Defence potion", type: "defence", amount: 5 },
-		{ name: "Attack potion", type: "attack", amount: 5 },
-		{ name: "Perception potion", type: "perception", amount: 5 }
+		{ name: "Small Health Potion (3)", type: "health", amount: 3 }
+		{ name: "Health Potion (5)", type: "health", amount: 5 }
+		{ name: "Big Health Potion (8)", type: "health", amount: 8 }
+		{ name: "Very big Health Potion (10)", type: "health", amount: 10 }
+		{ name: "Gigantic Health potion (15)", type: "health", amount: 15 },
+		{ name: "Small Max-health Potion (3)", type: "maxHealth", amount: 3 }
+		{ name: "Max-health Potion (5)", type: "maxHealth", amount: 5 }
+		{ name: "Big Max-health Potion (8)", type: "maxHealth", amount: 8 }
+		{ name: "Very big Max-health Potion (10)", type: "maxHealth", amount: 10 }
+		{ name: "Gigantic Max-health potion (15)", type: "maxHealth", amount: 15 },
+		{ name: "Small Experience Potion (5)", type: "experience", amount: 5 }
+		{ name: "Experience Potion (10)", type: "experience", amount: 10 }
+		{ name: "Big Experience Potion (20)", type: "experience", amount: 20 }
+		{ name: "Very big Experience Potion (40)", type: "experience", amount: 40 }
+		{ name: "Gigantic Experience potion (80)", type: "experience", amount: 80 },
+		{ name: "Small Defence Potion (1)", type: "defence", amount: 1 }
+		{ name: "Defence Potion (2)", type: "defence", amount: 2 }
+		{ name: "Big Defence Potion (3)", type: "defence", amount: 3 }
+		{ name: "Very big Defence Potion (4)", type: "defence", amount: 4 }
+		{ name: "Gigantic Defence potion (5)", type: "defence", amount: 5 },
+		{ name: "Small Attack Potion (1)", type: "attack", amount: 1 }
+		{ name: "Attack Potion (2)", type: "attack", amount: 2 }
+		{ name: "Big Attack Potion (3)", type: "attack", amount: 3 }
+		{ name: "Very big Attack Potion (4)", type: "attack", amount: 4 }
+		{ name: "Gigantic Attack potion (5)", type: "attack", amount: 5 },		
+		{ name: "Small Perception Potion (1)", type: "perception", amount: 1 }
+		{ name: "Perception Potion (2)", type: "perception", amount: 2 }
+		{ name: "Big Perception Potion (3)", type: "perception", amount: 3 }
+		{ name: "Very big Perception Potion (4)", type: "perception", amount: 4 }
+		{ name: "Gigantic Perception potion (5)", type: "perception", amount: 5 },
+		{ name: "Small AttackValue Potion (1)", type: "attackValue", amount: 1 }
+		{ name: "AttackValue Potion (2)", type: "attackValue", amount: 2 }
+		{ name: "Big AttackValue Potion (3)", type: "attackValue", amount: 3 }
+		{ name: "Very big AttackValue Potion (4)", type: "attackValue", amount: 4 }
+		{ name: "Gigantic AttackValue potion (5)", type: "attackValue", amount: 5 }
+		{ name: "Small Life Elixer (3)", type: "health", amount: 3 }
+		{ name: "Life Elixer (5)", type: "health", amount: 5 }
+		{ name: "Big Life Elixer (8)", type: "health", amount: 8 }
+		{ name: "Very big Life Elixer (10)", type: "health", amount: 10 }
+		{ name: "Gigantic Life Elixer (15)", type: "health", amount: 15 },
+		{ name: "Small Flask of the warrior (5)", type: "experience", amount: 5 }
+		{ name: "Flask of the warrior (10)", type: "experience", amount: 10 }
+		{ name: "Big Flask of the warrior (20)", type: "experience", amount: 20 }
+		{ name: "Very Flask of the warrior (40)", type: "experience", amount: 40 }
+		{ name: "Gigantic Flask of the warrior (80)", type: "experience", amount: 80 },
+		{ name: "Elixer of Bob Polis (100)", type: "experience", amount: 100 },
+		{ name: "Elixer of Bart Gelens (10)", type: "attackValue", amount: 10 },
+		{ name: "Claw of Ger Saris (3)", type: "attack", amount: 3 },
+		{ name: "Brain of Bert Hoeks (5)", type: "perception", amount: 5 },
+		{ name: "Bob vd Putten Amulet (15)", type: "maxHealth", amount: 15 }
+		
 	],
 	
 	traps: [

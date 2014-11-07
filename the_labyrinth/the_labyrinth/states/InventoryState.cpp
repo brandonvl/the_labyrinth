@@ -19,6 +19,13 @@ void InventoryState::cleanUp()
 
 void InventoryState::update()
 {
+	displayInfo();
+	displayOptions();
+	doOption();
+}
+
+void InventoryState::displayInfo()
+{
 	system("cls");
 
 	std::cout << "Inventory" << std::endl;
@@ -28,8 +35,10 @@ void InventoryState::update()
 
 	if (inventory != nullptr && inventory->getItemCount() > 0) {
 
+		int index = 0;
 		for (auto item : inventory->getItems()) {
-			std::cout << item.second << "x " << item.first->getName() << std::endl;
+			index++;
+			std::cout << index << ". " << item.second << "x " << item.first->getName() << std::endl;
 		}
 	}
 	else {
@@ -38,23 +47,26 @@ void InventoryState::update()
 
 	std::cout << std::endl << std::endl;
 	std::cout << "Press any key to exit...";
-	
+
 	std::cin.get();
-	doOption();
-}
-
-void InventoryState::displayInfo()
-{
-
 }
 
 void InventoryState::displayOptions()
 {
+	if (_player->getInventory()->getItemCount() > 0) {
 
+	}
+	return;
 }
 
 void InventoryState::doOption() 
 {
-	system("cls");
-	changeState(ExploreState::instance());
+	if (_player->getInventory()->getItemCount() > 0) {
+
+	}
+	else
+	{
+		changeState(ExploreState::instance());
+	}
+	
 }
