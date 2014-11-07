@@ -33,6 +33,9 @@ void Item::doEffect(Player &player) {
 	case ItemType::PERCEPTION:
 		player.setPerception(_amount);
 		break;
+	case ItemType::ATTACKVALUE:
+		player.addAttackValue(_amount);
+		break;
 	}
 }
 

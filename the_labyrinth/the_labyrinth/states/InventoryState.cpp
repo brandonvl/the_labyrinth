@@ -19,6 +19,13 @@ void InventoryState::cleanUp()
 
 void InventoryState::update()
 {
+	displayInfo();
+	displayOptions();
+	doOption();
+}
+
+void InventoryState::displayInfo()
+{
 	system("cls");
 
 	std::cout << "Inventory" << std::endl;
@@ -38,14 +45,9 @@ void InventoryState::update()
 
 	std::cout << std::endl << std::endl;
 	std::cout << "Press any key to exit...";
-	
+
 	std::cin.get();
 	doOption();
-}
-
-void InventoryState::displayInfo()
-{
-
 }
 
 void InventoryState::displayOptions()
@@ -55,6 +57,5 @@ void InventoryState::displayOptions()
 
 void InventoryState::doOption() 
 {
-	system("cls");
 	changeState(ExploreState::instance());
 }

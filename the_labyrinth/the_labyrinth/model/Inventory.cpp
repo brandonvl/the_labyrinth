@@ -9,6 +9,12 @@ Inventory::Inventory(Player &owner) : _owner(&owner)
 
 Inventory::~Inventory()
 {
+	for (auto it : _items)
+	{
+		delete it.first;
+	}
+
+	_items.clear();
 }
 
 void Inventory::addItem(Item &item) {
@@ -24,7 +30,10 @@ void Inventory::useItem(Item &item) {
 	auto it = _items.find(&item);
 	if (it != _items.end()) {
 		item.doEffect(*_owner);
-		_items.erase(_items.find(&item));
+		it->second--;
+
+		if (it->second == 0)
+			_items.erase(_items.find(&item));
 	}
 }
 

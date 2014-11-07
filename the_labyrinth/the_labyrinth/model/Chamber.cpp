@@ -5,6 +5,7 @@
 #include "Trap.h"
 #include "util\RandomGenerator.h"
 #include <algorithm>
+#include "Inventory.h"
 
 Chamber::Chamber(const std::string size, const std::string state, const std::string lightning, const std::string furniture, const std::string furniturePosition) :
 _explored(false), _player(nullptr), _visited(false), _size(size), _state(state), _lightning(lightning), _furniture(furniture), _furniturePosition(furniturePosition)
@@ -28,7 +29,7 @@ Chamber::~Chamber()
 	delete _trap;
 
 	
-	
+	_items.clear();
 	_neighbours.clear();
 }
 
@@ -76,10 +77,21 @@ void Chamber::enter(Player &player)
 
 void Chamber::explore(Player &player)
 {
-	int exploreroll = RandomGenerator::random(0, player.getPerception());
+	if (_trap != nullptr) {
+		int exploreroll = RandomGenerator::random(player.getPerception() / 2, 10);
+
+		if (exploreroll > 6)
+			_trap->dismantle();
+	}
 
 	// explore code (determine threshold)
 
+	for (auto it : _items)
+	{
+		player.getInventory()->addItem(*it);
+	}
+
+	_items.clear();
 	_explored = true;
 }
 

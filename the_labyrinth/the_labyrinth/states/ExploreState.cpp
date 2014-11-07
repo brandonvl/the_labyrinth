@@ -173,9 +173,6 @@ void ExploreState::doOption()
 		std::cin.get();
 	}
 
-	/*if (_game->getPlayer().getCurrentRoom()->getMonsters()->size() > 0)
-		changeState(FightState::instance());*/
-
 	std::cout << std::endl;
 	_chosenOption = "";
 }
@@ -205,6 +202,7 @@ void ExploreState::doOptionShowStatus(Player &player)
 	std::cout << "==== Status of " << player.getName() << " ====" << std::endl;
 	std::cout << "Level: " << player.getLevel() << std::endl;
 	std::cout << "HP / MaxHP: " << player.getHealth() << " / " << player.getMaxHealth() << std::endl;
+	std::cout << "AttackValue: " << player.getAttackValue() << std::endl;
 	std::cout << "Defense: " << player.getDefense() << std::endl;
 	std::cout << "Attack: " << player.getAttack() << std::endl;
 	std::cout << "Perception: " << player.getPerception() << std::endl;

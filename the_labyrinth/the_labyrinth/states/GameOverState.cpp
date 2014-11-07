@@ -34,13 +34,9 @@ void GameOverState::update()
 
 	std::cout << std::endl << std::endl;
 
-	std::cout << "Press R to play again or any key to quit...";
-
-	char ch = 0;	
-	std::cin.get(ch);
-
-	if (ch == 'r' || ch == 'R') changeState(IntroState::instance());
-	else _game->stop();
+	std::cout << "Press any key to quit...";
+	std::cin.get();
+	_game->stop();
 }
 
 void GameOverState::displayInfo()
