@@ -238,14 +238,14 @@ JSON::JSONElement &Floor::serialize(JSON::JSONElement *parent) {
 	obj->add("chambers", *chamberArr);
 
 	JSON::JSONObject *startObj = new JSON::JSONObject(obj);
-	startObj->add("x", startX);
-	startObj->add("y", startY);
+	startObj->add("x", int(startX));
+	startObj->add("y", int(startY));
 	obj->add("start", *startObj);
 
 	JSON::JSONObject *endObj = new JSON::JSONObject(obj);
-	startObj->add("x", startX);
-	startObj->add("y", startY);
-	obj->add("start", *startObj);
+	endObj->add("x", int(endX));
+	endObj->add("y", int(endY));
+	obj->add("end", *endObj);
 
 	return *obj;
 }
@@ -253,11 +253,11 @@ JSON::JSONElement &Floor::serialize(JSON::JSONElement *parent) {
 void Floor::deserialize(JSON::JSONObject &element) {
 
 	JSON::JSONArray &chamberArr = element.getArray("chambers");
-	for (int i = 0; i < chamberArr.size(); i++) {
+	for (int y = 0; y < chamberArr.size(); y++) {
 		std::vector<Chamber*> vect;
-		JSON::JSONArray &subArr = chamberArr.getArray(i);
-		for (int j = 0; i < subArr.size(); i++) {
-			JSON::JSONObject &chamberObj = subArr.getObject(i);
+		JSON::JSONArray &subArr = chamberArr.getArray(y);
+		for (int x = 0; x < subArr.size(); x++) {
+			JSON::JSONObject &chamberObj = subArr.getObject(x);
 			Chamber *chamber = new Chamber();
 			chamber->setFloor(*this);
 			chamber->deserialize(chamberObj);
@@ -266,6 +266,11 @@ void Floor::deserialize(JSON::JSONObject &element) {
 		_chambers.push_back(vect);
 	}
 
-	_start = _chambers[element.getObject("start").getInt("x")][element.getObject("start").getInt("y")];
-	_end = _chambers[element.getObject("end").getInt("x")][element.getObject("end").getInt("y")];
+	int startX = element.getObject("start").getInt("x");
+	int startY = element.getObject("start").getInt("y");
+	_start = _chambers[startX][startY];
+
+	int endX = element.getObject("end").getInt("x");
+	int endY = element.getObject("end").getInt("y");
+	_end = _chambers[endX][endY];
 }

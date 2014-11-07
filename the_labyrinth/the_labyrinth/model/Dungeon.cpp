@@ -38,6 +38,14 @@ void Dungeon::setPreviousFloor()
 	_currentFloor = *floor;
 }
 
+Floor *Dungeon::getNextFloor() {
+	return _currentFloor + 1;
+}
+
+Floor *Dungeon::getPreviousFloor() {
+	return _currentFloor - 1;
+}
+
 void Dungeon::createDungeon()
 {
 	Floor *previousFloor = nullptr;

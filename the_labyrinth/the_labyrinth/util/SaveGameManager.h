@@ -10,7 +10,7 @@ class SaveGameManager
 {
 public:
 	static void saveGame(Game &game);
-	static Game *loadGame();
+	static void loadGame(Game *game);
 	static void addToAttachNeightbourList(Chamber *chamber, JSON::JSONArray *neighbourArr) { instance()._attachNeightbourList.insert(std::make_pair(chamber, neighbourArr)); }
 
 private:

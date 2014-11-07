@@ -4,6 +4,7 @@
 #include "model\enums.h"
 #include "model\Chamber.h"
 #include "model\Floor.h"
+#include "model\Dungeon.h"
 
 void SaveGameManager::saveGame(Game &game) {
 	JSON::JSONDocument *doc = JSON::JSONDocument::fromRoot(game.serialize());
@@ -11,13 +12,11 @@ void SaveGameManager::saveGame(Game &game) {
 	delete doc;
 }
 
-Game *SaveGameManager::loadGame() {
+void SaveGameManager::loadGame(Game *game) {
 	JSON::JSONDocument *doc = JSON::JSONDocument::fromFile("data/savegame");
-	Game *game = new Game();
 	game->deserialize(doc->getRootObject());
 	instance().attachNeightbours();
 	delete doc;
-	return game;
 }
 
 void SaveGameManager::attachNeightbours() {
@@ -29,10 +28,10 @@ void SaveGameManager::attachNeightbours() {
 
 			switch (direction) {
 			case Direction::UPSTAIRS:
-
+				chamber = (&it.first->getFloor() + 1)->getChamber(neighbourObj.getInt("y"), neighbourObj.getInt("x"));
 				break;
 			case Direction::DOWNSTAIRS:
-
+				chamber = (&it.first->getFloor() - 1)->getChamber(neighbourObj.getInt("y"), neighbourObj.getInt("x"));
 				break;
 			default:
 				chamber = it.first->getFloor().getChamber(neighbourObj.getInt("y"), neighbourObj.getInt("x"));

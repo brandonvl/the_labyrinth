@@ -78,5 +78,6 @@ void Game::deserialize(JSON::JSONObject &element) {
 	_player->deserialize(element.getObject("player"));
 
 	_dungeon = new Dungeon();
+	_dungeon->setGame(*this);
 	_dungeon->deserialize(element.getObject("dungeon"));
 }
